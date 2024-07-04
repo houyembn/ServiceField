@@ -1,4 +1,8 @@
-﻿#root {
+﻿
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+#root {
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
@@ -17,3 +21,7 @@ th, td {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
