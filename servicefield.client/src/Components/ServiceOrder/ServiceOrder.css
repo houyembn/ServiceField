@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#openPopupBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.popup {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #FEFEFA;
+    padding-top: 20px;
+}
+
+.popup-content {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #0074D9;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: popupAnimation 0.4s;
+    border-radius: 10px;
+}
+
+    .popup-content:hover {
+        border-color: #0056b3;
+    }
+
+@keyframes popupAnimation {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000;
+}
+
+    .close-btn:hover {
+        color: #FF4136;
+    }
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+    .input-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .input-container input {
+        width: calc(100% - 24px); /* Adjusted width to accommodate padding and borders */
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
+
+        .input-container input:focus {
+            outline: none;
+            border-color: #0074D9;
+        }
+
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+    .button-container button {
+        padding: 12px 24px;
+        margin: 0 10px; /* Add margin around buttons */
+        font-size: 15px;
+        font-weight: 400;
+        border: none;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        background: linear-gradient(135deg, #5b9cd3, #4b82ad); /* Slightly darker blue gradient */
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        outline: none;
+    }
+
+        .button-container button:first-child {
+            margin-left: 0; /* No left margin on the first button */
+        }
+
+        .button-container button:hover {
+            background: linear-gradient(-135deg, #5b9cd3, #4b82ad); /* Slightly darker gradient on hover */
+        }
+
