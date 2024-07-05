@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceField.Server.Data;
+using ServiceField.Server.Dtos.Articles;
+using ServiceField.Server.Mappers;
 
 namespace ServiceField.Server.Controllers
 {
@@ -22,7 +24,8 @@ namespace ServiceField.Server.Controllers
         {
 
 
-            var articles = _context.Articles.ToList();
+            var articles = _context.Articles.ToList()
+                .Select(s => s.ToArticleDto());
 
             return Ok(articles);
         }
@@ -41,7 +44,25 @@ namespace ServiceField.Server.Controllers
 
             }
 
-            return Ok(articles);
+            return Ok(articles.ToArticleDto());
+
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateArticleRequestDto articlelDto)
+        {
+
+
+            var articleModel= articlelDto.ToArticleFromCreateDTO();
+
+            _context.Articles.Add(articleModel);
+            _context.SaveChanges();
+
+
+            return CreatedAtAction(nameof(GetById), new { id = articleModel.Id }, articleModel.ToArticleDto());
+
 
         }
 

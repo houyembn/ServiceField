@@ -17,6 +17,35 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+
+var provider=builder.Services.BuildServiceProvider();
+var configuration=provider.GetService<IConfiguration>();
+
+builder.Services.AddCors(options =>
+
+{
+    var frontendURL = configuration.GetValue<string>("frontend_url");
+    // Add CORS policy
+
+    options.AddDefaultPolicy(builder=>
+    {
+        builder.WithOrigins(frontendURL)
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    
+    });
+
+
+
+
+});
+
+
+
+
+
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -30,6 +59,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 
 app.UseAuthorization();
 

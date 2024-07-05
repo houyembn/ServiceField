@@ -1,8 +1,10 @@
-﻿namespace ServiceField.Server.Models
+﻿using ServiceField.Server.Models;
+
+namespace ServiceField.Server.Dtos.Articles
 {
-    public class Article
+    public class CreateArticleRequestDto
     {
-        public int Id { get; set; }
+     
         public string Name { get; set; }
         public string Description { get; set; }
         public string SKU { get; set; }
@@ -12,7 +14,17 @@
         public string Condition { get; set; }
         public int SupplierId { get; set; }
 
+     
 
-         
+
+
+
+
+
+
+
+
+
+
     }
 }

@@ -5,6 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import './App.css';
+import ShowArticles from './Componements/Articles/ShowArticles';
+import ArticleDetails from './Componements/Articles/ArticleDetails';
+
+
+
+
 
 function App() {
 
@@ -13,6 +19,11 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/Articles" element={<Articles />} />
+                <Route path="/ShowArticles" element={<ShowArticles />} />
+
+
+                <Route path="/ShowArticles/:id" element={<ArticleDetails />} />
+
 
             </Routes>
         </Router>
