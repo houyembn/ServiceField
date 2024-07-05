@@ -1,59 +1,62 @@
-import  { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ServiceOrder.css';
 
 function ServiceOrder() {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [clientId, setClientId] = useState('');
-    const [serviceOrders, setServiceOrders] = useState([]);
-    const [hasServiceOrders, setHasServiceOrders] = useState(false);
+    const [idCase, setIdCase] = useState('');
     const [searchResultMessage, setSearchResultMessage] = useState('');
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [caseData, setCaseData] = useState(null);
 
     const openPopup = () => {
         setIsPopupOpen(true);
-        resetState();
     };
 
     const closePopup = () => {
         setIsPopupOpen(false);
     };
 
-    const resetState = () => {
-        setServiceOrders([]);
-        setHasServiceOrders(false);
-        setSearchResultMessage('');
-    };
-
-    const handleClientIdChange = (event) => {
-        setClientId(event.target.value);
+    const handleIdCaseChange = (event) => {
+        setIdCase(event.target.value);
     };
 
     const handleSearch = async () => {
-        if (!clientId.trim()) {
-            setSearchResultMessage('Please enter a Client ID');
+        if (!idCase.trim()) {
+            setSearchResultMessage('Please enter a Case ID');
             return;
         }
 
         try {
-            const response = await axios.get(`http://localhost:5297/api/ServiceCases/CheckClientCase?idClient=${clientId}`);
-            const data = response.data;
-            setServiceOrders(data);
-            const hasOrders = data.length > 0;
-            setHasServiceOrders(hasOrders);
-            setSearchResultMessage(hasOrders ? 'Service Case found' : 'Service Case not found');
+            const response = await axios.get(`https://localhost:7141/api/ServiceCases/CheckClientCase?idCase=${idCase}`);
+            console.log('Response from API:', response.data); // Log the response data
+
+            // Evaluate the response to determine the message to display
+            if (response.data && response.data.idCase) {
+                setSearchResultMessage('Service Case found');
+                setCaseData(response.data);
+            } else {
+                setSearchResultMessage('Service Case not found');
+                setCaseData(null);
+            }
+
         } catch (error) {
-            console.error('Error fetching service orders:', error);
-            setSearchResultMessage('Error fetching service orders');
+            console.error('Error fetching data:', error);
+            setSearchResultMessage('Error fetching data');
         }
     };
 
-    const handleYesButtonClick = () => {
-        console.log('Yes button clicked');
+    const handleButtonCaseClick = () => {
+        if (caseData) {
+            navigate('/CheckCase', { state: { caseData } });
+        }
     };
 
-    const handleNoButtonClick = () => {
-        console.log('No button clicked');
-        closePopup();
+    const navigate = useNavigate();
+    const handleButtonOrderClick = () => {
+        if (!caseData ) {
+            navigate('/OrderManagement', { state: { caseData } });
+        }
     };
 
     return (
@@ -64,31 +67,20 @@ function ServiceOrder() {
                 <div id="popup" className="popup" onClick={closePopup}>
                     <div className="popup-content" onClick={e => e.stopPropagation()}>
                         <span className="close-btn" onClick={closePopup}>&times;</span>
-                        <h2>Has this client made service orders before?</h2>
+                        <h2>Has this ever been a service case?</h2>
                         <div className="input-container">
-                            <label htmlFor="clientId">Enter Client ID:</label>
-                            <input type="text" id="clientId" value={clientId} onChange={handleClientIdChange} />
+                            <label htmlFor="idCase">Enter Case ID:</label>
+                            <input type="text" id="idCase" value={idCase} onChange={handleIdCaseChange} />
                             <button className="search-btn" onClick={handleSearch}>Search</button>
-                        </div>
-                        <div className="button-container">
-                            <button className="yes-btn" onClick={handleYesButtonClick}>Yes</button>
-                            <button className="no-btn" onClick={handleNoButtonClick}>No</button>
                         </div>
                         <div className="search-result">
                             <p>{searchResultMessage}</p>
                         </div>
-                        {hasServiceOrders && (
-                            <div className="service-orders">
-                                <h3>Service Orders:</h3>
-                                <ul>
-                                    {serviceOrders.map(order => (
-                                        <li key={order.idCase}>
-                                            {order.descriptionOfCase}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
+
+                        <div className="button-container">
+                            <button className="popup-btn" onClick={handleButtonCaseClick}>Check the service case</button>
+                            <button className="popup-btn" onClick={handleButtonOrderClick}>Create a service order</button>
+                        </div>
                     </div>
                 </div>
             )}

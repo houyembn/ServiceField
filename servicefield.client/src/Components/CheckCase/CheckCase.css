@@ -1,0 +1,46 @@
+.CheckCase {
+    font-size: 14px;
+}
+
+.sectionCheckCase {
+    margin-bottom: 5px;
+}
+
+    .sectionCheckCase h2 {
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 8px;
+        text-align: left;
+        padding-bottom: 5px;
+    }
+
+.input-rowsectionCheckCase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.input-groupCheckCase {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+    .input-groupCheckCase label {
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .input-groupCheckCase input {
+        width: 100%;
+        padding: 7px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        border: 2px solid rgba(16, 16, 183, 0.468);
+        transition: all 0.3s ease;
+    }
+
+        .input-groupCheckCase input:focus {
+            border-color: #0A1172;
+        }

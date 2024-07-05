@@ -1,0 +1,94 @@
+import { useLocation } from 'react-router-dom';
+import './OrderManagement.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+function OrderManagement() {
+    const location = useLocation();
+    const caseData = location.state?.caseData || {};
+
+    const handleSubmit = () => {
+       
+    };
+
+    return (
+        <div className="order-management">
+            <div className="section">
+                <h2>Company Information</h2>
+                <div className="input-row">
+                    <div className="input-group">
+                        <label>Company Name: </label>
+                        <input type="text" value={caseData.clientName || ''} readOnly />
+                    </div>
+                    <div className="input-group">
+                        <label>Company Phone Number: </label>
+                        <input type="text" value={caseData.phoneNumber || ''} readOnly />
+                    </div>
+                    <div className="input-group">
+                        <label>Company Address: </label>
+                        <input type="text" value={caseData.address || ''} readOnly />
+                    </div>
+                </div>
+            </div>
+
+            <div className="section">
+                <h2>Service Order Information</h2>
+                <div className="input-row">
+                    <div className="input-group">
+                        <label>Description of the Order: </label>
+                        <input type="text" placeholder="Enter the Description" />
+                    </div>
+                    <div className="input-group">
+                        <label>Service Type: </label>
+                        <select>
+                            <option value="">Select...</option>
+                            <option value="type1">Techincal support </option>
+                            <option value="type2">Maintenance</option>
+                            <option value="type3">Installation</option>
+                        </select>
+                    </div>
+                    <div className="input-group">
+                        <label>Date Opened: </label>
+                        <DatePicker
+                            selected={null} // Set your state for selected date here
+                            onChange={(date) => console.log(date)} // Handle date change
+                            placeholderText="Enter opening date"
+                            dateFormat="dd/MM/yyyy" // Format of displayed date
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Assigned To: </label>
+                        <select>
+                            <option value="">Select...</option>
+                            <option value="type1">Sami</option>
+                            <option value="type2">Sarah</option>
+                            <option value="type3">Selim</option>
+                        </select>
+                    </div>
+                    <div className="input-group">
+                        <label>Resolution Summary: </label>
+                        <input type="text" placeholder="Enter the Summary" />
+                    </div>
+                    <div className="input-group">
+                        <label>Date Closed: </label>
+                        <DatePicker
+                            selected={null} // Set your state for selected date here
+                            onChange={(date) => console.log(date)} // Handle date change
+                            placeholderText="Enter opening date"
+                            dateFormat="dd/MM/yyyy" // Format of displayed date
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Customer Satisfaction: </label>
+                        <input type="text" placeholder="Enter Customer Satisfaction" />
+                    </div>
+                    <div className="button-container">
+                        <button onClick={handleSubmit}>Submit Service Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default OrderManagement;

@@ -18,15 +18,14 @@ namespace ServiceField.Server.Controllers
 
         // GET: api/ServiceCases/CheckClientCase?idClient=5
         [HttpGet("CheckClientCase")]
-        public IActionResult CheckClientCase(int idClient)
+        public IActionResult CheckClientCase(int idCase)
         {
-            var clientCases = _context.ServiceCases
-                .Where(c => c.IdClient == idClient)
-                .ToList();
+            var clientCase = _context.ServiceCases
+                .FirstOrDefault(c => c.IdCase == idCase);
 
-            if (clientCases.Any())
+            if (clientCase != null)
             {
-                return Ok("Service Case found");
+                return Ok(clientCase); // Return the case as JSON
             }
             else
             {

@@ -76,10 +76,11 @@ body {
         display: block;
         margin-bottom: 8px;
         font-size: 16px;
+        margin-right:60%;
     }
 
     .input-container input {
-        width: calc(100% - 24px); /* Adjusted width to accommodate padding and borders */
+        width: 70%; 
         padding: 12px;
         font-size: 16px;
         border: 1px solid #ccc;
@@ -88,13 +89,17 @@ body {
         transition: border-color 0.3s ease;
     }
 
-        .input-container input:focus {
+    .input-container input:focus {
             outline: none;
             border-color: #0074D9;
         }
 
+    .search-btn{
+        margin-left:5%;
+}
 
-.button-container {
+
+.button-container, {
     display: flex;
     justify-content: center; /* Center buttons horizontally */
     margin-top: 20px; /* Adjust margin as needed */
