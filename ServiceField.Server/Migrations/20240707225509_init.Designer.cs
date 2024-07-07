@@ -11,7 +11,7 @@ using ServiceField.Server.Data;
 namespace ServiceField.Server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240707214933_init")]
+    [Migration("20240707225509_init")]
     partial class init
     {
         /// <inheritdoc />

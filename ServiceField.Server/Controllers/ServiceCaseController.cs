@@ -25,6 +25,8 @@ namespace ServiceField.Server.Controllers
 
             return Ok(serviceCases);
         }
+
+
         [HttpGet("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {

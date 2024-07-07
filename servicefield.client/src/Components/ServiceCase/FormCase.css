@@ -17,5 +17,46 @@ select {
 
 
 
+.details {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+    .details h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .details table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .details table, .details th, .details td {
+        border: 1px solid #ddd;
+    }
+
+    .details th, .details td {
+        padding: 12px;
+        text-align: left;
+    }
+
+    .details th {
+        background-color: #f2f2f2;
+    }
+
+    .details tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .details tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .details p {
+        color: red;
+        text-align: center;
+    }
 
     
