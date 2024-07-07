@@ -16,12 +16,12 @@ namespace ServiceField.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<int>(type: "int", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductSerialNumber = table.Column<int>(type: "int", nullable: false),
-                    ProblemType = table.Column<int>(type: "int", nullable: false),
+                    ProblemType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Priority = table.Column<int>(type: "int", nullable: false),
-                    Contract = table.Column<int>(type: "int", nullable: false)
+                    Priority = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contract = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

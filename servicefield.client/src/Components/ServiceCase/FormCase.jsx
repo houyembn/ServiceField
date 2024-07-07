@@ -1,5 +1,104 @@
-import React, { useState } from 'react';
+//import  { useState } from 'react';
+//import './FormCase.css';
+//import axios from 'axios';
+
+//const FormCase = () => {
+//    const [formData, setFormData] = useState({
+//        id: '',
+//        companyName: '',
+//        productSerialNumber: '',
+//        problemType: '',
+//        description:'',
+//        priority: '',
+//        contract: '',
+
+
+//    });
+
+//    const handleChange = (e) => {
+//        const { name, value } = e.target;
+//        setFormData({ ...formData, [name]: value });
+//    };
+//    const handleSubmit = async (e) => {
+//        e.preventDefault();
+//        try {
+//            const response = await axios.post('https://localhost:5173/ServiceField/Case', formData);
+//            console.log(response.data);
+
+//        } catch (error) {
+//            console.error('There was an error adding the item!', error);
+
+//        }
+//    };
+
+
+//    return (
+//        <div className="form">
+//            <h2>Service Case</h2>
+//            <form onSubmit={handleSubmit}>
+//                <div className="form-group">
+//                    <label htmlFor="id">ID </label>
+//                    <input type="text" id="id" name="id" value={formData.id} onChange={handleChange} />
+//                </div>
+//                <div className="form-group">
+//                    <label htmlFor="companyName">Company Name</label>
+//                    <select id="companyName" name="companyName" value={formData.companyName} onChange={handleChange}>
+
+//                        <option value="Company A">L_Mobile</option>
+//                        <option value="Company B">Actia</option>
+//                        <option value="Company C">EY</option>
+
+//                    </select>
+//                </div>
+
+//                <div className="form-group">
+//                    <label htmlFor="productSerialNumber">Product Serial Number</label>
+//                    <input type="text" id="productSerialNumber" name="productSerialNumber" value={formData.productSerialNumber} onChange={handleChange} />
+//                </div>
+//                <div className="form-group">
+//                    <label htmlFor="problemType"> ProblemType </label>
+//                    <select id="problemType" name="problemType" value={formData.problemType} onChange={handleChange}>
+
+//                        <option value="technical"> Technical problem</option>
+//                        <option value="billing"> Billing Problem</option>
+//                        <option value="customer-support">Customer Support</option>
+//                    </select>
+//                </div>
+//                <div className="form-group">
+//                    <label htmlFor="description">Description </label>
+//                    <textarea id="description" name="description" value={formData.description} onChange={handleChange}></textarea>
+//                </div>
+//                <div className="form-group">
+//                    <label htmlFor="priority"> Priority </label>
+//                    <select id="priority" name="priority" value={formData.priority} onChange={handleChange}>
+
+//                        <option value="high">High</option>
+//                        <option value="medium"> Average</option>
+//                        <option value="low">Low</option>
+//                    </select>
+//                </div>
+//                <div className="form-group">
+//                    <label htmlFor="contract">Contract </label>
+//                    <select id="contract" name="contract" value={formData.contract} onChange={handleChange}>
+
+//                        <option value="maintenance">Maintenance contract</option>
+//                        <option value="support">Technical Support Contract</option>
+//                    </select>
+//                </div>
+
+//                <button >Submit</button>
+//            </form>
+//        </div>
+//    );
+//};
+
+//export default FormCase;
+
+
+
+import { useState } from 'react';
 import './FormCase.css';
+import axios from 'axios';
 
 const FormCase = () => {
     const [formData, setFormData] = useState({
@@ -7,83 +106,79 @@ const FormCase = () => {
         companyName: '',
         productSerialNumber: '',
         problemType: '',
-        description:'',
+        description: '',
         priority: '',
         contract: '',
-
- 
     });
+
+    const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Ajoutez ici la logique pour soumettre le formulaire, par exemple envoyer les données au backend
-        console.log(formData);
+        try {
+            const response = await axios.post('https://localhost:7141/ServiceField/Case', formData);
+            console.log(response.data);
+            setMessage('Form submitted successfully!');
+        } catch (error) {
+            console.error('There was an error adding the item!', error);
+            setMessage('Failed to submit form.');
+        }
     };
 
     return (
         <div className="form">
             <h2>Service Case</h2>
+            {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="id">ID </label>
-                    <input type="text" id="id" name="id" value={formData.id} onChange={handleChange} />
-                </div>
+
                 <div className="form-group">
                     <label htmlFor="companyName">Company Name</label>
                     <select id="companyName" name="companyName" value={formData.companyName} onChange={handleChange}>
-                        
-                        <option value="Company A">L-Mobile</option>
-                        <option value="Company B">Actie</option>
-                        <option value="Company C">EY</option>
-                        
+                        <option value="0">L_Mobile</option>
+                        <option value="1">Actia</option>
+                        <option value="2">EY</option>
                     </select>
                 </div>
-
                 <div className="form-group">
                     <label htmlFor="productSerialNumber">Product Serial Number</label>
                     <input type="text" id="productSerialNumber" name="productSerialNumber" value={formData.productSerialNumber} onChange={handleChange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="problemType"> ProblemType </label>
+                    <label htmlFor="problemType">Problem Type</label>
                     <select id="problemType" name="problemType" value={formData.problemType} onChange={handleChange}>
-                        
-                        <option value="technical"> Technical problem</option>
-                        <option value="billing"> Billing Problem</option>
-                        <option value="customer-support">Customer Support</option>
+                        <option value="0">Technical problem</option>
+                        <option value="1">Billing Problem</option>
+                        <option value="2-support">Customer Support</option>
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="description">Description </label>
+                    <label htmlFor="description">Description</label>
                     <textarea id="description" name="description" value={formData.description} onChange={handleChange}></textarea>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="priority"> Priority </label>
+                    <label htmlFor="priority">Priority</label>
                     <select id="priority" name="priority" value={formData.priority} onChange={handleChange}>
-                        
-                        <option value="high">High</option>
-                        <option value="medium"> Average</option>
-                        <option value="low">Low</option>
+                        <option value="0">High</option>
+                        <option value="1">Average</option>
+                        <option value="2">Low</option>
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="contract">Contract </label>
+                    <label htmlFor="contract">Contract</label>
                     <select id="contract" name="contract" value={formData.contract} onChange={handleChange}>
-                        
-                        <option value="maintenance">Maintenance contract</option>
-                        <option value="support">Technical Support Contract</option>
+                        <option value="0">Maintenance contract</option>
+                        <option value="1">Technical Support Contract</option>
                     </select>
                 </div>
-
-                <button >Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     );
 };
 
 export default FormCase;
-
