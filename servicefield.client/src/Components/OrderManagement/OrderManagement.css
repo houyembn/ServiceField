@@ -1,6 +1,6 @@
 
 .order-management {
-    font-size: 14px; 
+    font-size: 14px;
 }
 
 .section {
@@ -28,11 +28,10 @@
 }
 
     .input-group label {
-       
         font-weight: bold;
     }
 
-    .input-group input{
+    .input-group input {
         padding: 2px;
         height: 30px;
         border: 1px solid #ccc;
@@ -42,53 +41,57 @@
         border: 2px solid rgba(16, 16, 183, 0.468);
         transition: all 0.3s ease;
     }
-       
 
-    .input-group input:focus {
-        border-color: #0A1172;
-    }
+
+        .input-group input:focus {
+            border-color: #0A1172;
+        }
 
     .input-group .react-datepicker-wrapper {
         width: 100%; /* Set the width as needed */
     }
 
-   
 
-        .input-group .react-datepicker__input-container input {
-            width: 100%;
-            padding: 2px;
-            height: 30px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            border-radius: 5px;
-            border: 2px solid rgba(16, 16, 183, 0.468);
-            transition: all 0.3s ease;
+
+    .input-group .react-datepicker__input-container input {
+        width: 100%;
+        padding: 2px;
+        height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        border-radius: 5px;
+        border: 2px solid rgba(16, 16, 183, 0.468);
+        transition: all 0.3s ease;
+    }
+
+        .input-group .react-datepicker__input-container input:focus {
+            border-color: #0A1172;
         }
 
-            .input-group .react-datepicker__input-container input:focus {
-                border-color: #0A1172;
-            }
 
 
-
-.input-group select {
-    padding: 2px;
-    height: 37px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    border-radius: 5px;
-    border: 2px solid rgba(16, 16, 183, 0.468);
-    transition: all 0.3s ease;
-}
+    .input-group select {
+        padding: 2px;
+        height: 37px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        border-radius: 5px;
+        border: 2px solid rgba(16, 16, 183, 0.468);
+        transition: all 0.3s ease;
+    }
 
 input-group select:focus {
     border-color: #0A1172;
 }
 
+.button-container {
+    margin-top: 20px; /* Added margin to the top of the button container */
+    text-align: center; /* Center align the button */
+}
+
 .button {
-    margin-top: -100px;
     padding: 12px 24px;
     margin: 0 10px;
     font-size: 15px;
@@ -103,6 +106,7 @@ input-group select:focus {
     outline: none;
 }
 
-     . button:hover {
-    background: linear-gradient(-135deg, #5b9cd3, #4b82ad); 
-}
+
+    . button:hover {
+        background: linear-gradient(-135deg, #5b9cd3, #4b82ad);
+    }

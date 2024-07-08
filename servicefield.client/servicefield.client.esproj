@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\Components\CheckCase\" />
+    <Folder Include="src\Components\SideBar\" />
     <Folder Include="src\Components\OrderManagement\" />
     <Folder Include="src\Components\ServiceOrder\" />
   </ItemGroup>

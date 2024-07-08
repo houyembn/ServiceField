@@ -1,12 +1,9 @@
-import { useLocation } from 'react-router-dom';
 import './OrderManagement.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function OrderManagement() {
-    const location = useLocation();
-    const caseData = location.state?.caseData || {};
-
+  
     const handleSubmit = () => {
        
     };
@@ -14,29 +11,19 @@ function OrderManagement() {
     return (
         <div className="order-management">
             <div className="section">
-                <h2>Company Information</h2>
+                <h2>Service Order Form</h2>
                 <div className="input-row">
                     <div className="input-group">
                         <label>Company Name: </label>
-                        <input type="text" value={caseData.clientName || ''} readOnly />
+                        <select>
+                            <option value="">Select...</option>
+                            <option value="type1">L-mobile </option>
+                            <option value="type2">ITBS</option>
+                        </select>
                     </div>
-                    <div className="input-group">
-                        <label>Company Phone Number: </label>
-                        <input type="text" value={caseData.phoneNumber || ''} readOnly />
-                    </div>
-                    <div className="input-group">
-                        <label>Company Address: </label>
-                        <input type="text" value={caseData.address || ''} readOnly />
-                    </div>
-                </div>
-            </div>
-
-            <div className="section">
-                <h2>Service Order Information</h2>
-                <div className="input-row">
                     <div className="input-group">
                         <label>Description of the Order: </label>
-                        <input type="text" placeholder="Enter the Description" />
+                        <input type="text"  placeholder="Enter the Description" />
                     </div>
                     <div className="input-group">
                         <label>Service Type: </label>
@@ -66,6 +53,15 @@ function OrderManagement() {
                         </select>
                     </div>
                     <div className="input-group">
+                        <label>Status: </label>
+                        <select>
+                            <option value="">Select...</option>
+                            <option value="type1">open</option>
+                            <option value="type2">in progress</option>
+                            <option value="type3">closed</option>
+                        </select>
+                    </div>
+                    <div className="input-group">
                         <label>Resolution Summary: </label>
                         <input type="text" placeholder="Enter the Summary" />
                     </div>
@@ -74,7 +70,7 @@ function OrderManagement() {
                         <DatePicker
                             selected={null} // Set your state for selected date here
                             onChange={(date) => console.log(date)} // Handle date change
-                            placeholderText="Enter opening date"
+                            placeholderText="Enter closing date"
                             dateFormat="dd/MM/yyyy" // Format of displayed date
                         />
                     </div>
@@ -82,9 +78,10 @@ function OrderManagement() {
                         <label>Customer Satisfaction: </label>
                         <input type="text" placeholder="Enter Customer Satisfaction" />
                     </div>
-                    <div className="button-container">
-                        <button onClick={handleSubmit}>Submit Service Order</button>
-                    </div>
+                    
+                </div>
+                <div className="button-container">
+                    <button onClick={handleSubmit}>Submit Service Order</button>
                 </div>
             </div>
         </div>
