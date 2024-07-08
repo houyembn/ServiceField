@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './FormCase.css';
 import axios from 'axios';
+import Sidebar from '../sidebar/SideBar';
 
 const DetailsFormCase = () => {
     const [serviceCases, setServiceCases] = useState([]);
@@ -22,6 +23,7 @@ const DetailsFormCase = () => {
 
     return (
         <div className="details">
+            <Sidebar />
             <h2>Service Cases</h2>
             {error && <p>{error}</p>}
             <table>
