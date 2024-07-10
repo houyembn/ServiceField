@@ -153,6 +153,7 @@ const Sidebar = () => {
     const toggleServiceManagement = () => {
         setIsServiceManagementOpen(!isServiceManagementOpen);
     };
+   
 
     return (
         <>
@@ -206,6 +207,24 @@ const Sidebar = () => {
                         </div>
                     )}
                 </div>
+                <br />
+                <Link to="#">
+                    <i className="material-icons">add</i>
+                    <span className="icon-text">Articles</span>
+                </Link>
+                <br />
+
+                <Link to="#">
+                    <i className="material-icons">apartment</i>
+                    <span className="icon-text">Clients</span>
+                </Link>
+                <br />
+                <Link to="#">
+                    <i className="material-icons">groups</i>
+                    <span className="icon-text">Technicians</span>
+                </Link>
+                <br />
+            
                 <br />
 
             </div>
