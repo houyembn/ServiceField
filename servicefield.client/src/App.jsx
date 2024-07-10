@@ -5,8 +5,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import './App.css';
+import './index.css';
+
 import ShowArticles from './Componements/Articles/ShowArticles';
 import ArticleDetails from './Componements/Articles/ArticleDetails';
+import ShowSideBar from './Componements/SideBar/SideBar';
+
+
+
+
+
+import './Componements/SideBar/SideBar.css';
+import ShowNavBar from './Componements/NavBar/NavBar';
 
 
 
@@ -24,7 +34,11 @@ function App() {
 
                 <Route path="/ShowArticles/:id" element={<ArticleDetails />} />
 
+                <Route path="/ShowSideBar" element={<ShowSideBar />} />
 
+
+
+                <Route path="/ShowNavBar" element={<ShowNavBar />} />
             </Routes>
         </Router>
     );

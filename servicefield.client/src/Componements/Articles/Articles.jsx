@@ -19,7 +19,6 @@ import { useState } from 'react';
 function Articles() {
 
 
-    
     const [item, setItem] = useState({
         name: '',
         description: '',
@@ -29,10 +28,11 @@ function Articles() {
         location_id: '',
         condition: '',
         supplier_id: '',
-        barcode: '',
-        barcodeType: '', // Added barcodeType state
-
+        barcodeType: '',
+        barcode: ''
     });
+
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -42,32 +42,54 @@ function Articles() {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('https://localhost:7141/ServiceField.Server/Article', item);
-            console.log(response.data);
-            // Handle success (e.g., show a success message, clear the form, etc.)
-        } catch (error) {
-            console.error('There was an error adding the item!', error);
-            // Handle error (e.g., show an error message)
-        }
-    };
-
-
-
     const handleBarcodeTypeChange = (e) => {
         const { value } = e.target;
         setItem(prevState => ({
             ...prevState,
-            barcodeType: value
+            barcodeType: value,
+            barcode: '' // Reset barcode value when barcode type changes
+        }));
+        setErrors(prevErrors => ({
+            ...prevErrors,
+            barcode: '' // Reset barcode error when barcode type changes
         }));
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            try {
+                const response = await axios.post('https://localhost:7141/ServiceField.Server/Article', item);
+                console.log(response.data);
+                // Handle success (e.g., show a success message, clear the form, etc.)
+            } catch (error) {
+                console.error('There was an error adding the item!', error);
+                // Handle error (e.g., show an error message)
+            }
+        }
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!item.name) newErrors.name = 'Item name is required.';
+        if (!item.barcode) {
+            newErrors.barcode = 'Barcode is required.';
+        } else {
+            if (item.barcodeType === 'UPC_A' && !/^\d{12}$/.test(item.barcode)) {
+                newErrors.barcode = 'UPC-A barcode must be exactly 12 digits.';
+            }
+            if (item.barcodeType === 'EAN_13' && !/^\d{13}$/.test(item.barcode)) {
+                newErrors.barcode = 'EAN-13 barcode must be exactly 13 digits.';
+            }
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
 
     return (
         <Container fluid className="d-flex justify-content-center align-items-center min-vh-100">
+
 
             <Row className="justify-content-md-center">
 
@@ -82,7 +104,11 @@ function Articles() {
                                 name="name"
                                 value={item.name}
                                 onChange={handleChange}
+                                isInvalid={!!errors.name}
+                                required
                             />
+                            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formDescription">
@@ -138,6 +164,8 @@ function Articles() {
                                 value={item.quantity}
                                 onChange={handleChange}
                             />
+
+
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formLocation">
@@ -195,12 +223,14 @@ function Articles() {
                                 name="barcodeType"
                                 value={item.barcodeType}
                                 onChange={handleBarcodeTypeChange}
+                                isInvalid={!!errors.barcode}
                                 required
                             >
                                 <option value="">Select barcode type</option>
                                 <option value="UPC_A">UPC-A</option>
                                 <option value="EAN_13">EAN-13</option>
                             </Form.Control>
+                            <Form.Control.Feedback type="invalid">{errors.barcode}</Form.Control.Feedback>
                         </Form.Group>
 
                         {item.barcodeType && (
@@ -212,17 +242,12 @@ function Articles() {
                                     name="barcode"
                                     value={item.barcode}
                                     onChange={handleChange}
-                                    minLength={item.barcodeType === 'UPC_A' ? 12 : 13}
-                                    maxLength={item.barcodeType === 'UPC_A' ? 12 : 13}
-                                    pattern={item.barcodeType === 'UPC_A' ? '\\d{12}' : '\\d{13}'}
+                                    isInvalid={!!errors.barcode}
                                     required
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter a valid {item.barcodeType} barcode ({item.barcodeType === 'UPC_A' ? '12 digits' : '13 digits'}).
-                                </Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid">{errors.barcode}</Form.Control.Feedback>
                             </Form.Group>
                         )}
-
 
 
                         
