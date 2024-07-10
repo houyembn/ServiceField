@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ServiceOrder.css';
+import SideBar from '../SideBar/SideBar';
 
 function ServiceOrder() {
     const [idCase, setIdCase] = useState('');
@@ -61,6 +62,7 @@ function ServiceOrder() {
 
     return (
         <div>
+            <SideBar />
             <button id="openPopupBtn" onClick={openPopup}>Open Popup</button>
 
             {isPopupOpen && (

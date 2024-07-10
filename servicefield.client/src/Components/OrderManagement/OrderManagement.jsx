@@ -1,6 +1,8 @@
 import './OrderManagement.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import SideBar from '../SideBar/SideBar';
+
 
 function OrderManagement() {
   
@@ -10,6 +12,7 @@ function OrderManagement() {
 
     return (
         <div className="order-management">
+            <SideBar />
             <div className="section">
                 <h2>Service Order Form</h2>
                 <div className="input-row">

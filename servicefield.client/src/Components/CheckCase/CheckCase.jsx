@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import './CheckCase.css';
+import SideBar from '../SideBar/SideBar';
+
 
 
 function CheckCase() {
@@ -10,6 +12,7 @@ function CheckCase() {
 
     return (
         <div className="CheckCase">
+            <SideBar />
             <div className="sectionCheckCase">
                 <h2>Service Case Information</h2>
                 <div className="input-rowsectionCheckCase">

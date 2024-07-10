@@ -4,11 +4,6 @@ using ServiceField.Server.Data;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-// Configure the default culture and UI culture
-//var cultureInfo = new CultureInfo(""); // Use invariant culture
-//CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-//CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
 
@@ -29,8 +24,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(option =>
-option.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionDB")));
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+{
+
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 

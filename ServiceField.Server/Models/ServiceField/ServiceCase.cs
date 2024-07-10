@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiceField.Server.Models.ServiceField
 {
-    public class ServiceCases
+    public class ServiceCase
     {
         [Key]
         public int IdCase { get; set; }

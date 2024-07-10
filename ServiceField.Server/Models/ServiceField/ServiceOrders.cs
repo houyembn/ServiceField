@@ -14,7 +14,10 @@ namespace ServiceField.Server.Models.ServiceField
         public string CompanyName { get; set; }
 
         [Required]
-        public int  OrderType { get; set; }
+        public string Description { get; set; }
+
+        [Required]
+        public string  ServiceType { get; set; }
 
         [Required]
         public DateTime OpenedDate { get; set; }
