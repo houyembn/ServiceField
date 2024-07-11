@@ -17,6 +17,7 @@ import ShowSideBar from './Componements/SideBar/SideBar';
 
 import './Componements/SideBar/SideBar.css';
 import ShowNavBar from './Componements/NavBar/NavBar';
+import HomePage from './Componements/HomePage/HomePage';
 
 
 
@@ -39,6 +40,10 @@ function App() {
 
 
                 <Route path="/ShowNavBar" element={<ShowNavBar />} />
+
+
+
+                <Route path="/Homepage" element={<HomePage />} />
             </Routes>
         </Router>
     );

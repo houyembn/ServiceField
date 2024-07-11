@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="src\Componements\Articles\" />
     <Folder Include="src\Componements\NavBar\" />
+    <Folder Include="src\Componements\HomePage\" />
     <Folder Include="src\Componements\SideBar\" />
   </ItemGroup>
 </Project>
