@@ -249,7 +249,7 @@ const Sidebar = () => {
                                 <span className="text">Service Case</span>
                             </Link>
 
-                            <Link to="/FormCase" className="nested-link">
+                            <Link to="/Ordeer" className="nested-link">
                                 <i className="material-icons">view_list</i>
                                 <span className="text">Service Order</span>
                             </Link>
