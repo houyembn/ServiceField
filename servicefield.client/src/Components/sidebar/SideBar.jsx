@@ -1,23 +1,18 @@
-
-
 //import './SideBar.css';
 //import { useState } from 'react';
 //import { Link } from 'react-router-dom';
-////import img from "../../assets/mobile.png";
-//import Dropdown from 'react-bootstrap/Dropdown';
-//import DropdownButton from 'react-bootstrap/DropdownButton';
+//import img from "../../assets/mobile.png";
 //import 'bootstrap/dist/css/bootstrap.min.css';
-//import { Button } from 'bootstrap';
 //const Sidebar = () => {
 //    const [mini, setMini] = useState(true);
 //    const [isServiceManagementOpen, setIsServiceManagementOpen] = useState(false);
-
+//    const [isInventoryOpen, setIsInventoryOpen] = useState(false);
 
 //    const openSidebar = () => {
 //        if (mini) {
 //            console.log("opening sidebar");
-//            document.getElementById("mySidebar").style.width = "250px";
-//            document.getElementById("main").style.marginLeft = "250px";
+//            document.getElementById("mySidebar").style.width = "280px";
+//            document.getElementById("main").style.marginLeft = "280px";
 //            setMini(false);
 //        }
 //    };
@@ -41,15 +36,22 @@
 //    const handleMouseOut = () => {
 //        closeSidebarTimeout = setTimeout(() => {
 //            closeSidebar();
-//        }, 300); 
+//        }, 300);
 //    };
+
 //    const toggleServiceManagement = () => {
 //        setIsServiceManagementOpen(!isServiceManagementOpen);
 //    };
+    //const toggleInventory = () => {
+    //    setIsInventoryOpen(!isInventoryOpen);
+    //};
+
 
 //    return (
 //        <>
-          
+
+
+
 //            <div
 //                id="mySidebar"
 //                className="sidebar"
@@ -58,18 +60,30 @@
 //            >
 
 
+//                    <div className="head">
+//                        <div className="user-img">
+//                            <img src={img} alt="" />
+//                        </div>
+//                        <div className="user-details">
+//                            <p className="name">ServiceField</p>
+//                        </div>
+//                    </div>
 
-                
-//                {/*<img src={img} / > */}
-//            <Link to="/Sidebar" className="sidebar-link">
+
+
+
+
+
+//                <Link to="/Sidebar" className="sidebar-link">
 //                    <i className="material-icons">home</i>
 //                    <span className="icon-text">Home</span>
-//                </Link><br />
-                
+//                </Link>
+//                <br />
+
 //                <div>
-//                    <button onClick={toggleServiceManagement} className="btn " >
-//                        <i className="material-icons" >build</i>
-//                        <span>Service Management</span>
+//                    <button onClick={toggleServiceManagement} className="sidebar-link no-outline">
+//                        <i className="material-icons">build</i>
+//                        <span className="icon-text">Service Management</span>
 //                        <i className="material-icons">
 //                            {isServiceManagementOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
 //                        </i>
@@ -80,37 +94,74 @@
 //                                <i className="material-icons">view_list</i>
 //                                <span className="text">Service Case</span>
 //                            </Link>
-//                            <Link to="/service-cases" className="nested-link">
-//                                <i className="material-icons">view_list</i>
+
+//                            <Link to="/FormCase" className="nested-link">
+//                                <i className="material-icons">chrome_reader_mode</i>
 //                                <span className="text">Service Order</span>
 //                            </Link>
 //                        </div>
 //                    )}
 //                </div>
+//                <br />
+                //<Link to="#">
+                //    <i className="material-icons">factory</i>
+                //    <span className="icon-text">Installation</span>
+                //</Link>
+                //<br />
 
-//                <Link to="#">
-//                    <i className="material-icons">add</i>
-//                    <span className="icon-text">Articles</span>
-//                </Link><br />
+                //<Link to="#">
+                //    <i className="material-icons">apartment</i>
+                //    <span className="icon-text">Companies</span>
+                //</Link>
+                //<br />
+                //<Link to="#">
+                //    <i className="material-icons">groups</i>
+                //    <span className="icon-text">Technicians</span>
+                //</Link>
+                //<br />
 
-//                <Link to="#">
-//                    <i className="material-icons">monetization_on</i>
-//                    <span className="icon-text">clients</span>
-//                </Link><br />
-//                <Link to="#">
-//                    <i className="material-icons">email</i>
-//                    <span className="icon-text">contact</span>
-//                </Link>
+                //<div>
+                //    <button onClick={toggleInventory} className="sidebar-link no-outline">
+                //        <i className="material-icons">inventory_2</i>
+                //        <span className="icon-text">Inventories</span>
+                //        <i className="material-icons">
+                //            {isInventoryOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+                //        </i>
+                //    </button>
+                //    {isInventoryOpen && (
+                //        <div className="nested-links">
+                //            <Link to="/DetailsFormCase" className="nested-link">
+                //                <i className="material-icons">view_list</i>
+                //                <span className="text">Articles</span>
+                //            </Link>
+
+                //            <Link to="/service-cases" className="nested-link">
+                //                <i className="material-icons">view_list</i>
+                //                <span className="text">Stocks</span>
+                //            </Link>
+                //            <Link to="/service-cases" className="nested-link">
+                //                <i className="material-icons">view_list</i>
+                //                <span className="text">Stores</span>
+                //            </Link>
+                //        </div>
+                //    )}
+                //</div>
+
+                //<br />
+
 //            </div>
 
 //            <div id="main">
-                
+//                {/* Contenu principal de l'application */}
 //            </div>
 //        </>
 //    );
 //};
 
 //export default Sidebar;
+
+
+
 import './SideBar.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -118,12 +169,13 @@ import img from "../../assets/mobile.png";
 const Sidebar = () => {
     const [mini, setMini] = useState(true);
     const [isServiceManagementOpen, setIsServiceManagementOpen] = useState(false);
+    const [isInventoryOpen, setIsInventoryOpen] = useState(false);
 
     const openSidebar = () => {
         if (mini) {
             console.log("opening sidebar");
             document.getElementById("mySidebar").style.width = "280px";
-            document.getElementById("main").style.marginLeft = "280px";
+            document.getElementById("main").style.marginLeft = "250px";
             setMini(false);
         }
     };
@@ -132,7 +184,7 @@ const Sidebar = () => {
         if (!mini) {
             console.log("closing sidebar");
             document.getElementById("mySidebar").style.width = "85px";
-            document.getElementById("main").style.marginLeft = "85px";
+            document.getElementById("main").style.marginLeft = "50px";
             setMini(true);
         }
     };
@@ -153,7 +205,9 @@ const Sidebar = () => {
     const toggleServiceManagement = () => {
         setIsServiceManagementOpen(!isServiceManagementOpen);
     };
-   
+    const toggleInventory = () => {
+        setIsInventoryOpen(!isInventoryOpen);
+    };
 
     return (
         <>
@@ -164,20 +218,13 @@ const Sidebar = () => {
                 onMouseOut={handleMouseOut}
             >
 
-               
-                    <div className="head">
-                        <div className="user-img">
-                            <img src={img} alt="" />
-                        </div>
-                        <div className="user-details">
-                            <p className="name">ServiceField</p>
-                        </div>
+
+                <div className="head">
+                    <div className="user-img">
+                        <img src={img} alt="" />
                     </div>
 
-
-
-
-
+                </div>
 
                 <Link to="/Sidebar" className="sidebar-link">
                     <i className="material-icons">home</i>
@@ -186,6 +233,8 @@ const Sidebar = () => {
                 <br />
 
                 <div>
+
+
                     <button onClick={toggleServiceManagement} className="sidebar-link no-outline">
                         <i className="material-icons">build</i>
                         <span className="icon-text">Service Management</span>
@@ -199,8 +248,8 @@ const Sidebar = () => {
                                 <i className="material-icons">view_list</i>
                                 <span className="text">Service Case</span>
                             </Link>
-                         
-                            <Link to="/service-cases" className="nested-link">
+
+                            <Link to="/FormCase" className="nested-link">
                                 <i className="material-icons">view_list</i>
                                 <span className="text">Service Order</span>
                             </Link>
@@ -209,14 +258,13 @@ const Sidebar = () => {
                 </div>
                 <br />
                 <Link to="#">
-                    <i className="material-icons">add</i>
-                    <span className="icon-text">Articles</span>
+                    <i className="material-icons">factory</i>
+                    <span className="icon-text">Installation</span>
                 </Link>
                 <br />
-
                 <Link to="#">
                     <i className="material-icons">apartment</i>
-                    <span className="icon-text">Clients</span>
+                    <span className="icon-text">Companies</span>
                 </Link>
                 <br />
                 <Link to="#">
@@ -224,8 +272,35 @@ const Sidebar = () => {
                     <span className="icon-text">Technicians</span>
                 </Link>
                 <br />
-            
+                <div>
+                    <button onClick={toggleInventory} className="sidebar-link no-outline">
+                        <i className="material-icons">inventory_2</i>
+                        <span className="icon-text">Inventories</span>
+                        <i className="material-icons">
+                            {isInventoryOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+                        </i>
+                    </button>
+                    {isInventoryOpen && (
+                        <div className="nested-links">
+                            <Link to="/DetailsFormCase" className="nested-link">
+                                <i className="material-icons">view_list</i>
+                                <span className="text">Articles</span>
+                            </Link>
+
+                            <Link to="/service-cases" className="nested-link">
+                                <i className="material-icons">view_list</i>
+                                <span className="text">Stocks</span>
+                            </Link>
+                            <Link to="/service-cases" className="nested-link">
+                                <i className="material-icons">view_list</i>
+                                <span className="text">Stores</span>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+
                 <br />
+
 
             </div>
 

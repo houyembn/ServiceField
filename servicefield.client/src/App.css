@@ -1,19 +1,7 @@
-﻿#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-}
+﻿
+/* import 'bootstrap/dist/css/bootstrap.min.css';    */
 
-tr:nth-child(even) {
-    background: #F2F2F2;
-}
 
-tr:nth-child(odd) {
-    background: #FFF;
-}
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
+
+/*          import 'bootstrap/dist/css/bootstrap.min.css';         */
