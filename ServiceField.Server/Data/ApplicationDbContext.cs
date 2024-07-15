@@ -11,6 +11,7 @@ namespace ServiceField.Server.Data
         }
 
         public DbSet<ServiceCases> ServiceCases { get; set; }
+        public DbSet<ServiceOrders> ServiceOrders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

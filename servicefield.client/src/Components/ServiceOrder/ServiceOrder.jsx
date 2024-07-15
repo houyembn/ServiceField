@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Fade from '@mui/material/Fade';
 import './ServiceOrder.css';
+import ShowNavBar from '../NavBar/NavBar';
+import SideBar from '../SideBar/SideBar';
 
 function ServiceOrder() {
     const [idCase, setIdCase] = useState('');
     const [searchResultMessage, setSearchResultMessage] = useState('');
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [caseData, setCaseData] = useState(null);
-
-    const openPopup = () => {
-        setIsPopupOpen(true);
-    };
-
-    const closePopup = () => {
-        setIsPopupOpen(false);
-    };
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleIdCaseChange = (event) => {
         setIdCase(event.target.value);
@@ -29,9 +29,8 @@ function ServiceOrder() {
 
         try {
             const response = await axios.get(`https://localhost:7141/api/ServiceCases/CheckClientCase?idCase=${idCase}`);
-            console.log('Response from API:', response.data); // Log the response data
+            console.log('Response from API:', response.data);
 
-            // Evaluate the response to determine the message to display
             if (response.data && response.data.idCase) {
                 setSearchResultMessage('Service Case found');
                 setCaseData(response.data);
@@ -39,51 +38,115 @@ function ServiceOrder() {
                 setSearchResultMessage('Service Case not found');
                 setCaseData(null);
             }
-
         } catch (error) {
             console.error('Error fetching data:', error);
             setSearchResultMessage('Error fetching data');
         }
     };
 
+    const navigate = useNavigate();
     const handleButtonCaseClick = () => {
         if (caseData) {
             navigate('/CheckCase', { state: { caseData } });
         }
     };
 
-    const navigate = useNavigate();
     const handleButtonOrderClick = () => {
-        if (!caseData ) {
+        if (!caseData) {
             navigate('/OrderManagement', { state: { caseData } });
         }
     };
 
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
     return (
-        <div>
-            <button id="openPopupBtn" onClick={openPopup}>Open Popup</button>
-
-            {isPopupOpen && (
-                <div id="popup" className="popup" onClick={closePopup}>
-                    <div className="popup-content" onClick={e => e.stopPropagation()}>
-                        <span className="close-btn" onClick={closePopup}>&times;</span>
-                        <h2>Has this ever been a service case?</h2>
+        <div className="flex">
+            <SideBar />
+            <div className="flex-1">
+                <ShowNavBar />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <Button variant="contained" onClick={openModal}>
+                Open Popup
+            </Button>
+            <Modal
+                open={isModalOpen}
+                onClose={closeModal}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+                closeAfterTransition
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={isModalOpen}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: '80%',
+                            maxWidth: 500,
+                            bgcolor: 'background.paper',
+                            boxShadow: 24,
+                            p: 4,
+                            outline: 'none',
+                        }}
+                    >
+                        <Typography id="modal-title" variant="h6" component="h2">
+                            Has this ever been a service case?
+                        </Typography>
                         <div className="input-container">
-                            <label htmlFor="idCase">Enter Case ID:</label>
-                            <input type="text" id="idCase" value={idCase} onChange={handleIdCaseChange} />
-                            <button className="search-btn" onClick={handleSearch}>Search</button>
+                            <TextField
+                                label="Enter Case ID"
+                                value={idCase}
+                                onChange={handleIdCaseChange}
+                                fullWidth
+                                margin="normal"
+                                sx={{ width: '100%' }}
+                            />
                         </div>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSearch}
+                            sx={{ mt: 2 }}
+                        >
+                            Search
+                        </Button>
                         <div className="search-result">
-                            <p>{searchResultMessage}</p>
+                            <Typography id="modal-description" variant="body1">
+                                {searchResultMessage}
+                            </Typography>
                         </div>
-
                         <div className="button-container">
-                            <button className="popup-btn" onClick={handleButtonCaseClick}>Check the service case</button>
-                            <button className="popup-btn" onClick={handleButtonOrderClick}>Create a service order</button>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                onClick={handleButtonCaseClick}
+                                sx={{ mt: 2, mr: 1 }}
+                            >
+                                Check the service case
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                onClick={handleButtonOrderClick}
+                                sx={{ mt: 2, ml: 1 }}
+                            >
+                                Create a service order
+                            </Button>
                         </div>
-                    </div>
+                    </Box>
+                </Fade>
+            </Modal>
                 </div>
-            )}
+            </div>
         </div>
     );
 }
