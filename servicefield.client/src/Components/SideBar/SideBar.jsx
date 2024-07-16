@@ -45,6 +45,30 @@ const Sidebar = () => {
         setIsInventoryOpen(!isInventoryOpen);
     };
 
+    const closeSidebar = () => {
+        if (!mini) {
+            console.log("closing sidebar");
+            document.getElementById("mySidebar").style.width = "85px";
+            document.getElementById("main").style.marginLeft = "85px";
+            document.getElementById("mySidebar").classList.add("closed");
+            document.getElementById("mySidebar").classList.remove("open");
+            setMini(true);
+        }
+    };
+
+    let closeSidebarTimeout;
+
+    const handleMouseOver = () => {
+        clearTimeout(closeSidebarTimeout);
+        openSidebar();
+    };
+
+    const handleMouseOut = () => {
+        closeSidebarTimeout = setTimeout(() => {
+            closeSidebar();
+        }, 300);
+    };
+
     return (
         <>
             <div

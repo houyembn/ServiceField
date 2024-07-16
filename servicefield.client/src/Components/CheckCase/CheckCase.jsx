@@ -8,6 +8,8 @@ import SideBar from '../SideBar/SideBar';
 import Grid from '@mui/material/Grid';
 import './CheckCase.css';
 
+
+
 function CheckCase() {
     const location = useLocation();
     const caseData = location.state?.caseData || {};

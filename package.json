@@ -1,17 +1,23 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "@date-io/date-fns": "^3.0.0",
     "@date-io/dayjs": "^3.0.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+=======
+>>>>>>> 39bb6ea10eec4de8de965b4256fb0df0f435ce74
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+<<<<<<< HEAD
     "@mui/lab": "^5.0.0-alpha.171",
     "@mui/material": "^5.16.0",
     "@mui/x-date-pickers": "^7.9.0",
+=======
+>>>>>>> 39bb6ea10eec4de8de965b4256fb0df0f435ce74
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "date-fns": "^3.6.0",
