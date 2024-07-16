@@ -17,7 +17,7 @@ namespace ServiceField.Server.Models.ServiceField
         public string Description { get; set; }
 
         [Required]
-        public string  ServiceType { get; set; }
+        public string ServiceType { get; set; }
 
         [Required]
         public DateTime OpenedDate { get; set; }

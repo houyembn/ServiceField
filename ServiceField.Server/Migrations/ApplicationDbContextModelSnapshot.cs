@@ -10,7 +10,7 @@ using ServiceField.Server.Data;
 
 namespace ServiceField.Server.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext)]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -23,95 +23,95 @@ namespace ServiceField.Server.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ServiceField.Server.Models.ServiceField.ServiceCases", b =>
-                {
-                    b.Property<int>("IdCase")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("IdCase")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCase"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCase"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Address")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClientName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateTimeOfCase")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("DateTimeOfCase")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("DescriptionOfCase")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("DescriptionOfCase")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HowItIsSolved")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("HowItIsSolved")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdClient")
-                        .HasColumnType("int");
+                b.Property<int>("IdClient")
+                    .HasColumnType("int");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PhoneNumber")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdCase");
+                b.HasKey("IdCase");
 
-                    b.ToTable("ServiceCases");
-                });
+                b.ToTable("ServiceCases");
+            });
 
             modelBuilder.Entity("ServiceField.Server.Models.ServiceField.ServiceOrders", b =>
-                {
-                    b.Property<int>("IdCaseOrder")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("IdCaseOrder")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCaseOrder"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCaseOrder"));
 
-                    b.Property<DateTime>("ClosedDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("ClosedDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CompanyName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CompanySatisfaction")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CompanySatisfaction")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdCompany")
-                        .HasColumnType("int");
+                b.Property<int>("IdCompany")
+                    .HasColumnType("int");
 
-                    b.Property<int>("IdTechnician")
-                        .HasColumnType("int");
+                b.Property<int>("IdTechnician")
+                    .HasColumnType("int");
 
-                    b.Property<DateTime>("OpenedDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("OpenedDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("ServiceType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ServiceType")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                b.Property<int>("Status")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Summary")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TechnicianName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("TechnicianName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdCaseOrder");
+                b.HasKey("IdCaseOrder");
 
-                    b.ToTable("ServiceOrders");
-                });
+                b.ToTable("ServiceOrders");
+            });
 #pragma warning restore 612, 618
         }
     }

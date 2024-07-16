@@ -3,19 +3,24 @@ using ServiceField.Server.Models.ServiceField;
 
 namespace ServiceField.Server.Data
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDBContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
         }
 
-        public DbSet<ServiceCase> ServiceCases { get; set; }
+        public DbSet<ServiceCases> ServiceCases { get; set; }
         public DbSet<ServiceOrders> ServiceOrders { get; set; }
 
-       
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
 
+            modelBuilder.Entity<ServiceCases>();
+        }
     }
 }
+
 
