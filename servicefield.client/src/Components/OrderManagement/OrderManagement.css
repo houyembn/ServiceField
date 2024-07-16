@@ -30,6 +30,7 @@
 .inputselect {
     flex: 1;
     width: 50%;
+
 }
 .row {
     display: flex;
