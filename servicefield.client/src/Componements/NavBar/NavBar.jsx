@@ -9,6 +9,15 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Modal from 'react-bootstrap/Modal';
 import { BsBell } from 'react-icons/bs';
 import './NavBar.css';
+import Image from 'react-bootstrap/Image';
+
+import { GoSearch } from "react-icons/go";
+import InputGroup from 'react-bootstrap/InputGroup';
+
+
+import img from "../../assets/profile.png";
+
+
 
 function ShowNavBar() {
     const [showModal, setShowModal] = useState(false);
@@ -22,7 +31,7 @@ function ShowNavBar() {
     };
 
     return (
-        <>
+        <> 
             {[true].map((expand) => (
                 <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3" variant="light">
                     <Container fluid>
@@ -42,12 +51,17 @@ function ShowNavBar() {
                             <Offcanvas.Body className="d-flex justify-content-end">
                                 <Container fluid className="d-flex align-items-center justify-content-end">
                                     <Form className="d-flex ms-auto">
+                                        <InputGroup className="me-2" >
+                                       
                                         <Form.Control
                                             type="search"
                                             placeholder="Search"
-                                            className="me-2"
+                                          
                                             aria-label="Search"
-                                        />
+                                            
+                                            />
+                                            <InputGroup.Text > <GoSearch className=" outline-primary"/></InputGroup.Text>
+                                    </InputGroup>
                                         <Button variant="outline-primary">Search</Button>
                                     </Form>
                                     <Nav className="d-flex align-items-center">
@@ -69,7 +83,13 @@ function ShowNavBar() {
                                         <Navbar.Text>
                                             Signed in as: <a href="#login">Mark Otto</a>
                                         </Navbar.Text>
+
+                                       
+                                        
                                     </Nav>
+
+
+                                    <Image className="ms-3 " src={img} roundedCircle />
                                 </Container>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>

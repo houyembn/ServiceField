@@ -208,7 +208,7 @@ const Sidebar = () => {
                     )}
                 </div>
                 <br />
-                <Link to="#">
+                <Link to="/ShowArticles">
                     <i className="material-icons">add</i>
                     <span className="icon-text">Articles</span>
                 </Link>
