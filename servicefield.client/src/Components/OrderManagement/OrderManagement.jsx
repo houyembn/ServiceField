@@ -88,36 +88,40 @@ const OrderManagement = () => {
     //const handleDateTimeCloseChange = (newDateTime) => {
     //    setSelectedDateTimeClose(newDateTime);
     //};
-    const [item, setItem] = useState({
-        OrderNumber: '',
-        description: '',
-        sku: '',
-        category_id: '',
-        quantity: '',
-        location_id: '',
-        condition: '',
-        supplier_id: '',
-        barcodeType: '',
-        barcode: ''
+    const [Order, setOrder] = useState({
+        orderNumber: '',
+        serviceObject: '',
+        idCompany: '',
+        companyName: '',
+        idInstallation: '',
+        installationName: '',
+        idInitiator: '',
+        initiatorName: '',
+        initiatorContact: '',
+        serviceType: '',
+        invoicing: '',
+        message: '',
+        address: '',
+        contactPerson: '',
+        location: ''
     });
+
    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setItem(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+        setOrder({ ...Order, [name]: value });
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
       
             try {
-                const response = await axios.post('https://localhost:7141/ServiceField.Server/Article', item);
+                const response = await axios.post('https://localhost:7141/api/ServiceOrders', Order);
                 console.log(response.data);
             } catch (error) {
-                console.error('There was an error adding the item!', error);
+                console.error('There was an error adding the Order!', error);
             }
         
     };
@@ -129,21 +133,19 @@ const OrderManagement = () => {
                 <ShowNavBar />
                 <div className="p-4">
 
-                    <Container fluid className="d-flex justify-content-center align-items-center min-vh-100">
-
-
+                    <Container fluid className="d-flex justify-content-center align-items-center">
                         <Row className="justify-content-md-center">
-
-
                             <Col >
+                                <h1 className="display-6">Service Order Form</h1>
                                 <Form onSubmit={handleSubmit}>
-                                    <Form.Group className="mb-3" controlId="formOrderNumber">
+                                    <Row>
+                                        <Form.Group as={Col} className="mb-3" controlId="formOrderNumber">
                                         <Form.Label>Order Number</Form.Label>
                                         <Form.Control
                                             type="text"
                                             placeholder="Enter Order Number"
-                                            name="OrderNumber"
-                                            value={item.OrderNumber}
+                                            name="orderNumber"
+                                            value={Order.OrderNumber}
                                             onChange={handleChange}
                                             required
                                         />
@@ -153,8 +155,8 @@ const OrderManagement = () => {
                                         <Form.Label>Service Object</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="ServiceObject"
-                                            value={item.ServiceObject}
+                                            name="serviceObject"
+                                            value={Order.ServiceObject}
                                             onChange={handleChange}
                                         >
                                             <option>Select Service Object</option>
@@ -163,13 +165,25 @@ const OrderManagement = () => {
                                             <option value="3">Service 3</option>
                                         </Form.Control>
                                     </Form.Group>
+                                    </Row>
+                                    <Form.Group className="mb-3" controlId="formidCompany">
+                                        <Form.Label>idCompany</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter idCompany"
+                                            name="idCompany"
+                                            value={Order.idCompany}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formCustomer">
                                         <Form.Label>Customer</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Customer"
-                                            value={item.Customer}
+                                            name=" companyName"
+                                            value={Order.companyName}
                                             onChange={handleChange}
                                         >
                                             <option>Select Customer</option>
@@ -179,12 +193,24 @@ const OrderManagement = () => {
                                         </Form.Control>
                                     </Form.Group>
 
+                                    <Form.Group className="mb-3" controlId="formidCompany">
+                                        <Form.Label>idInstallation</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter idInstallation"
+                                            name="idInstallation"
+                                            value={Order.idInstallation}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </Form.Group>
+
                                     <Form.Group className="mb-3" controlId="formInstallation">
                                         <Form.Label>Installation</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Installation"
-                                            value={item.Installation}
+                                            name="installationName"
+                                            value={Order.installationName}
                                             onChange={handleChange}
                                         >
                                             <option>Select Installation</option>
@@ -194,12 +220,24 @@ const OrderManagement = () => {
                                         </Form.Control>
                                     </Form.Group>
 
+                                    <Form.Group className="mb-3" controlId="formidCompany">
+                                        <Form.Label>idInitiator</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter idInitiator"
+                                            name="idInitiator"
+                                            value={Order.idInitiator}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </Form.Group>
+
                                     <Form.Group className="mb-3" controlId="formInitiator">
                                         <Form.Label>Initiator</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Initiator"
-                                            value={item.Initiator}
+                                            name="initiatorName"
+                                            value={Order.initiatorName}
                                             onChange={handleChange}
                                         >
                                             <option>Select Initiator</option>
@@ -213,8 +251,8 @@ const OrderManagement = () => {
                                         <Form.Label>Contact person of Initiator</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Contact"
-                                            value={item.Contact}
+                                            name=" initiatorContact"
+                                            value={Order.initiatorContact}
                                             onChange={handleChange}
                                         >
                                             <option>Select contact person of Initiator</option>
@@ -228,8 +266,8 @@ const OrderManagement = () => {
                                         <Form.Label>Service Order Type</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Type"
-                                            value={item.Type}
+                                            name=" serviceType"
+                                            value={Order.serviceType}
                                             onChange={handleChange}
                                         >
                                             <option>Select Service Order Type</option>
@@ -242,8 +280,8 @@ const OrderManagement = () => {
                                         <Form.Label>Invoicing Type</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Invoicing"
-                                            value={item.Invoicing}
+                                            name="invoicing"
+                                            value={Order.invoicing}
                                             onChange={handleChange}
                                         >
                                             <option>Invoicing Type</option>
@@ -258,8 +296,8 @@ const OrderManagement = () => {
                                         <Form.Control
                                             type="text"
                                             placeholder="Enter Message"
-                                            name="Message"
-                                            value={item.Message}
+                                            name="message"
+                                            value={Order.message}
                                             onChange={handleChange}
                                             required
                                         />
@@ -269,8 +307,8 @@ const OrderManagement = () => {
                                         <Form.Label>Custom Address</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Address"
-                                            value={item.Address}
+                                            name="address"
+                                            value={Order.address}
                                             onChange={handleChange}
                                         >
                                             <option>Custom Address</option>
@@ -283,8 +321,8 @@ const OrderManagement = () => {
                                         <Form.Label>Contact at service location</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Contact"
-                                            value={item.Contact}
+                                            name="contactPerson"
+                                            value={Order.contactPerson}
                                             onChange={handleChange}
                                         >
                                             <option>Contact at service location</option>
@@ -298,8 +336,8 @@ const OrderManagement = () => {
                                         <Form.Label>Location</Form.Label>
                                         <Form.Control
                                             as="select"
-                                            name="Location"
-                                            value={item.Location}
+                                            name=" location"
+                                            value={Order.location}
                                             onChange={handleChange}
                                         >
                                             <option>Location</option>

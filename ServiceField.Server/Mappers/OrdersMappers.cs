@@ -5,44 +5,52 @@ namespace ServiceField.Server.Mappers
 {
     public static class OrdersMappers
     {
-        public static OrdersDto ToOrderDto(this ServiceOrders OrderModel)
+        public static OrdersDto ToOrderDto(this ServiceOrder OrderModel)
         {
 
 
 
             return new OrdersDto
             {
-                IdCaseOrder = OrderModel.IdCaseOrder,
-                IdCompany = OrderModel.IdCompany,
-                Description = OrderModel.Description,
+                IdOrder = OrderModel.IdOrder,
+                OrderNumber = OrderModel.OrderNumber,
+                ServiceObject = OrderModel.ServiceObject,
+                IdCompany = OrderModel.IdCompany, 
                 CompanyName = OrderModel.CompanyName,
+                IdInstallation = OrderModel.IdInstallation,
+                InstallationName = OrderModel.InstallationName,
+                IdInitiator = OrderModel.IdInitiator,
+                InitiatorName = OrderModel.InitiatorName,
+                InitiatorContact = OrderModel.InitiatorContact,
                 ServiceType = OrderModel.ServiceType,
-                OpenedDate = OrderModel.OpenedDate,
-                Status = OrderModel.Status,
-                IdTechnician = OrderModel.IdTechnician,
-                TechnicianName = OrderModel.TechnicianName,
-                ClosedDate = OrderModel.ClosedDate,
-                Summary = OrderModel.Summary,
-                CompanySatisfaction = OrderModel.CompanySatisfaction,
+                Invoicing = OrderModel.Invoicing,
+                Message = OrderModel.Message,
+                Address = OrderModel.Address,
+                ContactPerson = OrderModel.ContactPerson,
+                Location = OrderModel.Location,
             };
         }
 
-        public static ServiceOrders ToOrderFromCreateDTO(this CreateOrderRequestDto OrderDto)
+        public static ServiceOrder ToOrderFromCreateDTO(this CreateOrderRequestDto OrderDto)
         {
-            return new ServiceOrders
+            return new ServiceOrder
             {
 
+                OrderNumber = OrderDto.OrderNumber,
+                ServiceObject = OrderDto.ServiceObject,
                 IdCompany = OrderDto.IdCompany,
-                Description = OrderDto.Description,
                 CompanyName = OrderDto.CompanyName,
+                IdInstallation = OrderDto.IdInstallation,
+                InstallationName = OrderDto.InstallationName,
+                IdInitiator = OrderDto.IdInitiator,
+                InitiatorName = OrderDto.InitiatorName,
+                InitiatorContact = OrderDto.InitiatorContact,
                 ServiceType = OrderDto.ServiceType,
-                OpenedDate = OrderDto.OpenedDate,
-                Status = OrderDto.Status,
-                IdTechnician = OrderDto.IdTechnician,
-                TechnicianName = OrderDto.TechnicianName,
-                ClosedDate = OrderDto.ClosedDate,
-                Summary = OrderDto.Summary,
-                CompanySatisfaction = OrderDto.CompanySatisfaction,
+                Invoicing = OrderDto.Invoicing,
+                Message = OrderDto.Message,
+                Address = OrderDto.Address,
+                ContactPerson = OrderDto.ContactPerson,
+                Location = OrderDto.Location,
 
 
 

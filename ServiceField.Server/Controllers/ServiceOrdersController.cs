@@ -21,18 +21,18 @@ namespace ServiceField.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var orders = _context.ServiceOrders.ToList()
+            var orders = _context.ServiceOrder.ToList()
             .Select(s => s.ToOrderDto());
 
             return Ok(orders);
         }
 
 
-        [HttpGet("{IdCaseOrder}")]
-        public IActionResult GetById([FromRoute] int IdCaseOrder)
+        [HttpGet("{IdOrder}")]
+        public IActionResult GetById([FromRoute] int IdOrder)
         {
 
-            var articles = _context.ServiceOrders.Find(IdCaseOrder);
+            var articles = _context.ServiceOrder.Find(IdOrder);
 
 
             if (articles == null)
@@ -52,11 +52,11 @@ namespace ServiceField.Server.Controllers
 
             var OrderModel = OrdersDto.ToOrderFromCreateDTO();
 
-            _context.ServiceOrders.Add(OrderModel);
+            _context.ServiceOrder.Add(OrderModel);
             _context.SaveChanges();
 
 
-            return CreatedAtAction(nameof(GetById), new { IdCaseOrder = OrderModel.IdCaseOrder }, OrderModel.ToOrderDto());
+            return CreatedAtAction(nameof(GetById), new { IdOrder = OrderModel.IdOrder }, OrderModel.ToOrderDto());
 
 
         }

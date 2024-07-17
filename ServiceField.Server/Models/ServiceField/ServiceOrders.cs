@@ -43,4 +43,3 @@ namespace ServiceField.Server.Models.ServiceField
         public string CompanySatisfaction { get; set; }
     }
 }
-

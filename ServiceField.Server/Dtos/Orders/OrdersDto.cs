@@ -5,27 +5,36 @@ namespace ServiceField.Server.Dtos.Orders
     public class OrdersDto
     {
 
-        public int IdCaseOrder { get; set; }
+        public int IdOrder { get; set; }
+
+        public int OrderNumber { get; set; }
+
+        public string ServiceObject { get; set; }
+
         public int IdCompany { get; set; }
 
         public string CompanyName { get; set; }
 
-        public string Description { get; set; }
+        public int IdInstallation { get; set; }
+
+        public string InstallationName { get; set; }
+
+        public int IdInitiator { get; set; }
+
+        public string InitiatorName { get; set; }
+
+        public string InitiatorContact { get; set; }
 
         public string ServiceType { get; set; }
 
-        public DateTime OpenedDate { get; set; }
+        public string Invoicing { get; set; }
 
-        public int Status { get; set; }
+        public string Message { get; set; }
 
-        public int IdTechnician { get; set; }
+        public string Address { get; set; }
 
-        public string TechnicianName { get; set; }
+        public string ContactPerson { get; set; }
 
-        public DateTime ClosedDate { get; set; }
-
-        public string Summary { get; set; }
-
-        public string CompanySatisfaction { get; set; }
+        public string Location { get; set; }
     }
 }
