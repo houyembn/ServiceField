@@ -12,6 +12,12 @@ namespace ServiceField.Server.Data
         }
 
         public DbSet<ServiceCase> ServiceCases { get; set; }
+        public DbSet<LuServiceCaseCategory> LuServiceCaseCategories { get; set; }
+        public DbSet<LuServiceObject> LuServiceObjects { get; set; }
+        public DbSet<MDCheckList> MDCheckLists { get; set; }
+        public DbSet<MDElement> MDElements { get; set; }
+        public DbSet<MDSkills> MDSkills { get; set; }
+
 
 
     }

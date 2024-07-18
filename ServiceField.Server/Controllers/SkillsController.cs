@@ -2,16 +2,15 @@
 using ServiceField.Server.Data;
 using ServiceField.Server.Dtos.ServiceCase;
 using ServiceField.Server.Mappers;
-using ServiceField.Server.Models;
 
 namespace ServiceField.Server.Controllers
 {
     [ApiController]
-    [Route("ServiceField/Case")]
-    public class ServiceCaseController : ControllerBase
+    [Route("ServiceField/Skills")]
+    public class SkillsController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
-        public ServiceCaseController(ApplicationDBContext context)
+        public SkillsController(ApplicationDBContext context)
         {
             _context = context;
         }
@@ -20,8 +19,8 @@ namespace ServiceField.Server.Controllers
         {
 
 
-            var serviceCases = _context.ServiceCases.ToList()
-                .Select(s => s.ToServiceCaseDto());
+            var serviceCases = _context.MDSkills.ToList()
+                .Select(s => s.ToSkillsDto());
 
             return Ok(serviceCases);
         }
@@ -31,7 +30,7 @@ namespace ServiceField.Server.Controllers
         public IActionResult GetById([FromRoute] int id)
         {
 
-            var serviceCases = _context.ServiceCases.Find(id);
+            var serviceCases = _context.MDSkills.Find(id);
 
 
             if (serviceCases == null)
@@ -40,30 +39,27 @@ namespace ServiceField.Server.Controllers
 
             }
 
-            return Ok(serviceCases.ToServiceCaseDto());
+            return Ok(serviceCases.ToSkillsDto());
 
         }
-
         [HttpPost]
-        public IActionResult Create([FromBody] CreateServiceCaseRequestDto ServiceCaseDto)
+        public IActionResult Create([FromBody] CreateSkillsRequestDto SkillsDto)
         {
 
-            var serviceCaseModel = ServiceCaseDto.ToServiceCaseCreateDTO();
+            var serviceCaseModel = SkillsDto.ToSkillsCreateDTO();
 
-            _context.ServiceCases.Add(serviceCaseModel);
+            _context.MDSkills.Add(serviceCaseModel);
             _context.SaveChanges();
 
 
 
-            return CreatedAtAction(nameof(GetById), new { id = serviceCaseModel.Id }, serviceCaseModel.ToServiceCaseDto());
+            return CreatedAtAction(nameof(GetById), new { id = serviceCaseModel.Id }, serviceCaseModel.ToSkillsDto());
         }
-
-
         [HttpDelete("{id}")]
         public IActionResult DeleteById([FromRoute] int id)
         {
 
-            var serviceCases = _context.ServiceCases.Find(id);
+            var serviceCases = _context.MDSkills.Find(id);
 
 
             if (serviceCases == null)
@@ -71,31 +67,29 @@ namespace ServiceField.Server.Controllers
                 return NotFound();
 
             }
-            _context.ServiceCases.Remove(serviceCases);
+            _context.MDSkills.Remove(serviceCases);
             _context.SaveChanges();
 
-          
 
-            return Ok(serviceCases.ToServiceCaseDto());
+
+            return Ok(serviceCases.ToSkillsDto());
 
         }
         [HttpDelete("DeleteAll")]
         public IActionResult DeleteAll()
         {
-            var allServiceCases = _context.ServiceCases.ToList();
+            var allServiceCases = _context.MDSkills.ToList();
 
             if (!allServiceCases.Any())
             {
                 return NoContent();
             }
 
-            _context.ServiceCases.RemoveRange(allServiceCases);
+            _context.MDSkills.RemoveRange(allServiceCases);
             _context.SaveChanges();
 
             return Ok();
         }
-
-
 
     }
 }

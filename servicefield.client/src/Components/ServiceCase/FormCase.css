@@ -1,5 +1,6 @@
 
-.body {
+
+/*.body {
     font-family: Arial, sans-serif;
     justify-content: center;
     align-items: center;
@@ -10,28 +11,14 @@
 }
 
 .form-group {
-    margin: 10px; /*mebiiin kol chan*/
+    margin: 10px;*/ /*mebiiin kol chan*/
    
-}
-.form-row {
-    display: flex;
-    justify-content: space-between; 
-    margin-bottom: 10px;
-    width: 100%;
-}
-
-    .form-row .form-group {
-        flex: 1;
-        margin-right: 10px; 
-    }
-
-        .form-row .form-group:last-child {
-            margin-right: 0;
-        }
+/*}
+ 
 
 .company-group {
     display: flex;
-    margin-bottom: 10px; /*mebiiin kol chan*/
+    margin-bottom: 10px; 
 }
 .text {
     justify-content: center;
@@ -44,7 +31,7 @@ textarea,
 select {
     width: 100%;
     padding: 8px;
-    border: 3px solid;
+   
     border-radius: 5px;
     border-color: #1d3070;
 
@@ -87,14 +74,12 @@ select {
     background-color: #ffffff;
 }
 
-    .sub:focus {
-        border-color: #1d3070;
-        outline: none;
-    }
 
-   .sub:active {
-        border-color: #1d3070;
-        outline: none;
+    .sub:hover {
+        border-color: #2945a2;
+        background-color: #ffffff;
+        transform: scale(1.12);
+        font-weight: bold;
     }
 .details {
     margin: 20px;
@@ -137,47 +122,125 @@ select {
         color: red;
         text-align: center;
     }
-    .addBtn {
-    width: 4%;
-    margin-inline-start: 98%;
-  
-    padding: 8px;
-    border: 3px solid;
-    font-size: 15px;
-    border-radius: 10px;
-    border-color: #1d3070;
-    background-color: #4c5bc0;
-}
 
-    .addBtn:focus {
-        border-color: #1d3070;
-        outline: none;
+    .addBtn .material-icons {
+        padding: 20%;
+        font-size: 30px;
     }
 
-    .addBtn:active {
-        border-color: #1d3070;
-        outline: none;
-    }
 .addBtn {
-    width: 4%;
-    margin-inline-start: 98%;
-  
-    padding: 8px;
+    position: fixed;
+    bottom: 3%; 
+    right: 1.5%; 
+    width: 60px;
+    height: 60px;
+    color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
     border: 3px solid;
-    font-size: 15px;
-    border-radius: 10px;
-    border-color: #1d3070;
-    background-color: #4c5bc0;
+    border-radius: 50px;
+    background-color: #305ef7;
+    text-decoration-color: #ffffff;
+    border-color: #cebdbd;
 }
 
-    .addBtn:focus {
-        border-color: #1d3070;
-        outline: none;
+
+    .addBtn:hover {
+        background-color: #204fea;
+        border-color: #cebdbd;
+        transform: scale(1.3);
+    }*/
+h2 {
+    border-bottom: 2px solid #ccc;
+    position: absolute;
+    left: 10%;
+    font-size: 27px;
+    font-weight: bold;
+}
+h3 {
+    border-bottom: 2px solid #ccc;
+    padding-top: 4%;
+    font-size: 17px;
+    font-weight: bold;
+}
+.all {
+    display: flex;
+    flex-direction: column;
+  padding-top:1.5%;
+}
+
+.custom-label {
+    color: #696666;
+    font-style: italic;
+    margin-top: 0.5%;
+}
+
+.custom-input {
+    border-radius: 5px;
+    border: 2px solid #808080;
+}
+    .custom-input::placeholder {
+        color: #000000;
+        font-size: 15px; 
     }
 
-    .addBtn:active {
-        border-color: #1d3070;
-        outline: none;
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-column {
+    flex: 1; 
+}
+
+
+.sub {
+    width: 10%;
+    margin-top: 2%;
+    margin-inline-start: 40%;
+    padding: 0.8%;
+    border: 3px solid;
+    font-size: 100%;
+    border-radius: 20%;
+    border-color: #ccc;
+    background-color: #808080;
+    font-weight: bold;
+    color : #000000;
+}
+
+
+    .sub:hover {
+        border-color: #ccc;
+        background-color: #767676;
+        transform: scale(1.12);
+        font-weight: bold;
     }
 
 
+
+.addBtn .material-icons {
+    padding: 20%;
+    font-size: 30px;
+}
+.addBtn {
+    position: fixed;
+    bottom: 3%;
+    right: 1.5%;
+    width: 60px;
+    height: 60px;
+    color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    border: 3px solid;
+    border-radius: 50px;
+    background-color: #204fea;
+    text-decoration-color: #ffffff;
+    border-color: #cebdbd;
+}
+
+
+    .addBtn:hover {
+        background-color: #204fea;
+        border-color: #cebdbd;
+        transform: scale(1.3);
+    }

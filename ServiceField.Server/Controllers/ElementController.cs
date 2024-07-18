@@ -2,16 +2,15 @@
 using ServiceField.Server.Data;
 using ServiceField.Server.Dtos.ServiceCase;
 using ServiceField.Server.Mappers;
-using ServiceField.Server.Models;
 
 namespace ServiceField.Server.Controllers
 {
     [ApiController]
-    [Route("ServiceField/Case")]
-    public class ServiceCaseController : ControllerBase
+    [Route("ServiceField/Element")]
+    public class ElementController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
-        public ServiceCaseController(ApplicationDBContext context)
+        public ElementController(ApplicationDBContext context)
         {
             _context = context;
         }
@@ -20,8 +19,8 @@ namespace ServiceField.Server.Controllers
         {
 
 
-            var serviceCases = _context.ServiceCases.ToList()
-                .Select(s => s.ToServiceCaseDto());
+            var serviceCases = _context.MDElements.ToList()
+                .Select(s => s.ToElementDto());
 
             return Ok(serviceCases);
         }
@@ -31,7 +30,7 @@ namespace ServiceField.Server.Controllers
         public IActionResult GetById([FromRoute] int id)
         {
 
-            var serviceCases = _context.ServiceCases.Find(id);
+            var serviceCases = _context.MDElements.Find(id);
 
 
             if (serviceCases == null)
@@ -40,30 +39,27 @@ namespace ServiceField.Server.Controllers
 
             }
 
-            return Ok(serviceCases.ToServiceCaseDto());
+            return Ok(serviceCases.ToElementDto());
 
         }
-
         [HttpPost]
-        public IActionResult Create([FromBody] CreateServiceCaseRequestDto ServiceCaseDto)
+        public IActionResult Create([FromBody] CreateElementRequestDto ElementDto)
         {
 
-            var serviceCaseModel = ServiceCaseDto.ToServiceCaseCreateDTO();
+            var serviceCaseModel = ElementDto.ToElementCreateDTO();
 
-            _context.ServiceCases.Add(serviceCaseModel);
+            _context.MDElements.Add(serviceCaseModel);
             _context.SaveChanges();
 
 
 
-            return CreatedAtAction(nameof(GetById), new { id = serviceCaseModel.Id }, serviceCaseModel.ToServiceCaseDto());
+            return CreatedAtAction(nameof(GetById), new { id = serviceCaseModel.Id }, serviceCaseModel.ToElementDto());
         }
-
-
         [HttpDelete("{id}")]
         public IActionResult DeleteById([FromRoute] int id)
         {
 
-            var serviceCases = _context.ServiceCases.Find(id);
+            var serviceCases = _context.MDElements.Find(id);
 
 
             if (serviceCases == null)
@@ -71,31 +67,28 @@ namespace ServiceField.Server.Controllers
                 return NotFound();
 
             }
-            _context.ServiceCases.Remove(serviceCases);
+            _context.MDElements.Remove(serviceCases);
             _context.SaveChanges();
 
-          
 
-            return Ok(serviceCases.ToServiceCaseDto());
+
+            return Ok(serviceCases.ToElementDto());
 
         }
         [HttpDelete("DeleteAll")]
         public IActionResult DeleteAll()
         {
-            var allServiceCases = _context.ServiceCases.ToList();
+            var allServiceCases = _context.MDElements.ToList();
 
             if (!allServiceCases.Any())
             {
                 return NoContent();
             }
 
-            _context.ServiceCases.RemoveRange(allServiceCases);
+            _context.MDElements.RemoveRange(allServiceCases);
             _context.SaveChanges();
 
             return Ok();
         }
-
-
-
     }
 }

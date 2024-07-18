@@ -10,25 +10,47 @@ namespace ServiceField.Server.Mappers
             return new ServiceCaseDto
             {
                 Id = serviceCase.Id,
-                CompanyName = serviceCase.CompanyName,
                 ProductSerialNumber = serviceCase.ProductSerialNumber,
-                ProblemType = serviceCase.ProblemType,
-                Description = serviceCase.Description,
+                ServiceObject = serviceCase.ServiceObject,
+                AffectedCompany = serviceCase.AffectedCompany,
+                ContactPerson = serviceCase.ContactPerson,
+                AffectedInstallation = serviceCase.AffectedInstallation,
+                Skills = serviceCase.Skills,
+                OriginatingSOrder = serviceCase.OriginatingSOrder,
+                
+                CheckList = serviceCase.CheckList,
+                Element = serviceCase.Element,
+                ServiceCaseStatus = serviceCase.ServiceCaseStatus,
+                ServiceCaseCategory = serviceCase.ServiceCaseCategory,
+                ResponsableUser = serviceCase.ResponsableUser,
                 Priority = serviceCase.Priority,
-                Contract = serviceCase.Contract,
+                Message = serviceCase.Message,
+                Creator = serviceCase.Creator,
+                CreationDate = serviceCase.CreationDate
             };
         }
         public static ServiceCase ToServiceCaseCreateDTO(this CreateServiceCaseRequestDto serviceCaseDto )
         {
             return new ServiceCase
             {
-                CompanyName = serviceCaseDto.CompanyName,
+                Id = serviceCaseDto.Id,
                 ProductSerialNumber = serviceCaseDto.ProductSerialNumber,
-                ProblemType = serviceCaseDto.ProblemType,
-                Description = serviceCaseDto.Description,
-
+                ServiceObject = serviceCaseDto.ServiceObject,
+                AffectedCompany = serviceCaseDto.AffectedCompany,
+                ContactPerson = serviceCaseDto.ContactPerson,
+                AffectedInstallation = serviceCaseDto.AffectedInstallation,
+                Skills = serviceCaseDto.Skills,
+                OriginatingSOrder = serviceCaseDto.OriginatingSOrder,
+                
+                CheckList = serviceCaseDto.CheckList,
+                Element = serviceCaseDto.Element,
+                ServiceCaseStatus = serviceCaseDto.ServiceCaseStatus,
+                ServiceCaseCategory = serviceCaseDto.ServiceCaseCategory,
+                ResponsableUser = serviceCaseDto.ResponsableUser,
                 Priority = serviceCaseDto.Priority,
-                Contract = serviceCaseDto.Contract,
+                Message = serviceCaseDto.Message,
+                Creator = serviceCaseDto.Creator,
+                CreationDate = serviceCaseDto.CreationDate
 
             };
 
