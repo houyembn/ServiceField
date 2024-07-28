@@ -123,7 +123,10 @@ namespace ServiceField.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CheckListId")
+                    b.Property<int>("CategoryFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CheckListFK")
                         .HasColumnType("int");
 
                     b.Property<string>("ContactPerson")
@@ -137,12 +140,15 @@ namespace ServiceField.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ElementId")
+                    b.Property<int>("ElementFK")
                         .HasColumnType("int");
 
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ObjectFK")
+                        .HasColumnType("int");
 
                     b.Property<string>("OriginatingSOrder")
                         .IsRequired()
@@ -159,75 +165,94 @@ namespace ServiceField.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceCaseCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ServiceCaseStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServiceObjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SkillsId")
+                    b.Property<int>("SkillsFK")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CheckListId");
+                    b.HasIndex("CategoryFK");
 
-                    b.HasIndex("ElementId");
+                    b.HasIndex("CheckListFK");
 
-                    b.HasIndex("ServiceCaseCategoryId");
+                    b.HasIndex("ElementFK");
 
-                    b.HasIndex("ServiceObjectId");
+                    b.HasIndex("ObjectFK");
 
-                    b.HasIndex("SkillsId");
+                    b.HasIndex("SkillsFK");
 
                     b.ToTable("ServiceCases");
                 });
 
             modelBuilder.Entity("ServiceField.Server.Models.ServiceCase", b =>
                 {
-                    b.HasOne("ServiceField.Server.Models.MDCheckList", "CheckList")
-                        .WithMany()
-                        .HasForeignKey("CheckListId")
+                    b.HasOne("ServiceField.Server.Models.LuServiceCaseCategory", "LuServiceCaseCategory")
+                        .WithMany("ServiceCases")
+                        .HasForeignKey("CategoryFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ServiceField.Server.Models.MDElement", "Element")
-                        .WithMany()
-                        .HasForeignKey("ElementId")
+                    b.HasOne("ServiceField.Server.Models.MDCheckList", "MDCheckList")
+                        .WithMany("ServiceCases")
+                        .HasForeignKey("CheckListFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ServiceField.Server.Models.LuServiceCaseCategory", "ServiceCaseCategory")
-                        .WithMany()
-                        .HasForeignKey("ServiceCaseCategoryId")
+                    b.HasOne("ServiceField.Server.Models.MDElement", "MDElement")
+                        .WithMany("ServiceCases")
+                        .HasForeignKey("ElementFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ServiceField.Server.Models.LuServiceObject", "ServiceObject")
-                        .WithMany()
-                        .HasForeignKey("ServiceObjectId")
+                    b.HasOne("ServiceField.Server.Models.LuServiceObject", "LuServiceObject")
+                        .WithMany("ServiceCases")
+                        .HasForeignKey("ObjectFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ServiceField.Server.Models.MDSkills", "Skills")
-                        .WithMany()
-                        .HasForeignKey("SkillsId")
+                    b.HasOne("ServiceField.Server.Models.MDSkills", "MDSkills")
+                        .WithMany("ServiceCases")
+                        .HasForeignKey("SkillsFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CheckList");
+                    b.Navigation("LuServiceCaseCategory");
 
-                    b.Navigation("Element");
+                    b.Navigation("LuServiceObject");
 
-                    b.Navigation("ServiceCaseCategory");
+                    b.Navigation("MDCheckList");
 
-                    b.Navigation("ServiceObject");
+                    b.Navigation("MDElement");
 
-                    b.Navigation("Skills");
+                    b.Navigation("MDSkills");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.LuServiceCaseCategory", b =>
+                {
+                    b.Navigation("ServiceCases");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.LuServiceObject", b =>
+                {
+                    b.Navigation("ServiceCases");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.MDCheckList", b =>
+                {
+                    b.Navigation("ServiceCases");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.MDElement", b =>
+                {
+                    b.Navigation("ServiceCases");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.MDSkills", b =>
+                {
+                    b.Navigation("ServiceCases");
                 });
 #pragma warning restore 612, 618
         }

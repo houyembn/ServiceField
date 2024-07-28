@@ -57,6 +57,21 @@ namespace ServiceField.Server.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = serviceCaseModel.Id }, serviceCaseModel.ToServiceCaseDto());
         }
+        //[HttpPost]
+        //public async Task<IActionResult> Create([FromBody] CreateServiceCaseRequestDto serviceCaseDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var serviceCaseModel = serviceCaseDto.ToServiceCaseCreateDTO();
+
+        //    _context.ServiceCases.Add(serviceCaseModel);
+        //    await _context.SaveChangesAsync();
+
+        //    return CreatedAtAction(nameof(GetById), new { id = serviceCaseModel.Id }, serviceCaseModel.ToServiceCaseDto());
+        //}
 
 
         [HttpDelete("{id}")]

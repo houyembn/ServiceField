@@ -83,81 +83,81 @@ namespace ServiceField.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductSerialNumber = table.Column<int>(type: "int", nullable: false),
-                    ServiceObjectId = table.Column<int>(type: "int", nullable: false),
                     AffectedCompany = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AffectedInstallation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SkillsId = table.Column<int>(type: "int", nullable: false),
                     OriginatingSOrder = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CheckListId = table.Column<int>(type: "int", nullable: false),
-                    ElementId = table.Column<int>(type: "int", nullable: false),
                     ServiceCaseStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ServiceCaseCategoryId = table.Column<int>(type: "int", nullable: false),
                     ResponsableUser = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Priority = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Creator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ObjectFK = table.Column<int>(type: "int", nullable: false),
+                    SkillsFK = table.Column<int>(type: "int", nullable: false),
+                    CheckListFK = table.Column<int>(type: "int", nullable: false),
+                    ElementFK = table.Column<int>(type: "int", nullable: false),
+                    CategoryFK = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ServiceCases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ServiceCases_LuServiceCaseCategories_ServiceCaseCategoryId",
-                        column: x => x.ServiceCaseCategoryId,
+                        name: "FK_ServiceCases_LuServiceCaseCategories_CategoryFK",
+                        column: x => x.CategoryFK,
                         principalTable: "LuServiceCaseCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ServiceCases_LuServiceObjects_ServiceObjectId",
-                        column: x => x.ServiceObjectId,
+                        name: "FK_ServiceCases_LuServiceObjects_ObjectFK",
+                        column: x => x.ObjectFK,
                         principalTable: "LuServiceObjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ServiceCases_MDCheckLists_CheckListId",
-                        column: x => x.CheckListId,
+                        name: "FK_ServiceCases_MDCheckLists_CheckListFK",
+                        column: x => x.CheckListFK,
                         principalTable: "MDCheckLists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ServiceCases_MDElements_ElementId",
-                        column: x => x.ElementId,
+                        name: "FK_ServiceCases_MDElements_ElementFK",
+                        column: x => x.ElementFK,
                         principalTable: "MDElements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ServiceCases_MDSkills_SkillsId",
-                        column: x => x.SkillsId,
+                        name: "FK_ServiceCases_MDSkills_SkillsFK",
+                        column: x => x.SkillsFK,
                         principalTable: "MDSkills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceCases_CheckListId",
+                name: "IX_ServiceCases_CategoryFK",
                 table: "ServiceCases",
-                column: "CheckListId");
+                column: "CategoryFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceCases_ElementId",
+                name: "IX_ServiceCases_CheckListFK",
                 table: "ServiceCases",
-                column: "ElementId");
+                column: "CheckListFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceCases_ServiceCaseCategoryId",
+                name: "IX_ServiceCases_ElementFK",
                 table: "ServiceCases",
-                column: "ServiceCaseCategoryId");
+                column: "ElementFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceCases_ServiceObjectId",
+                name: "IX_ServiceCases_ObjectFK",
                 table: "ServiceCases",
-                column: "ServiceObjectId");
+                column: "ObjectFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServiceCases_SkillsId",
+                name: "IX_ServiceCases_SkillsFK",
                 table: "ServiceCases",
-                column: "SkillsId");
+                column: "SkillsFK");
         }
 
         /// <inheritdoc />
