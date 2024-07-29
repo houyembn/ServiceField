@@ -158,7 +158,7 @@ function Articles() {
                                             >
                                                 <option value="">Select item type</option>
                                                 {itemTypes.map(type => (
-                                                    <option key={type.id} value={type.id}>{type.name}</option>
+                                                    <option key={type.id} value={type.id}>{type.type}</option>
                                                 ))}
                                             </Form.Control>
                                         </Form.Group>
@@ -230,37 +230,6 @@ function Articles() {
                                             <option value="3">Category 3</option>
                                         </Form.Control>
                                     </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formLocation">
-                                        <Form.Label>Location</Form.Label>
-                                        <Form.Control
-                                            as="select"
-                                            name="location_id"
-                                            value={item.location_id}
-                                            onChange={handleChange}
-                                        >
-                                            <option>Select location</option>
-                                            <option value="1">Location 1</option>
-                                            <option value="2">Location 2</option>
-                                            <option value="3">Location 3</option>
-                                        </Form.Control>
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formCondition">
-                                        <Form.Label>Condition</Form.Label>
-                                        <Form.Control
-                                            as="select"
-                                            name="condition"
-                                            value={item.condition}
-                                            onChange={handleChange}
-                                        >
-                                            <option>Select condition</option>
-                                            <option value="New">New</option>
-                                            <option value="Used">Used</option>
-                                            <option value="Damaged">Damaged</option>
-                                        </Form.Control>
-                                    </Form.Group>
-
                                    
 
                                     <h1 className="display-6">Extended Information</h1>

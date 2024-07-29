@@ -18,6 +18,8 @@ import ShowSideBar from './Componements/SideBar/SideBar';
 import './Componements/SideBar/SideBar.css';
 import ShowNavBar from './Componements/NavBar/NavBar';
 import HomePage from './Componements/HomePage/HomePage';
+import AddLookup from './Componements/LU_Articles/AddLookup';
+import EditArticle from './Componements/Articles/EditArticle';
 
 
 
@@ -44,6 +46,10 @@ function App() {
 
 
                 <Route path="/Homepage" element={<HomePage />} />
+
+                <Route path="/add-lookup" element={<AddLookup />} />
+
+                <Route path="/edit-article/:id" element={<EditArticle />} />
             </Routes>
         </Router>
     );

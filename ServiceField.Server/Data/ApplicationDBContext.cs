@@ -13,6 +13,8 @@ namespace ServiceField.Server.Data
 
         public DbSet<Article> Articles { get; set; }
 
+        public DbSet<ItemType> ItemTypes { get; set; }  
+
 
     }
 }

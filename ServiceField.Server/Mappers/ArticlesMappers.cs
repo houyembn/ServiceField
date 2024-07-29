@@ -20,8 +20,32 @@ namespace ServiceField.Server.Mappers
                 LocationId = articleModel.LocationId,
                 Quantity = articleModel.Quantity,
                 SupplierId = articleModel.SupplierId,
-               
                 Condition = articleModel.Condition,
+                BarcodeType = articleModel.BarcodeType,
+                Barcode = articleModel.Barcode,
+                Price = articleModel.Price,
+                PurchasePrice = articleModel.PurchasePrice,
+                Currency = articleModel.Currency,
+                QuantityUnit = articleModel.QuantityUnit,
+                HasSerialNo = articleModel.HasSerialNo,
+                IsBatch = articleModel.IsBatch,
+                DangerousGoods = articleModel.DangerousGoods,
+                SpareParts = articleModel.SpareParts,
+                WarehouseManaged = articleModel.WarehouseManaged,
+                LeadTime = articleModel.LeadTime,
+                Weight = articleModel.Weight,
+                WeightNetto = articleModel.WeightNetto,
+                Length = articleModel.Length,
+                Width = articleModel.Width,
+                Height = articleModel.Height
+
+
+
+
+
+
+
+
             };
 
 
@@ -36,13 +60,29 @@ namespace ServiceField.Server.Mappers
 
                 Name = articleDto.Name,
                 Description = articleDto.Description,
-                CategoryId = articleDto.CategoryId,
                 SKU = articleDto.SKU,
-                Quantity=   articleDto.Quantity,
-                LocationId= articleDto.LocationId,
+                CategoryId = articleDto.CategoryId,
+                Quantity = articleDto.Quantity,
+                LocationId = articleDto.LocationId,
                 SupplierId = articleDto.SupplierId,
-                
                 Condition = articleDto.Condition,
+                BarcodeType = articleDto.BarcodeType,
+                Barcode = articleDto.Barcode,
+                Price = articleDto.Price,
+                PurchasePrice = articleDto.PurchasePrice,
+                Currency = articleDto.Currency,
+                QuantityUnit = articleDto.QuantityUnit,
+                HasSerialNo = articleDto.HasSerialNo,
+                IsBatch = articleDto.IsBatch,
+                DangerousGoods = articleDto.DangerousGoods,
+                SpareParts = articleDto.SpareParts,
+                WarehouseManaged = articleDto.WarehouseManaged,
+                LeadTime = articleDto.LeadTime,
+                Weight = articleDto.Weight,
+                WeightNetto = articleDto.WeightNetto,
+                Length = articleDto.Length,
+                Width = articleDto.Width,
+                Height = articleDto.Height
 
 
 

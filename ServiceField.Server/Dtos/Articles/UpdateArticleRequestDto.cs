@@ -1,10 +1,7 @@
-﻿using ServiceField.Server.Models;
-
-namespace ServiceField.Server.Dtos.Articles
+﻿namespace ServiceField.Server.Dtos.Articles
 {
-    public class CreateArticleRequestDto
+    public class UpdateArticleRequestDto
     {
-
         public string Name { get; set; }
         public string Description { get; set; }
         public string SKU { get; set; }
@@ -42,11 +39,6 @@ namespace ServiceField.Server.Dtos.Articles
 
 
         public decimal Height { get; set; }
-
-
-
-
-
 
 
 

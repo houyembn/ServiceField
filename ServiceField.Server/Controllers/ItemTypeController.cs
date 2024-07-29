@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ServiceField.Server.Data;
 using ServiceField.Server.Models;
 
 namespace ServiceField.Server.Controllers
@@ -8,28 +10,38 @@ namespace ServiceField.Server.Controllers
 
     [ApiController]
     [Route("ServiceField.Server/ItemTypes")]
-    public class ItemTypeController : ControllerBase
+    public class ItemTypesController : ControllerBase
     {
+        private readonly ApplicationDBContext _context;
 
-
-        // Simulated database or service with item types
-        private static readonly List<ItemType> itemTypes = new List<ItemType>
-    {
-        new ItemType { Id = 1, Name = "Material" },
-        new ItemType { Id = 2, Name = "Goods" },
-        new ItemType { Id = 3, Name = "Service" }
-        // Add more item types as needed
-    };
-
-        [HttpGet]
-        public ActionResult<IEnumerable<ItemType>> GetItemTypes()
+        public ItemTypesController(ApplicationDBContext context)
         {
-            return Ok(itemTypes);
+            _context = context;
         }
 
-        // Optionally, add more actions such as GetById, Post, Put, Delete, etc.
+        [HttpGet]
+        public async Task<IActionResult> GetItemTypes()
+        {
+            var itemTypes = await _context.ItemTypes.ToListAsync();
+            if (itemTypes == null || !itemTypes.Any())
+            {
+                return NotFound("No item types found.");
+            }
 
+            return Ok(itemTypes);
+        }
+        [HttpPost]
+        public async Task<IActionResult> PostItemType([FromBody] ItemType newItemType)
+        {
+            if (newItemType == null || string.IsNullOrWhiteSpace(newItemType.Type) || string.IsNullOrWhiteSpace(newItemType.Value))
+            {
+                return BadRequest("Invalid item type data.");
+            }
 
+            _context.ItemTypes.Add(newItemType);
+            await _context.SaveChangesAsync();
 
+            return Ok(newItemType);
+        }
     }
 }
