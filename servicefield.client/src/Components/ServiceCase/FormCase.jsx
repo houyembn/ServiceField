@@ -421,41 +421,49 @@ function FormCase() {
     });
 
     const [message, setMessage] = useState('');
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        console.log(name, value);
-    };
-    const navigate = useNavigate();
-    const handleGetButtonClick = () => {
-        navigate('/DetailsFormCase');
-    };
     const [checklist, setCheckLists] = useState([]);
     const [object, setObjects] = useState([]);
     const [element, setElements] = useState([]);
     const [skills, setSkills] = useState([]);
     const [category, setCategories] = useState([]);
     const [error, setError] = useState('');
-    //const validateFormData = () => {
-    //    const errors = [];
-    //    if (!formData.productSerialNumber) errors.push('Product Serial Number is required.');
-    //    if (!formData.objectFK) errors.push('Object FK is required.');
-    //    if (!formData.skillsFK) errors.push('Skills FK is required.');
-    //    if (!formData.checkListFK) errors.push('CheckList FK is required.');
-    //    if (!formData.elementFK) errors.push('Element FK is required.');
-    //    if (!formData.categoryFK) errors.push('Category FK is required.');
-    //    // Ajouter d'autres validations si nécessaire
-    //    return errors;
-    //};
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        console.log(name, value);
+       setError({ ...error, [name]: '' }); 
+    };
+    const navigate = useNavigate();
+    const handleGetButtonClick = () => {
+        navigate('/DetailsFormCase');
+    };
+ 
+
+
+    //const handleSubmit = async (e) => {
+    //    e.preventDefault();
+
+
+    //    try {
+    //        const response = await axios.post('https://localhost:7141/ServiceField/Case', formData);
+    //        console.log(response.data);
+    //        setMessage('Form submitted successfully!');
+    //        navigate('/DetailsFormCase');
+    //    } catch (error) {
+    //        console.error('There was an error adding the item!', error.response?.data);
+    //        setMessage('Failed to submit form.');
+    //    }
+    //};
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //const validationErrors = validateFormData();
-        //if (validationErrors.length > 0) {
-        //    setMessage(validationErrors.join(' '));
-        //    return;
-        //}
+
+        // Validation supplémentaire avant l'envoi
+        if (!/^\d{6,}$/.test(formData.productSerialNumber)) {
+            setError({ ...error, productSerialNumber: 'The product serial number must contain only digits and at least 6 digits' });
+            return;
+        }
+
         try {
             const response = await axios.post('https://localhost:7141/ServiceField/Case', formData);
             console.log(response.data);
@@ -467,10 +475,6 @@ function FormCase() {
         }
     };
 
-
-
-
-    
         useEffect(() => {
             const fetchData = async () => {
                 try {
@@ -484,7 +488,6 @@ function FormCase() {
                     setSkills(skillsResponse.data);
                     const categoryResponse = await axios.get('https://localhost:7141/ServiceField/Category');
                     setCategories(categoryResponse.data);
-                    //console.log(categoryResponse.data);
                 } catch (error) {
                     console.error('There was an error fetching the data!', error);
                     setError('Failed to fetch data.');
@@ -507,14 +510,20 @@ function FormCase() {
                         <h3>Basic information</h3>
                         <div className="all">
 
-                            <Form.Label className="custom-label">Service Case Numero</Form.Label>
+                            <Form.Label className="custom-label">Product Serial Number</Form.Label>
                             <Form.Control
                                 id="productSerialNumber"
-                                placeholder="Put service Numero"
+                                placeholder="Enter product serial number"
                                 className="custom-input"
-
-                                name="productSerialNumber" value={formData.productSerialNumber} onChange={handleChange}
+                                name="productSerialNumber"
+                                value={formData.productSerialNumber}
+                                onChange={handleChange}
+                                isInvalid={!!error.productSerialNumber}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {error.productSerialNumber}
+                            </Form.Control.Feedback>
+
                                  
 
                             <div className="form-row">
@@ -624,7 +633,7 @@ function FormCase() {
                                         onChange={handleChange}>
                                         <option value="New">New</option>
                                         <option value="Old">Old</option>
-                                        <option value="Three">Three</option>
+                                        <option value="In-progress">In progress</option>
                                     </Form.Select>
                                 </div>
                                 <div className="form-column">
@@ -651,9 +660,10 @@ function FormCase() {
                                     <Form.Label className="custom-label">Priority</Form.Label>
                                     <Form.Select aria-label="Select skills" className="custom-input" id="priority" name="priority" value={formData.priority}
                                         onChange={handleChange} >
+                                        <option value="">Select an option</option>
                                         <option value="High">High</option>
-                                        <option value="Midum">Midum</option>
-                                        <option value="Three">Three</option>
+                                        <option value="Midum">Medium</option>
+                                        <option value="Low">Low</option>
                                     </Form.Select>
                                 </div>
                               
@@ -663,7 +673,6 @@ function FormCase() {
                                                            <Form.Control className="custom-input"  as="textarea" rows={3} style={{ resize: 'both' }} id="message" name="message" value={formData.message} onChange={handleChange} />
                             </Form.Group>
                             <Form.Label className="custom-label">Creation Date</Form.Label>
-                            <Form.Label className="custom-label">Creation Date</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={formData.creationDate}
@@ -672,7 +681,7 @@ function FormCase() {
                            
                             />
                           
-                                <Form.Label className="custom-label">Creator</Form.Label>
+                                {/*<Form.Label className="custom-label">Creator</Form.Label>*/}
                             {/*<Form.Select aria-label="creator" id="creator" className="custom-input" name="creator" value={formData.creator}*/}
                             {/*        onChange={handleChange} >*/}
                             {/*    <option value="Abir">Abir</option>*/}
@@ -681,13 +690,7 @@ function FormCase() {
                             {/*    </Form.Select>*/}
                            
                             <Button className="sub" as="input" type="submit" value="Submit" onSubmit={handleSubmit} />
-
-                          
-
-
                         </div>
-
-
 
                     </form>
 
