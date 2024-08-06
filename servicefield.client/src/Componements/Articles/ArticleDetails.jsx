@@ -89,9 +89,7 @@ function ArticleDetails() {
                                         <Card.Text>
                                             <strong>Quantity: </strong> {article.quantity}
                                         </Card.Text>
-                                        <Card.Text>
-                                            <strong>Location: </strong> {article.location_id}
-                                        </Card.Text>
+                                     
                                         <Card.Text>
                                             <strong>Condition: </strong> {article.condition}
                                         </Card.Text>

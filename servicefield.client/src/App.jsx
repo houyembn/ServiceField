@@ -20,6 +20,9 @@ import ShowNavBar from './Componements/NavBar/NavBar';
 import HomePage from './Componements/HomePage/HomePage';
 import AddLookup from './Componements/LU_Articles/AddLookup';
 import EditArticle from './Componements/Articles/EditArticle';
+import SignIn from './Componements/Users/SignIn';
+import SignUp from './Componements/Users/SignUp';
+import User from './Componements/Users/User';
 
 
 
@@ -50,6 +53,13 @@ function App() {
                 <Route path="/add-lookup" element={<AddLookup />} />
 
                 <Route path="/edit-article/:id" element={<EditArticle />} />
+
+
+                <Route path="/SignIn/" element={<SignIn />} />
+
+
+                <Route path="/SignUp/" element={<SignUp />} />
+                <Route path="/User/" element={<User />} />
             </Routes>
         </Router>
     );

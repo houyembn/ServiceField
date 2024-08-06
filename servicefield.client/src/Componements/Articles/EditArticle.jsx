@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Row } from 'react-bootstrap';
 import ShowNavBar from '../NavBar/NavBar';
 import Sidebar from '../SideBar/SideBar';
 
@@ -217,55 +217,75 @@ function EditArticle() {
                             />
                         </Form.Group>
 
-                        <Form.Group controlId="hasSerialNo">
-                            <Form.Check
-                                type="checkbox"
-                                name="hasSerialNo"
-                                label="Has Serial No"
-                                checked={article.hasSerialNo}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
 
-                        <Form.Group controlId="isBatch">
-                            <Form.Check
-                                type="checkbox"
-                                name="isBatch"
-                                label="Is Batch"
-                                checked={article.isBatch}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+                        <Container>
+                            <Row>
+                                <Form.Group  controlId="hasSerialNo">
+                                    <Form.Check
+                                        type="checkbox"
+                                        name="hasSerialNo"
+                                        label="Has Serial No"
+                                        checked={article.hasSerialNo}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
 
-                        <Form.Group controlId="dangerousGoods">
-                            <Form.Check
-                                type="checkbox"
-                                name="dangerousGoods"
-                                label="Dangerous Goods"
-                                checked={article.dangerousGoods}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+                                <Form.Group controlId="isBatch">
+                                    <Form.Check
+                                        type="checkbox"
+                                        name="isBatch"
+                                        label="Is Batch"
+                                        checked={article.isBatch}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
 
-                        <Form.Group controlId="spareParts">
-                            <Form.Check
-                                type="checkbox"
-                                name="spareParts"
-                                label="Spare Parts"
-                                checked={article.spareParts}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+                                <Form.Group controlId="dangerousGoods">
+                                    <Form.Check
+                                        type="checkbox"
+                                        name="dangerousGoods"
+                                        label="Dangerous Goods"
+                                        checked={article.dangerousGoods}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
 
-                        <Form.Group controlId="warehouseManaged">
-                            <Form.Check
-                                type="checkbox"
-                                name="warehouseManaged"
-                                label="Warehouse Managed"
-                                checked={article.warehouseManaged}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+                                <Form.Group controlId="spareParts">
+                                    <Form.Check
+                                        type="checkbox"
+                                        name="spareParts"
+                                        label="Spare Parts"
+                                        checked={article.spareParts}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group controlId="warehouseManaged">
+                                    <Form.Check
+                                        type="checkbox"
+                                        name="warehouseManaged"
+                                        label="Warehouse Managed"
+                                        checked={article.warehouseManaged}
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+
+
+                            </Row>
+
+                            
+
+                        </Container>
+
+
+
+
+
+
+
+                        
+
+                      
 
                         <Form.Group controlId="leadTime">
                             <Form.Label>Lead Time</Form.Label>
