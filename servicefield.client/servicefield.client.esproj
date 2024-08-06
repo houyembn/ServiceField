@@ -12,6 +12,9 @@
     <Folder Include="src\Components\CheckCase\" />
     <Folder Include="src\Components\NavBar\" />
     <Folder Include="src\Components\HomePage\" />
+    <Folder Include="src\Components\LookUpOrder\Invoicing\" />
+    <Folder Include="src\Components\User\" />
+    <Folder Include="src\Components\OrderDetails\" />
     <Folder Include="src\Components\OrderDisplay\" />
     <Folder Include="src\Components\SideBar\" />
     <Folder Include="src\Components\OrderManagement\" />

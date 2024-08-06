@@ -1,0 +1,24 @@
+.custom-table {
+    background-color: white;
+    color: white;
+}
+
+    .custom-table thead th,
+    .custom-table tbody td {
+        color: black; 
+    }
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.search-input {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.search-select {
+    flex: 1;
+}
+

@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ServiceField.Server.Data;
+using ServiceField.Server.Interfaces;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
+
+
 
 builder.Services.AddCors(options =>
 {
@@ -30,6 +33,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddScoped<IServiceOrderHelper, ServiceOrderHelper>();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -53,3 +58,5 @@ app.MapFallbackToFile("/index.html");
 app.UseCors();
 
 app.Run();
+
+

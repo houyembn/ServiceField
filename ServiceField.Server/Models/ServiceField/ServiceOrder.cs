@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiceField.Server.Models.ServiceField
 {
@@ -10,8 +11,15 @@ namespace ServiceField.Server.Models.ServiceField
         [Required]
         public int OrderNumber { get; set; }
 
+        //[Required]
+        //public string ServiceObject { get; set; }
+
         [Required]
-        public string ServiceObject { get; set; }
+        public int ServiceObjectId { get; set; } // Foreign Key
+
+        [ForeignKey(nameof(ServiceObjectId))]
+        public ServiceObject? ServiceObject { get; set; } // Navigation Property
+
 
         [Required]
         public int IdCompany { get; set; }
@@ -37,12 +45,21 @@ namespace ServiceField.Server.Models.ServiceField
         public string InitiatorContact { get; set; }
 
 
+        //[Required]
+        //public string ServiceType { get; set; }
+
         [Required]
-        public string ServiceType { get; set; }
+        public int ServiceTypeId { get; set; } // Foreign Key
+
+        [ForeignKey(nameof(ServiceTypeId))]
+        public ServiceType? ServiceType { get; set; } // Navigation Property
 
 
         [Required]
-        public string Invoicing { get; set; }
+        public int InvoicingId { get; set; } // Foreign Key
+
+        [ForeignKey(nameof(InvoicingId))]
+        public Invoicing? Invoicing { get; set; } // Navigation Property
 
 
         [Required]

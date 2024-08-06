@@ -1,4 +1,4 @@
-.h2 {
+/*.h2 {
     border-bottom: 2px solid #ccc;
     position: absolute;
    left :   8%;
@@ -7,7 +7,7 @@
    
 }
 
-.all {
+.all {*/
     /*display: flex;
     flex-direction: column;*/ /* Ensure items stack vertically */
     /*align-items: center;*/ /* Center items vertically */
@@ -15,7 +15,7 @@
     /*padding: 50px;*/ /* Increase padding to move it further away from edges */
     /*margin-top: 120px;*/ /* Increase margin from the top */
     /*margin-left: 100px;*/ /* Increase margin from the left */
-   padding : 6%;
+   /*padding : 6%;
 }
 
 .row + .row {
@@ -76,7 +76,89 @@
 
     .inputselect .MuiInputLabel-root.Mui-focused {
     color: #468FEA;
+}*/
+.h2 {
+
+    margin-left: 3%;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid #ccc;
+    display: inline-block;
 }
+.h3 {
+    border-bottom: 2px solid #ccc;
+    padding-top: 2%;
+    font-size: 17px;
+    font-weight: bold;
+ 
+}
+.all {
+    display: flex;
+    flex-direction: column;
+  padding-top:1.5%;
+  
+}
+
+.custom-label {
+    color: #696666;
+    font-style: italic;
+    margin-top: 0.5%;
+}
+
+.custom-input {
+    border-radius: 5px;
+    border: 2px solid #808080;
+}
+    .custom-input::placeholder {
+        color: #000000;
+        font-size: 15px; 
+    }
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-column {
+    flex: 1; 
+}
+
+
+.sub {
+    width: 10%;
+    margin-top: 2%;
+    margin-inline-start: 40%;
+    padding: 0.8%;
+    border: 3px solid;
+    font-size: 100%;
+    border-radius: 20%;
+    border-color: #ccc;
+    background-color: #808080;
+    font-weight: bold;
+    color : #000000;
+}
+
+
+    .sub:hover {
+        border-color: #ccc;
+        background-color: #767676;
+        transform: scale(1.12);
+        font-weight: bold;
+    }
+.modal-success {
+    color: green;
+}
+
+.modal-fail {
+    color: red;
+}
+
+.checkbox-label {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 
 
     /*

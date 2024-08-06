@@ -1,5 +1,6 @@
 ﻿using ServiceField.Server.Dtos.Orders;
 using ServiceField.Server.Models.ServiceField;
+using ServiceField.Server.Interfaces;
 
 namespace ServiceField.Server.Mappers
 {
@@ -7,23 +8,25 @@ namespace ServiceField.Server.Mappers
     {
         public static OrdersDto ToOrderDto(this ServiceOrder OrderModel)
         {
-
-
+            if (OrderModel == null)
+            {
+                throw new ArgumentNullException(nameof(OrderModel));
+            }
 
             return new OrdersDto
             {
                 IdOrder = OrderModel.IdOrder,
                 OrderNumber = OrderModel.OrderNumber,
-                ServiceObject = OrderModel.ServiceObject,
-                IdCompany = OrderModel.IdCompany, 
+                ServiceObject = OrderModel.ServiceObject?.ServiceObjectName,
+                IdCompany = OrderModel.IdCompany,
                 CompanyName = OrderModel.CompanyName,
                 IdInstallation = OrderModel.IdInstallation,
                 InstallationName = OrderModel.InstallationName,
                 IdInitiator = OrderModel.IdInitiator,
                 InitiatorName = OrderModel.InitiatorName,
                 InitiatorContact = OrderModel.InitiatorContact,
-                ServiceType = OrderModel.ServiceType,
-                Invoicing = OrderModel.Invoicing,
+                ServiceType = OrderModel.ServiceType?.ServiceTypeName,
+                Invoicing = OrderModel.Invoicing?.InvoicingType,
                 Message = OrderModel.Message,
                 Address = OrderModel.Address,
                 ContactPerson = OrderModel.ContactPerson,
@@ -31,13 +34,13 @@ namespace ServiceField.Server.Mappers
             };
         }
 
-        public static ServiceOrder ToOrderFromCreateDTO(this CreateOrderRequestDto OrderDto)
+
+        public static ServiceOrder ToOrderFromCreateDTO(this CreateOrderRequestDto OrderDto, IServiceOrderHelper serviceOrderHelper)
         {
             return new ServiceOrder
             {
-
                 OrderNumber = OrderDto.OrderNumber,
-                ServiceObject = OrderDto.ServiceObject,
+                ServiceObject = serviceOrderHelper.GetServiceObjectByName(OrderDto.ServiceObject),
                 IdCompany = OrderDto.IdCompany,
                 CompanyName = OrderDto.CompanyName,
                 IdInstallation = OrderDto.IdInstallation,
@@ -45,17 +48,14 @@ namespace ServiceField.Server.Mappers
                 IdInitiator = OrderDto.IdInitiator,
                 InitiatorName = OrderDto.InitiatorName,
                 InitiatorContact = OrderDto.InitiatorContact,
-                ServiceType = OrderDto.ServiceType,
-                Invoicing = OrderDto.Invoicing,
+                ServiceType = serviceOrderHelper.GetServiceTypeByName(OrderDto.ServiceType),
+                Invoicing = serviceOrderHelper.GetInvoicingByType(OrderDto.Invoicing),
                 Message = OrderDto.Message,
                 Address = OrderDto.Address,
                 ContactPerson = OrderDto.ContactPerson,
                 Location = OrderDto.Location,
-
-
-
             };
-
         }
+
     }
 }

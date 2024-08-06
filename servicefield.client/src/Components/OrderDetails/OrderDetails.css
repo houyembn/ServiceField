@@ -1,0 +1,80 @@
+
+.title {
+    border-bottom: 2px solid #ccc;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+
+.custom-label {
+    color: /* #2b2727*/ #696666;
+    font-style: italic;
+    margin-top: 0.5%;
+}
+
+.modal-success {
+    color: green;
+}
+
+.modal-fail {
+   
+    color: red;
+}
+
+.deleteBtn .material-icons {
+    padding: 20%;
+    font-size: 30px;
+}
+
+.deleteBtn {
+    position: fixed;
+    bottom: 1%;
+    right: 1.5%;
+    width: 60px;
+    height: 60px;
+    color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    border: 3px solid;
+    border-radius: 50px;
+    background: linear-gradient(135deg,#8e1e1d, #db0f27);
+    text-decoration-color: #ffffff;
+    border-color: #cebdbd;
+}
+
+
+    .deleteBtn:hover {
+        background: linear-gradient(-135deg,#8e1e1d, #db0f27);
+        border-color: #cebdbd;
+        transform: scale(1.3);
+    }
+
+
+.updateBtn .material-icons {
+    padding: 20%;
+    font-size: 30px;
+}
+
+.updateBtn {
+    position: fixed;
+    bottom: 1%;
+    right: 6.5%;
+    width: 60px;
+    height: 60px;
+    color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    border: 3px solid;
+    border-radius: 50px;
+    background: linear-gradient(135deg,#053b28, #0a6522);
+    text-decoration-color: #ffffff;
+    border-color: #cebdbd;
+}
+
+
+    .updateBtn:hover {
+        background: linear-gradient(-135deg,#053b28, #0a6522);
+        border-color: #cebdbd;
+        transform: scale(1.3);
+    }

@@ -11,7 +11,9 @@ namespace ServiceField.Server.Data
         }
 
         public DbSet<ServiceCases> ServiceCases { get; set; }
-        public DbSet<ServiceOrders> ServiceOrders { get; set; }
+        public DbSet<Invoicing> Invoicing { get; set; }
+        public DbSet<ServiceObject> ServiceObject { get; set; }
+        public DbSet<ServiceType> ServiceType { get; set; }
 
         public DbSet<ServiceOrder> ServiceOrder { get; set; }
 

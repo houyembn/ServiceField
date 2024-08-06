@@ -1,64 +1,144 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ServiceField.Server.Data;
 using ServiceField.Server.Dtos.Orders;
+using ServiceField.Server.Interfaces;
 using ServiceField.Server.Mappers;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ServiceField.Server.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class ServiceOrdersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IServiceOrderHelper _serviceOrderHelper;
 
-        public ServiceOrdersController(ApplicationDbContext context)
+        public ServiceOrdersController(ApplicationDbContext context, IServiceOrderHelper serviceOrderHelper)
         {
             _context = context;
+            _serviceOrderHelper = serviceOrderHelper;
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    var orders = await _context.ServiceOrder
+        //        .Select(s => s.ToOrderDto())
+        //        .ToListAsync();
+
+        //    return Ok(orders);
+        //}
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var orders = _context.ServiceOrder.ToList()
-            .Select(s => s.ToOrderDto());
+            var orders = await _context.ServiceOrder
+                .Include(o => o.ServiceObject)
+                .Include(o => o.ServiceType)
+                .Include(o => o.Invoicing)
+                .Select(s => s.ToOrderDto())
+                .ToListAsync();
 
             return Ok(orders);
         }
 
 
-        [HttpGet("{IdOrder}")]
-        public IActionResult GetById([FromRoute] int IdOrder)
+        //[HttpGet("{idOrder}")]
+        //public async Task<IActionResult> GetById([FromRoute] int idOrder)
+        //{
+        //    var order = await _context.ServiceOrder
+        //        .Where(o => o.IdOrder == idOrder)
+        //        .FirstOrDefaultAsync();
+
+        //    if (order == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(order.ToOrderDto());
+        //}
+
+
+        [HttpGet("{idOrder}")]
+        public async Task<IActionResult> GetById([FromRoute] int idOrder)
         {
+            var order = await _context.ServiceOrder
+                .Include(o => o.ServiceObject)
+                .Include(o => o.ServiceType)
+                .Include(o => o.Invoicing)
+                .FirstOrDefaultAsync(o => o.IdOrder == idOrder);
 
-            var articles = _context.ServiceOrder.Find(IdOrder);
-
-
-            if (articles == null)
+            if (order == null)
             {
                 return NotFound();
-
             }
 
-            return Ok(articles.ToOrderDto());
-
+            return Ok(order.ToOrderDto());
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CreateOrderRequestDto OrdersDto)
+        public async Task<IActionResult> Create([FromBody] CreateOrderRequestDto orderDto)
         {
+            var orderModel = orderDto.ToOrderFromCreateDTO(_serviceOrderHelper);
 
+            _context.ServiceOrder.Add(orderModel);
+            await _context.SaveChangesAsync();
 
-            var OrderModel = OrdersDto.ToOrderFromCreateDTO();
+            return CreatedAtAction(nameof(GetById), new { idOrder = orderModel.IdOrder }, orderModel.ToOrderDto());
+        }
 
-            _context.ServiceOrder.Add(OrderModel);
-            _context.SaveChanges();
+        [HttpDelete("{idOrder}")]
+        public async Task<IActionResult> Delete([FromRoute] int idOrder)
+        {
+            var orderModel = await _context.ServiceOrder
+                .Where(x => x.IdOrder == idOrder)
+                .FirstOrDefaultAsync();
 
+            if (orderModel == null)
+            {
+                return NotFound();
+            }
 
-            return CreatedAtAction(nameof(GetById), new { IdOrder = OrderModel.IdOrder }, OrderModel.ToOrderDto());
+            _context.ServiceOrder.Remove(orderModel);
+            await _context.SaveChangesAsync();
 
+            return NoContent();
+        }
 
+        [HttpPut("{idOrder}")]
+        public async Task<IActionResult> Update([FromRoute] int idOrder, [FromBody] UpdateOrderRequestDto updateDto)
+        {
+            var orderModel = await _context.ServiceOrder
+                .Where(x => x.IdOrder == idOrder)
+                .FirstOrDefaultAsync();
+
+            if (orderModel == null)
+            {
+                return NotFound();
+            }
+
+            orderModel.OrderNumber = updateDto.OrderNumber;
+            orderModel.ServiceObject = _serviceOrderHelper.GetServiceObjectByName(updateDto.ServiceObject);
+            orderModel.IdCompany = updateDto.IdCompany;
+            orderModel.CompanyName = updateDto.CompanyName;
+            orderModel.IdInstallation = updateDto.IdInstallation;
+            orderModel.InstallationName = updateDto.InstallationName;
+            orderModel.IdInitiator = updateDto.IdInitiator;
+            orderModel.InitiatorName = updateDto.InitiatorName;
+            orderModel.InitiatorContact = updateDto.InitiatorContact;
+            orderModel.ServiceType = _serviceOrderHelper.GetServiceTypeByName(updateDto.ServiceType);
+            orderModel.Invoicing = _serviceOrderHelper.GetInvoicingByType(updateDto.Invoicing);
+            orderModel.Message = updateDto.Message;
+            orderModel.Address = updateDto.Address;
+            orderModel.ContactPerson = updateDto.ContactPerson;
+            orderModel.Location = updateDto.Location;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(orderModel.ToOrderDto());
         }
     }
 }
