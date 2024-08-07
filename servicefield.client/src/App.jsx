@@ -10,6 +10,10 @@ import ShowNavBar from './Components/NavBar/NavBar';
 import HomePage from './Components/HomePage/HomePage';
 import LuSkills from './Components/ServiceCase/LuSkills';
 import ServiceCaseDetails from './Components/ServiceCase/ShowSCDetail';
+import LogIn from './Components/ServiceCase/LogIn';
+import User from './Components/User/User';
+import UserDisplay from './Components/User/UserDisplay';
+import UserDetails from './Components/User/UserDetails';
 
 function App() {
     return (
@@ -21,7 +25,11 @@ function App() {
                 <Route path="/FormCase" element={<FormCase />} />
                 <Route path="/ServiceCaseDetails/:id" element={<ServiceCaseDetails />} />
                 <Route path="/LuSkills" element={<LuSkills />} />
+                <Route path="/LogIn" element={<LogIn />} />
                 <Route path="/" element={<HomePage />} />
+                <Route path="/User" element={<User />} />
+                <Route path="/UserDisplay" element={<UserDisplay />} />
+                <Route path="/UserDetails/:UserId" element={<UserDetails />} />
             </Routes>
         </Router>
     );

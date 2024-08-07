@@ -1,155 +1,3 @@
-
-
-/*.body {
-    font-family: Arial, sans-serif;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    display: flex;
-    flex-direction: column; 
-   
-}
-
-.form-group {
-    margin: 10px;*/ /*mebiiin kol chan*/
-   
-/*}
- 
-
-.company-group {
-    display: flex;
-    margin-bottom: 10px; 
-}
-.text {
-    justify-content: center;
-    align-items: center;
-}
-
-
-input[type="text"],
-textarea,
-select {
-    width: 100%;
-    padding: 8px;
-   
-    border-radius: 5px;
-    border-color: #1d3070;
-
-}
-
-    input[type="text"],
-    textarea, select:focus {
-        border-color: #1d3070;
-        outline: none;
-    }
-
-    input[type="text"],
-    textarea, select:active {
-        border-color: #1d3070;
-        outline: none;
-    }
-    select.custom-select {
-        width: 70%;
-        padding: 8px;
-        border: 3px solid;
-        border-radius: 5px;
-        border-color: #1d3070;
-    }
-   input.custom-select {
-        width: 70%;
-        padding: 8px;
-        border: 3px solid;
-        border-radius: 5px;
-        border-color: #1d3070;
-    }
-.sub {
- 
-    width: 20%;
-    margin-inline-start:40%;
-    padding: 8px;
-    border: 3px solid;
-    font-size: 15px;
-    border-radius: 10px;
-    border-color: #1d3070;
-    background-color: #ffffff;
-}
-
-
-    .sub:hover {
-        border-color: #2945a2;
-        background-color: #ffffff;
-        transform: scale(1.12);
-        font-weight: bold;
-    }
-.details {
-    margin: 20px;
-    font-family: Arial, sans-serif;
-}
-
-    .details h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .details table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-
-    .details table, .details th, .details td {
-        border: 1px solid #ddd;
-    }
-
-    .details th, .details td {
-        padding: 12px;
-        text-align: left;
-    }
-
-    .details th {
-        background-color: #f2f2f2;
-    }
-
-    .details tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-    .details tr:hover {
-        background-color: #f1f1f1;
-    }
-
-    .details p {
-        color: red;
-        text-align: center;
-    }
-
-    .addBtn .material-icons {
-        padding: 20%;
-        font-size: 30px;
-    }
-
-.addBtn {
-    position: fixed;
-    bottom: 3%; 
-    right: 1.5%; 
-    width: 60px;
-    height: 60px;
-    color: #ffffff;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-    border: 3px solid;
-    border-radius: 50px;
-    background-color: #305ef7;
-    text-decoration-color: #ffffff;
-    border-color: #cebdbd;
-}
-
-
-    .addBtn:hover {
-        background-color: #204fea;
-        border-color: #cebdbd;
-        transform: scale(1.3);
-    }*/
 h2 {
     border-bottom: 2px solid #ccc;
     position: absolute;
@@ -183,14 +31,15 @@ h5 {
 }
 
 .custom-label {
-    color: #696666;
+   color: #696666;
     font-style: italic;
     margin-top: 0.5%;
 }
 
 .custom-input {
     border-radius: 5px;
-    border: 2px solid #808080;
+    border-radius: 5px;
+    
 }
     .custom-input::placeholder {
         color: #000000;

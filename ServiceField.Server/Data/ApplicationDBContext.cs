@@ -17,7 +17,7 @@ namespace ServiceField.Server.Data
         public DbSet<MDCheckList> MDCheckLists { get; set; }
         public DbSet<MDElement> MDElements { get; set; }
         public DbSet<MDSkills> MDSkills { get; set; }
-
+        public DbSet<User> Users { get; set; }
 
 
     }
