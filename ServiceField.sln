@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceField.Server", "ServiceField.Server\ServiceField.Server.csproj", "{64A69DE4-5894-41F8-AC35-D8B832ABE816}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceField.Server", "ServiceField.Server\ServiceField.Server.csproj", "{64A69DE4-5894-41F8-AC35-D8B832ABE816}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "servicefield.client", "servicefield.client\servicefield.client.esproj", "{84ECF097-6ED0-4B62-B546-64B55F1EBA68}"
 EndProject
