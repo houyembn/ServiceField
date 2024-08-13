@@ -23,8 +23,7 @@ function User() {
         Field:'',
         Skills: '',
         Grade:'',
-        ServiceManager: '',
-        Technician: '',
+        Role: '',
 
     });
 
@@ -33,13 +32,15 @@ function User() {
         setUser({ ...User, [name]: value });
     };
 
-
+    const handleRoleChange = (e) => {
+        setUser({ ...User, Role: e.target.value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://localhost:7141/api/User', User);
+            const response = await axios.post('https://localhost:7141/ServiceField.Server/User', User);
             console.log(response.data);
             setShowSuccessModal(true);
             setTimeout(() => setShowSuccessModal(false), 3000);
@@ -109,8 +110,8 @@ function User() {
                                         type="password"
                                         placeholder="Enter User Password"
                                         className="custom-input"
-                                        name="UserPassword"
-                                        value={User.UserPassword} onChange={handleChange}
+                                        name="Password"
+                                        value={User.Password} onChange={handleChange}
                                     />
                                 </div>
                             </div>
@@ -220,30 +221,25 @@ function User() {
                                 </div>
 
                           
-                                    <Form.Label className="custom-label">User Role</Form.Label>
-                                    <Form.Check
-                                        type="radio"
-                                        label="Service Manager"
-                                        name="radioGroup"
-                                        value={User.ServiceManager}
-                                        onChange={handleChange}
-                                    />
-                                
-
-                               
-                                    <Form.Check
-                                        type="radio"
-                                        label="Technician"
-                                        name="radioGroup"
-                                        value={User.Technician}
-                                        onChange={handleChange}
-                                    />
-                         
-                                
-
-                        </div>
-                            
+                            <Form.Label className="custom-label">User Role</Form.Label>
+                            <Form.Check
+                                type="radio"
+                                label="Service Manager"
+                                name="Role"
+                                value="Service Manager"
+                                checked={User.Role === 'Service Manager'}
+                                onChange={handleRoleChange}
+                            />
+                            <Form.Check
+                                type="radio"
+                                label="Technician"
+                                name="Role"
+                                value="Technician"
+                                checked={User.Role === 'Technician'}
+                                onChange={handleRoleChange}
+                            />
                             <Button className="sub" as="input" type="submit" value="Submit" onSubmit={handleSubmit} />{' '}
+                        </div>
                         
                     </form>
 

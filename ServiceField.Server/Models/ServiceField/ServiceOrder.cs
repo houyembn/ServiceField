@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ServiceField.Server.Models.ServiceField.Server.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiceField.Server.Models.ServiceField
@@ -36,7 +37,10 @@ namespace ServiceField.Server.Models.ServiceField
 
 
         [Required]
-        public int IdInitiator { get; set; }
+        public int IdInitiator { get; set; } // Foreign Key
+
+        [ForeignKey(nameof(IdInitiator))]
+        public Users? Initiator { get; set; }
 
         [Required]
         public string InitiatorName { get; set; }

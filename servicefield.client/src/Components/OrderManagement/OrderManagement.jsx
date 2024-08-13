@@ -19,6 +19,10 @@ const OrderManagement = () => {
     const [serviceTypes, setServiceTypes] = useState([]);
     const [invoicings, setInvoicings] = useState([]);
     const [serviceObjects, setServiceObjects] = useState([]);
+    const [initiators, setInitiators] = useState([]);
+   
+
+
 
     const [Order, setOrder] = useState({
         orderNumber: '',
@@ -27,7 +31,6 @@ const OrderManagement = () => {
         companyName: '',
         idInstallation: '',
         installationName: '',
-        idInitiator: '',
         initiatorName: '',
         initiatorContact: '',
         serviceType: '',
@@ -40,15 +43,17 @@ const OrderManagement = () => {
 
     const fetchData = async () => {
         try {
-            const [invoicingResponse, serviceObjectsResponse, serviceTypesResponse] = await Promise.all([
+            const [invoicingResponse, serviceObjectsResponse, serviceTypesResponse, initiatorsResponse] = await Promise.all([
                 axios.get('https://localhost:7141/api/Invoicing'),
                 axios.get('https://localhost:7141/api/ServiceObject'),
-                axios.get('https://localhost:7141/api/ServiceType')
+                axios.get('https://localhost:7141/api/ServiceType'),
+                axios.get('https://localhost:7141/ServiceField.Server/User')
             ]);
 
             setInvoicings(invoicingResponse.data);
             setServiceObjects(serviceObjectsResponse.data);
             setServiceTypes(serviceTypesResponse.data);
+            setInitiators(initiatorsResponse.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -60,10 +65,28 @@ const OrderManagement = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setOrder({ ...Order, [name]: value });
+        setOrder(prevOrder => ({
+            ...prevOrder,
+            [name]: value
+        }));
+
+        if (name === 'initiatorName') {
+            const selected = initiators.find(initiator => `${initiator.firstName} ${initiator.lastName}` === value);
+            setOrder(prevOrder => ({
+                ...prevOrder,
+                idInitiator: selected ? selected.id : '',
+                initiatorContact: selected ? `${selected.email}, ${selected.phoneNumber}` : '' 
+            }));
+        }
     };
 
+
+
+
+
+
     const handleSubmit = async (e) => {
+       
         e.preventDefault();
 
         // Ensure correct data types
@@ -74,11 +97,15 @@ const OrderManagement = () => {
             idCompany: parseInt(Order.idCompany),
             idInstallation: parseInt(Order.idInstallation),
             idInitiator: parseInt(Order.idInitiator),
+            initiatorName: Order.initiatorName,
+            initiatorContact: Order.initiatorContact 
            
         };
 
         console.log('Order Data:', orderData);
 
+
+       
         try {
             const response = await axios.post('https://localhost:7141/api/ServiceOrders', orderData);
             console.log(response.data);
@@ -198,17 +225,6 @@ const OrderManagement = () => {
                                         <option value="3">Installation 3</option>
                                     </Form.Select>
                                 </div>
-
-                                <div className="form-column">
-                                    <Form.Label className="custom-label">ID Initiator</Form.Label>
-                                    <Form.Control
-                                        placeholder="Enter ID Initiator"
-                                        className="custom-input"
-                                        name="idInitiator"
-                                        value={Order.idInitiator}
-                                        onChange={handleChange}
-                                    />
-                                </div>
                             </div>
 
                             <div className="form-row">
@@ -222,26 +238,26 @@ const OrderManagement = () => {
                                         onChange={handleChange}
                                     >
                                         <option value="">Select Initiator Name</option>
-                                        <option value="1">Initiator 1</option>
-                                        <option value="2">Initiator 2</option>
-                                        <option value="3">Initiator 3</option>
+                                        {initiators.map(initiator => (
+                                            <option key={initiator.id} value={`${initiator.firstName} ${initiator.lastName}`}>
+                                                {`${initiator.firstName} ${initiator.lastName}`}
+                                            </option>
+                                        ))}
                                     </Form.Select>
                                 </div>
 
                                 <div className="form-column">
-                                    <Form.Label className="custom-label">Initiator Contact</Form.Label>
-                                    <Form.Select
-                                        className="custom-input"
-                                        aria-label="Select Initiator Contact"
-                                        name="initiatorContact"
-                                        value={Order.initiatorContact}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">Select Initiator Contact</option>
-                                        <option value="1">Contact 1</option>
-                                        <option value="2">Contact 2</option>
-                                        <option value="3">Contact 3</option>
-                                    </Form.Select>
+                                    <Form.Group controlId="initiatorContact">
+                                        <Form.Label className="custom-label">Initiator Contact</Form.Label>
+                                        <Form.Control
+                                            className="custom-input"
+                                            type="text"
+                                            name="initiatorContact"
+                                            value={Order.initiatorContact}
+                                            readOnly 
+                                        />
+                                    </Form.Group>
+
                                 </div>
                             </div>
 

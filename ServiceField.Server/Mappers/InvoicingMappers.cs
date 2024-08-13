@@ -19,7 +19,7 @@ namespace ServiceField.Server.Mappers
                 TermsAndConditions = InvoicingModel.TermsAndConditions,
                 PaymentMethod = InvoicingModel.PaymentMethod,
                 RecurringPeriod = InvoicingModel.RecurringPeriod,
-                
+
             };
         }
 
@@ -38,6 +38,6 @@ namespace ServiceField.Server.Mappers
             };
 
         }
-    
-}
+
+    }
 }

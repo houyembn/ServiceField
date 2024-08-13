@@ -1,6 +1,6 @@
 ﻿using ServiceField.Server.Dtos.Orders;
-using ServiceField.Server.Models.ServiceField;
 using ServiceField.Server.Interfaces;
+using ServiceField.Server.Models.ServiceField;
 
 namespace ServiceField.Server.Mappers
 {
@@ -22,7 +22,6 @@ namespace ServiceField.Server.Mappers
                 CompanyName = OrderModel.CompanyName,
                 IdInstallation = OrderModel.IdInstallation,
                 InstallationName = OrderModel.InstallationName,
-                IdInitiator = OrderModel.IdInitiator,
                 InitiatorName = OrderModel.InitiatorName,
                 InitiatorContact = OrderModel.InitiatorContact,
                 ServiceType = OrderModel.ServiceType?.ServiceTypeName,
@@ -37,6 +36,7 @@ namespace ServiceField.Server.Mappers
 
         public static ServiceOrder ToOrderFromCreateDTO(this CreateOrderRequestDto OrderDto, IServiceOrderHelper serviceOrderHelper)
         {
+            var initiator = serviceOrderHelper.GetInitiatorByName(OrderDto.InitiatorName);
             return new ServiceOrder
             {
                 OrderNumber = OrderDto.OrderNumber,
@@ -45,9 +45,9 @@ namespace ServiceField.Server.Mappers
                 CompanyName = OrderDto.CompanyName,
                 IdInstallation = OrderDto.IdInstallation,
                 InstallationName = OrderDto.InstallationName,
-                IdInitiator = OrderDto.IdInitiator,
-                InitiatorName = OrderDto.InitiatorName,
-                InitiatorContact = OrderDto.InitiatorContact,
+                IdInitiator = initiator?.Id ?? 0, // Automatically assigned from the Users object
+                InitiatorName = initiator != null ? $"{initiator.FirstName} {initiator.LastName}" : null,
+                InitiatorContact = initiator != null ? $"{initiator.Email}, {initiator.PhoneNumber}" : null,
                 ServiceType = serviceOrderHelper.GetServiceTypeByName(OrderDto.ServiceType),
                 Invoicing = serviceOrderHelper.GetInvoicingByType(OrderDto.Invoicing),
                 Message = OrderDto.Message,

@@ -5,9 +5,11 @@ import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap'
 import ShowNavBar from '../../NavBar/NavBar';
 import SideBar from '../../SideBar/SideBar';
 import '../../OrderDetails/OrderDetails.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function InvoicingDetails() {
+    const navigate = useNavigate();
     const { InvoicingId } = useParams();
     const [Invoicing, setInvoicing] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -39,7 +41,10 @@ function InvoicingDetails() {
             await axios.put(`https://localhost:7141/api/Invoicing/${InvoicingId}`, updatedInvoicing);
             setEditMode(false);
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 3000);
+            setTimeout(() => {
+                setShowSuccessModal(false);
+                window.location.reload();
+            }, 3000);
         } catch (error) {
             console.error('Error saving changes:', error);
             setShowFailModal(true); // Show fail modal
@@ -56,6 +61,7 @@ function InvoicingDetails() {
         try {
             await axios.delete(`https://localhost:7141/api/Invoicing/${InvoicingId}`);
             setShowDeleteModal(false);
+            navigate('/InvoicingDisplay');
         } catch (error) {
             console.error('Error deleting Invoicing:', error);
         }
@@ -114,6 +120,8 @@ function InvoicingDetails() {
                                                 )}
                                             </Card.Text>
 
+                                            </Row>
+                                        <Row className="mb-3">
                                             <Card.Text as={Col}>
                                                 <span className="custom-label">Recurring Period:</span> {editMode ? (
                                                     <input

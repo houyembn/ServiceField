@@ -17,8 +17,14 @@ import ObjectDetails from './Components/LookUpOrder/ServiceObject/ObjectDetails'
 import InvoicingDisplay from './Components/LookUpOrder/Invoicing/InvoicingDisplay';
 import InvoicingDetails from './Components/LookUpOrder/Invoicing/InvoicingDetails';
 import User from './Components/User/User';
+import Login from './Components/Login/Login';
 import UserDisplay from './Components/User/UserDisplay';
 import UserDetails from './Components/User/UserDetails';
+import DetailsFormCase from './Components/ServiceCase/DetailsFormCase';
+import FormCase from './Components/ServiceCase/FormCase';
+import LuSkills from './Components/ServiceCase/LuSkills';
+import ServiceCaseDetails from './Components/ServiceCase/ShowSCDetail';
+import Technician from './Components/Technician/Technician';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './index.css';
@@ -53,6 +59,13 @@ function App() {
                 <Route path="/User" element={<User />} />
                 <Route path="/UserDisplay" element={<UserDisplay />} />
                 <Route path="/UserDetails/:UserId" element={<UserDetails />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/DetailsFormCase" element={<DetailsFormCase />} />
+                <Route path="/FormCase" element={<FormCase />} />
+                <Route path="/ServiceCaseDetails/:id" element={<ServiceCaseDetails />} />
+                <Route path="/LuSkills" element={<LuSkills />} />
+                <Route path="/Technician" element={<Technician />} />
                 </Routes>
         </Router>
     );

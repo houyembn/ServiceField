@@ -139,13 +139,13 @@
     color : #000000;
 }
 
-
+/*
     .sub:hover {
         border-color: #ccc;
         background-color: #767676;
         transform: scale(1.12);
         font-weight: bold;
-    }
+    }*/
 .modal-success {
     color: green;
 }

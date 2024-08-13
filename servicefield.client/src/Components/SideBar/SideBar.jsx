@@ -58,6 +58,7 @@ const Sidebar = () => {
                 <div className="head">
                     <div className="user-img">
                         <img src={img} alt="" />
+                    
                     </div>
 
                 </div>
@@ -85,7 +86,7 @@ const Sidebar = () => {
                                 <span className="text">Service Case</span>
                             </Link>
 
-                            <Link to="/ServiceOrder" className="nested-link">
+                            <Link to="/OrderDisplay" className="nested-link">
                                 <i className="material-icons">view_list</i>
                                 <span className="text">Service Order</span>
                             </Link>
@@ -103,9 +104,9 @@ const Sidebar = () => {
                     <span className="icon-text">Companies</span>
                 </Link>
                 <br />
-                <Link to="#">
+                <Link to="/UserDisplay">
                     <i className="material-icons">groups</i>
-                    <span className="icon-text">Technicians</span>
+                    <span className="icon-text">Users</span>
                 </Link>
                 <br />
                 <div>
@@ -134,8 +135,39 @@ const Sidebar = () => {
                         </div>
                     )}
                 </div>
-
                 <br />
+
+                <div>
+
+
+                    <button onClick={toggleServiceManagement} className="sidebar-link no-outline">
+                        <i className="material-icons">collections_bookmark</i>
+                        <span className="icon-text">LookUps</span>
+                        <i className="material-icons">
+                            {isServiceManagementOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+                        </i>
+                    </button>
+                    {isServiceManagementOpen && (
+                        <div className="nested-links">
+                            <Link to="/InvoicingDisplay" className="nested-link">
+                                <i className="material-icons">view_list</i>
+                                <span className="text">Invoicing</span>
+                            </Link>
+
+                            <Link to="/TypeDisplay" className="nested-link">
+                                <i className="material-icons">view_list</i>
+                                <span className="text">Service Type</span>
+                            </Link>
+
+                            <Link to="/ObjectDisplay" className="nested-link">
+                                <i className="material-icons">view_list</i>
+                                <span className="text">Service Object</span>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+                <br />
+               
 
 
             </div>

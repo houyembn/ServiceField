@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button,  Modal, Form} from 'react-bootstrap';
 import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 import '../OrderDetails/OrderDetails.css';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function UserDetails() {
+    const navigate = useNavigate();
     const { UserId } = useParams();
     const [User, setUser] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -19,7 +22,7 @@ function UserDetails() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`https://localhost:7141/api/User/${UserId}`);
+                const response = await axios.get(`https://localhost:7141/ServiceField.Server/User/${UserId}`);
                 setUser(response.data);
                 setUpdatedUser(response.data);
             } catch (error) {
@@ -36,10 +39,13 @@ function UserDetails() {
 
     const handleSaveClick = async () => {
         try {
-            await axios.put(`https://localhost:7141/api/User/${UserId}`, updatedUser);
+            await axios.put(`https://localhost:7141/ServiceField.Server/User/${UserId}`, updatedUser);
             setEditMode(false);
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 3000);
+            setTimeout(() => {
+                setShowSuccessModal(false);
+                window.location.reload();
+            }, 3000);
         } catch (error) {
             console.error('Error saving changes:', error);
             setShowFailModal(true);
@@ -54,8 +60,9 @@ function UserDetails() {
 
     const handleDeleteClick = async () => {
         try {
-            await axios.delete(`https://localhost:7141/api/User/${UserId}`);
+            await axios.delete(`https://localhost:7141/ServiceField.Server/User/${UserId}`);
             setShowDeleteModal(false);
+            navigate('/UserDisplay');
         } catch (error) {
             console.error('Error deleting User:', error);
         }
@@ -83,67 +90,223 @@ function UserDetails() {
                                         {/* <Card.Subtitle className="mb-2 text-muted">Detai:</Card.Subtitle>*/}
                                         <Row className="mb-3">
                                             <Card.Text as={Col}>
-                                                <span className="custom-label">User Type:</span> {editMode ? (
+                                                <span className="custom-label">First Name:</span> {editMode ? (
                                                     <input
                                                         type="text"
-                                                        name="UserType"
-                                                        value={updatedUser.UserType}
+                                                        name="firstName"
+                                                        value={updatedUser.firstName}
                                                         onChange={handleInputChange}
                                                         className="form-control"
                                                     />
                                                 ) : (
-                                                    <span>{User.UserType}</span>
-                                                )}
-                                            </Card.Text>
-
-
-                                        </Row>
-                                        <Row className="mb-3">
-                                            <Card.Text as={Col}>
-                                                <span className="custom-label">Payment Method:</span> {editMode ? (
-
-                                                    <input
-                                                        type="text"
-                                                        name="paymentMethod"
-                                                        value={updatedUser.paymentMethod}
-                                                        onChange={handleInputChange}
-                                                        className="form-control"
-                                                    />
-                                                ) : (
-                                                    <span>{User.paymentMethod}</span>
+                                                        <span>{User.firstName}</span>
                                                 )}
                                             </Card.Text>
 
                                             <Card.Text as={Col}>
-                                                <span className="custom-label">Recurring Period:</span> {editMode ? (
+                                                <span className="custom-label">LastName:</span> {editMode ? (
+
                                                     <input
                                                         type="text"
-                                                        name="recurringPeriod"
-                                                        value={updatedUser.recurringPeriod}
+                                                        name="lastName"
+                                                        value={updatedUser.lastName}
                                                         onChange={handleInputChange}
                                                         className="form-control"
                                                     />
                                                 ) : (
-                                                    <span>{User.recurringPeriod}</span>
+                                                        <span>{User.lastName}</span>
                                                 )}
                                             </Card.Text>
-                                        </Row>
-
-
+                                            </Row>
 
                                         <Row className="mb-3">
                                             <Card.Text as={Col}>
-                                                <span className="custom-label">Terms And Conditions:</span> {editMode ? (
-
-                                                    <Form.Control className="custom-input" as="textarea" rows={3} style={{ resize: 'both' }} id="termsAndConditions" name="termsAndConditions" value={updatedUser.termsAndConditions} onChange={handleInputChange} />
-
+                                                <span className="custom-label">Email:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="email"
+                                                        value={updatedUser.email}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
                                                 ) : (
-                                                    <span>{User.termsAndConditions}</span>
+                                                        <span>{User.email}</span>
                                                 )}
                                             </Card.Text>
 
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Password:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="password"
+                                                        value={updatedUser.password}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
+                                                ) : (
+                                                    <span>{User.password ? User.password.replace(/./g, '*') : ''}</span>
+                                                )}
+                                            </Card.Text>
 
                                         </Row>
+
+                                        <Row className="mb-3">
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">CIN:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="cin"
+                                                        value={updatedUser.cin}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                        pattern="\d{8}"
+                                                        maxLength="8"
+                                                    />
+                                                ) : (
+                                                        <span>{User.cin}</span>
+                                                )}
+                                            </Card.Text>
+
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Phone Number:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="phoneNumber"
+                                                        value={updatedUser.phoneNumber}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                        pattern="\d{8}"
+                                                        maxLength="8"
+                                                    />
+                                                ) : (
+                                                        <span>{User.phoneNumber}</span>
+                                                )}
+                                            </Card.Text>
+                                        </Row>
+
+                                        <Row className="mb-3">
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Age:</span> {editMode ? (
+                                                    <input
+                                                        type="number"
+                                                        name="age"
+                                                        value={updatedUser.age}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
+                                                ) : (
+                                                        <span>{User.age}</span>
+                                                )}
+                                            </Card.Text>
+
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Address:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="address"
+                                                        value={updatedUser.address}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
+                                                ) : (
+                                                        <span>{User.address}</span>
+                                                )}
+                                            </Card.Text>
+                                        </Row>
+
+                                        
+
+                                        <Card.Title className="title">Professional Information:</Card.Title>
+
+                                        <Row className="mb-3">
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Diploma:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="diploma"
+                                                        value={updatedUser.diploma}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
+                                                ) : (
+                                                        <span>{User.diploma}</span>
+                                                )}
+                                            </Card.Text>
+
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Field:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="field"
+                                                        value={updatedUser.field}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
+                                                ) : (
+                                                        <span>{User.field}</span>
+                                                )}
+                                            </Card.Text>
+                                        </Row>
+
+                                        <Row className="mb-3">
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Skills:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="skills"
+                                                        value={updatedUser.skills}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
+                                                ) : (
+                                                        <span>{User.skills}</span>
+                                                )}
+                                            </Card.Text>
+
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Grade:</span> {editMode ? (
+                                                    <input
+                                                        type="text"
+                                                        name="grade"
+                                                        value={updatedUser.grade}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                    />
+                                                ) : (
+                                                        <span>{User.grade}</span>
+                                                )}
+                                            </Card.Text>
+                                        </Row>
+
+                                        <Card.Text as={Col}>
+                                            <span className="custom-label">User Role:</span>
+                                            {editMode ? (
+                                                <>
+                                                    <Form.Check
+                                                        type="radio"
+                                                        label="Service Manager"
+                                                        name="role"
+                                                        value="Service Manager"
+                                                        checked={updatedUser.role === 'Service Manager'}
+                                                        onChange={handleInputChange}
+                                                        
+                                                    />
+                                                    <Form.Check
+                                                        type="radio"
+                                                        label="Technician"
+                                                        name="role"
+                                                        value="Technician"
+                                                        checked={updatedUser.role === 'Technician'}
+                                                        onChange={handleInputChange}
+                                                        
+                                                    />
+                                                </>
+                                            ) : (
+                                                <span>{User.role}</span>
+                                            )}
+                                        </Card.Text>
+
+                                       
 
 
                                         <div className="mt-4">

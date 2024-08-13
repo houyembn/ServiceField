@@ -12,26 +12,26 @@ import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 
 function ServiceOrder() {
-    const [idCase, setIdCase] = useState('');
+    const [id, setId] = useState('');
     const [searchResultMessage, setSearchResultMessage] = useState('');
     const [caseData, setCaseData] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleIdCaseChange = (event) => {
-        setIdCase(event.target.value);
+    const handleIdChange = (event) => {
+        setId(event.target.value);
     };
 
     const handleSearch = async () => {
-        if (!idCase.trim()) {
+        if (!id.trim()) {
             setSearchResultMessage('Please enter a Case ID');
             return;
         }
 
         try {
-            const response = await axios.get(`https://localhost:7141/api/ServiceCases/CheckClientCase?idCase=${idCase}`);
+            const response = await axios.get(`https://localhost:7141/ServiceField/Case/CheckClientCase?id=${id}`);
             console.log('Response from API:', response.data);
 
-            if (response.data && response.data.idCase) {
+            if (response.data && response.data.id) {
                 setSearchResultMessage('Service Case found');
                 setCaseData(response.data);
             } else {
@@ -104,8 +104,8 @@ function ServiceOrder() {
                         <div className="input-container">
                             <TextField
                                 label="Enter Case ID"
-                                value={idCase}
-                                onChange={handleIdCaseChange}
+                                value={id}
+                                onChange={handleIdChange}
                                 fullWidth
                                 margin="normal"
                                 sx={{ width: '100%' }}

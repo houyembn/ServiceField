@@ -5,9 +5,10 @@ import { Container, Row, Col, Card, Button,Form,  Modal } from 'react-bootstrap'
 import ShowNavBar from '../../NavBar/NavBar';
 import SideBar from '../../SideBar/SideBar';
 import '../../OrderDetails/OrderDetails.css';
-
+import { useNavigate } from 'react-router-dom';
 
 function TypeDetails() {
+    const navigate = useNavigate();
     const { ServiceTypeId } = useParams();
     const [Type, setType] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -39,7 +40,10 @@ function TypeDetails() {
             await axios.put(`https://localhost:7141/api/ServiceType/${ServiceTypeId}`, updatedType);
             setEditMode(false);
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 3000);
+            setTimeout(() => {
+                setShowSuccessModal(false);
+                window.location.reload();
+            }, 3000);
         } catch (error) {
             console.error('Error saving changes:', error);
             setShowFailModal(true); // Show fail modal
@@ -61,6 +65,7 @@ function TypeDetails() {
         try {
             await axios.delete(`https://localhost:7141/api/ServiceType/${ServiceTypeId}`);
             setShowDeleteModal(false);
+            navigate('/TypeDisplay');
         } catch (error) {
             console.error('Error deleting Type:', error);
         }

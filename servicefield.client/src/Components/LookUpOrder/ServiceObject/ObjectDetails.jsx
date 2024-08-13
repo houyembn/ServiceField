@@ -5,8 +5,10 @@ import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap'
 import ShowNavBar from '../../NavBar/NavBar';
 import SideBar from '../../SideBar/SideBar';
 import '../../OrderDetails/OrderDetails.css';
+import { useNavigate } from 'react-router-dom';
 
 function ObjectDetails() {
+    const navigate = useNavigate();
     const { ServiceObjectId } = useParams();
     const [object, setObject] = useState(null);
     const [editMode, setEditMode] = useState(false);
@@ -38,7 +40,10 @@ function ObjectDetails() {
             await axios.put(`https://localhost:7141/api/ServiceObject/${ServiceObjectId}`, updatedObject);
             setEditMode(false);
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 3000);
+            setTimeout(() => {
+                setShowSuccessModal(false);
+                window.location.reload();
+            }, 3000);
         } catch (error) {
             console.error('Error saving changes:', error);
             setShowFailModal(true); // Show fail modal
@@ -55,6 +60,7 @@ function ObjectDetails() {
         try {
             await axios.delete(`https://localhost:7141/api/ServiceObject/${ServiceObjectId}`);
             setShowDeleteModal(false);
+            navigate('/ObjectDisplay');
         } catch (error) {
             console.error('Error deleting Object:', error);
         }

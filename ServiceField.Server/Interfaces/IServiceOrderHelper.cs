@@ -1,4 +1,5 @@
 ﻿using ServiceField.Server.Models.ServiceField;
+using ServiceField.Server.Models.ServiceField.Server.Models;
 
 namespace ServiceField.Server.Interfaces
 {
@@ -7,5 +8,6 @@ namespace ServiceField.Server.Interfaces
         ServiceObject GetServiceObjectByName(string name);
         ServiceType GetServiceTypeByName(string name);
         Invoicing GetInvoicingByType(string type);
+        Users GetInitiatorByName(string name);
     }
 }

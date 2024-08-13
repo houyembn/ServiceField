@@ -51,43 +51,231 @@ namespace ServiceField.Server.Migrations
                     b.ToTable("Invoicing");
                 });
 
-            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.ServiceCases", b =>
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.LuServiceCaseCategory", b =>
                 {
-                    b.Property<int>("IdCase")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCase"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LuServiceCaseCategories");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.LuServiceObject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LuServiceObjects");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.MDCheckList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MDCheckLists");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.MDElement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MDElements");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.MDSkills", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MDSkills");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.Server.Models.Users", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateTimeOfCase")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DescriptionOfCase")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HowItIsSolved")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdClient")
+                    b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<int>("CIN")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Diploma")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdCase");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("ServiceCases");
+                    b.Property<string>("Field")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Grade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Skills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.ServiceCase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AffectedCompany")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AffectedInstallation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CheckListFK")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactPerson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ElementFK")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ObjectFK")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OriginatingSOrder")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Priority")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductSerialNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ResponsableUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceCaseStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SkillsFK")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryFK");
+
+                    b.HasIndex("CheckListFK");
+
+                    b.HasIndex("ElementFK");
+
+                    b.HasIndex("ObjectFK");
+
+                    b.HasIndex("SkillsFK");
+
+                    b.ToTable("ServiceCase");
                 });
 
             modelBuilder.Entity("ServiceField.Server.Models.ServiceField.ServiceObject", b =>
@@ -174,6 +362,8 @@ namespace ServiceField.Server.Migrations
 
                     b.HasKey("IdOrder");
 
+                    b.HasIndex("IdInitiator");
+
                     b.HasIndex("InvoicingId");
 
                     b.HasIndex("ServiceObjectId");
@@ -211,8 +401,57 @@ namespace ServiceField.Server.Migrations
                     b.ToTable("ServiceType");
                 });
 
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.ServiceCase", b =>
+                {
+                    b.HasOne("ServiceField.Server.Models.ServiceField.LuServiceCaseCategory", "LuServiceCaseCategory")
+                        .WithMany("ServiceCase")
+                        .HasForeignKey("CategoryFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ServiceField.Server.Models.ServiceField.MDCheckList", "MDCheckList")
+                        .WithMany("ServiceCase")
+                        .HasForeignKey("CheckListFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ServiceField.Server.Models.ServiceField.MDElement", "MDElement")
+                        .WithMany("ServiceCase")
+                        .HasForeignKey("ElementFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ServiceField.Server.Models.ServiceField.LuServiceObject", "LuServiceObject")
+                        .WithMany("ServiceCase")
+                        .HasForeignKey("ObjectFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ServiceField.Server.Models.ServiceField.MDSkills", "MDSkills")
+                        .WithMany("ServiceCase")
+                        .HasForeignKey("SkillsFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LuServiceCaseCategory");
+
+                    b.Navigation("LuServiceObject");
+
+                    b.Navigation("MDCheckList");
+
+                    b.Navigation("MDElement");
+
+                    b.Navigation("MDSkills");
+                });
+
             modelBuilder.Entity("ServiceField.Server.Models.ServiceField.ServiceOrder", b =>
                 {
+                    b.HasOne("ServiceField.Server.Models.ServiceField.Server.Models.Users", "Initiator")
+                        .WithMany()
+                        .HasForeignKey("IdInitiator")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ServiceField.Server.Models.ServiceField.Invoicing", "Invoicing")
                         .WithMany()
                         .HasForeignKey("InvoicingId")
@@ -231,11 +470,38 @@ namespace ServiceField.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Initiator");
+
                     b.Navigation("Invoicing");
 
                     b.Navigation("ServiceObject");
 
                     b.Navigation("ServiceType");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.LuServiceCaseCategory", b =>
+                {
+                    b.Navigation("ServiceCase");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.LuServiceObject", b =>
+                {
+                    b.Navigation("ServiceCase");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.MDCheckList", b =>
+                {
+                    b.Navigation("ServiceCase");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.MDElement", b =>
+                {
+                    b.Navigation("ServiceCase");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.ServiceField.MDSkills", b =>
+                {
+                    b.Navigation("ServiceCase");
                 });
 #pragma warning restore 612, 618
         }

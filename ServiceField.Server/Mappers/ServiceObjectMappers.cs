@@ -26,7 +26,7 @@ namespace ServiceField.Server.Mappers
             return new ServiceObject
             {
 
-              
+
                 ServiceObjectName = ServiceObjectDto.ServiceObjectName,
                 ServiceObjectDescription = ServiceObjectDto.ServiceObjectDescription,
 

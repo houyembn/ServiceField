@@ -13,6 +13,9 @@
     <Folder Include="src\Components\NavBar\" />
     <Folder Include="src\Components\HomePage\" />
     <Folder Include="src\Components\LookUpOrder\Invoicing\" />
+    <Folder Include="src\Components\Login\" />
+    <Folder Include="src\Components\Technician\" />
+    <Folder Include="src\Components\ServiceCase\" />
     <Folder Include="src\Components\User\" />
     <Folder Include="src\Components\OrderDetails\" />
     <Folder Include="src\Components\OrderDisplay\" />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -12,6 +12,20 @@ import './NavBar.css';
 
 function ShowNavBar() {
     const [showModal, setShowModal] = useState(false);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem('user');
+        if (userInfo) {
+            try {
+                const parsedUser = JSON.parse(userInfo);
+                setUser(parsedUser);
+            } catch (error) {
+                console.error('Error parsing user data:', error);
+                // Handle parse error if needed
+            }
+        }
+    }, []);
 
     const handleBellClick = () => {
         setShowModal(true);
@@ -67,7 +81,7 @@ function ShowNavBar() {
                                             <BsBell className="hover:text-blue-500" />
                                         </Nav.Link>
                                         <Navbar.Text>
-                                            Signed in as: <a href="#login">Mark Otto</a>
+                                            Signed in as: <a href="#login">{user ? user.email : ''}</a>
                                         </Navbar.Text>
                                     </Nav>
                                 </Container>

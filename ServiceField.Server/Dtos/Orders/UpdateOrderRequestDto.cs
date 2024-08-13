@@ -14,8 +14,7 @@
 
         public string InstallationName { get; set; }
 
-        public int IdInitiator { get; set; }
-
+    
         public string InitiatorName { get; set; }
 
         public string InitiatorContact { get; set; }

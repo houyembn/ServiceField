@@ -19,7 +19,6 @@ namespace ServiceField.Server.Dtos.Orders
 
         public string InstallationName { get; set; }
 
-        public int IdInitiator { get; set; }
 
         public string InitiatorName { get; set; }
 

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
-
+import axios from 'axios';
 function UserDisplay() {
     const navigate = useNavigate();
     const handleCreateButtonClick = () => {
@@ -14,22 +14,36 @@ function UserDisplay() {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [filterRole, setFilterRole] = useState('');
+    const [users, setUsers] = useState([]);
 
-    const users = [
-        { id: 1, CIN:12345678, firstName: 'Mark', lastName: 'Otto', role: 'Technician' },
-        { id: 2, CIN: 12345678, firstName: 'Jacob', lastName: 'Thornton', role: 'Service Manager' },
-        { id: 3, CIN: 12345678, firstName: 'Amilia', lastName: 'David', role: 'Service Manager' }
-    ];
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                const response = await axios.get('https://localhost:7141/ServiceField.Server/User');
+                setUsers(response.data);
+            } catch (error) {
+                console.error('Error fetching the items:', error);
+            }
+        };
 
+        fetchItems();
+    }, []);
+
+    //const filteredUsers = users.filter(user => {
+    //    const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+    //    const term = searchTerm.toLowerCase();
+    //    return (
+    //        (fullName.includes(term) || user.role.toLowerCase().includes(term))
+
+    //    );
+    //});
+
+    // Fonction de filtrage des utilisateurs
     const filteredUsers = users.filter(user => {
-        const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
-        const term = searchTerm.toLowerCase();
-        return (
-            (fullName.includes(term) ||
-                user.role.toLowerCase().includes(term) ||
-                user.cin.toLowerCase().includes(term)) &&
-            (filterRole ? user.role === filterRole : true)
-        );
+        const matchesRole = filterRole ? user.role === filterRole : true;
+        const matchesName = user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.lastName.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesRole && matchesName;
     });
 
 
@@ -43,7 +57,7 @@ function UserDisplay() {
             <div className="flex-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <h1 className="display">Users:</h1>
+                    <h1 className="display">Users</h1>
                     <div className="search-container">
                         <Form.Control
                             type="text"
@@ -74,7 +88,7 @@ function UserDisplay() {
                         <tbody>
                             {filteredUsers.map((user, index) => (
                                 <tr key={index} onClick={() => handleRowClick(user.id)} style={{ cursor: 'pointer' }}>
-                                    <td>{user.CIN}</td>
+                                    <td>{user.cin}</td>
                                     <td>{user.firstName}</td>
                                     <td>{user.lastName}</td>
                                     <td>{user.role}</td>
@@ -90,5 +104,4 @@ function UserDisplay() {
         </div>
     );
 }
-
 export default UserDisplay;

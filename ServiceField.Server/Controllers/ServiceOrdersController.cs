@@ -39,6 +39,7 @@ namespace ServiceField.Server.Controllers
                 .Include(o => o.ServiceObject)
                 .Include(o => o.ServiceType)
                 .Include(o => o.Invoicing)
+                .Include(o => o.Initiator)
                 .Select(s => s.ToOrderDto())
                 .ToListAsync();
 
@@ -69,6 +70,7 @@ namespace ServiceField.Server.Controllers
                 .Include(o => o.ServiceObject)
                 .Include(o => o.ServiceType)
                 .Include(o => o.Invoicing)
+                .Include(o => o.Initiator)
                 .FirstOrDefaultAsync(o => o.IdOrder == idOrder);
 
             if (order == null)
@@ -79,7 +81,23 @@ namespace ServiceField.Server.Controllers
             return Ok(order.ToOrderDto());
         }
 
-        [HttpPost]
+        [HttpGet("service-types-count")]
+        public async Task<IActionResult> GetServiceTypesCount()
+        {
+            var serviceTypesCount = await _context.ServiceOrder
+                .GroupBy(o => o.ServiceType.ServiceTypeName)
+                .Select(g => new
+                {
+                    ServiceType = g.Key,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+
+            return Ok(serviceTypesCount);
+        }
+    
+
+    [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateOrderRequestDto orderDto)
         {
             var orderModel = orderDto.ToOrderFromCreateDTO(_serviceOrderHelper);
@@ -126,7 +144,6 @@ namespace ServiceField.Server.Controllers
             orderModel.CompanyName = updateDto.CompanyName;
             orderModel.IdInstallation = updateDto.IdInstallation;
             orderModel.InstallationName = updateDto.InstallationName;
-            orderModel.IdInitiator = updateDto.IdInitiator;
             orderModel.InitiatorName = updateDto.InitiatorName;
             orderModel.InitiatorContact = updateDto.InitiatorContact;
             orderModel.ServiceType = _serviceOrderHelper.GetServiceTypeByName(updateDto.ServiceType);

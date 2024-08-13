@@ -13,5 +13,6 @@ namespace ServiceField.Server.Models.ServiceField
         [Required]
         public string ServiceObjectDescription { get; set; }
 
+
     }
 }
