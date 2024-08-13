@@ -1,0 +1,36 @@
+form {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+    form div {
+        margin-bottom: 10px;
+    }
+
+label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    padding: 5px;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    button:hover {
+        background-color: #0056b3;
+    }

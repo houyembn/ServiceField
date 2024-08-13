@@ -7,6 +7,7 @@ import path from 'path';
 import child_process from 'child_process';
 
 const baseFolder =
+    // eslint-disable-next-line no-undef
     process.env.APPDATA !== undefined && process.env.APPDATA !== ''
         ? `${process.env.APPDATA}/ASP.NET/https`
         : `${process.env.HOME}/.aspnet/https`;
