@@ -121,6 +121,7 @@ function FormCase() {
                                 <div className="form-column">
                                     <Form.Label className="custom-label">Service Object</Form.Label>
                                     <Form.Select className="custom-input" id="objectFK" aria-label="Default select example" name="objectFK" value={formData.objectFK}
+
                                         onChange={handleChange}>
                                         
                                         {object.map(obj => (
@@ -136,6 +137,7 @@ function FormCase() {
 
                                     <Form.Select className="custom-input" id="affectedCompany" aria-label="Default select example" name="affectedCompany"  value={formData.affectedCompany}
                                         onChange={handleChange}>
+                                        <option value="" disabled>Select an option</option>
 
                                         <option value="One">One</option>
                                         <option value="Two">Two</option>
@@ -150,6 +152,7 @@ function FormCase() {
 
                                     <Form.Select className="custom-input" id="contactPerson" aria-label="Default select example" name="contactPerson" value={formData.contactPerson}
                                         onChange={handleChange}>
+                                        <option value="" disabled>Select an option</option>
                                         <option value="One">One</option>
                                         <option value="Two">Two</option>
                                         <option value="Three">Three</option>
@@ -161,6 +164,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Affected Installation</Form.Label>
                                     <Form.Select className="custom-input" id="affectedInstallation" aria-label="Select affected installation" name="affectedInstallation" value={formData.affectedInstallation}
                                         onChange={handleChange} >
+                                        <option value="" disabled>Select an option</option>
                                         <option value="One">One</option>
                                         <option value="Two">Two</option>
                                         <option value="Three">Three</option>
@@ -173,6 +177,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Originating Service Order</Form.Label>
                                     <Form.Select className="custom-input" id="originatingSOrder" aria-label="Select affected installation" name="originatingSOrder" value={formData.originatingSOrder}
                                         onChange={handleChange} >
+                                        <option value="" disabled>Select an option</option>
                                         <option value="One">One</option>
                                         <option value="Two">Two</option>
                                         <option value="Three">Three</option>
@@ -222,6 +227,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Service case status</Form.Label>
                                     <Form.Select aria-label="Select affected installation" id="serviceCaseStatus" className="custom-input" name="serviceCaseStatus" value={formData.serviceCaseStatus}
                                         onChange={handleChange}>
+                                        <option value="" disabled>Select an option</option>
                                         <option value="New">New</option>
                                         <option value="Old">Old</option>
                                         <option value="In-progress">In progress</option>
@@ -242,6 +248,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Responsable user</Form.Label>
                                     <Form.Select aria-label="Select affected installation" id="responsableUser" className="custom-input" name="responsableUser" value={formData.responsableUser}
                                         onChange={handleChange} >
+                                        <option value="" disabled>Select an option</option>
                                         <option value="One">One</option>
                                         <option value="Two">Two</option>
                                         <option value="Three">Three</option>
@@ -251,7 +258,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Priority</Form.Label>
                                     <Form.Select aria-label="Select skills" className="custom-input" id="priority" name="priority" value={formData.priority}
                                         onChange={handleChange} >
-                                        <option value="">Select an option</option>
+                                        <option value="" disabled>Select an option</option>
                                         <option value="High">High</option>
                                         <option value="Medium">Medium</option>
                                         <option value="Low">Low</option>

@@ -31,7 +31,6 @@ function UserDisplay() {
         fetchItems();
     }, []);
 
-    // Fonction de filtrage des utilisateurs
     const filteredUsers = users.filter(user => {
         const matchesRole = filterRole ? user.role === filterRole : true;
         const matchesName = user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
