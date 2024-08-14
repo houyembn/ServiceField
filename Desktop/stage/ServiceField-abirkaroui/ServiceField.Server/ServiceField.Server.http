@@ -1,0 +1,6 @@
+@ServiceField.Server_HostAddress = http://localhost:5297
+
+GET {{ServiceField.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
