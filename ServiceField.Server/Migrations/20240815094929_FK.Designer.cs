@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceField.Server.Data;
 
@@ -11,9 +12,11 @@ using ServiceField.Server.Data;
 namespace ServiceField.Server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240815094929_FK")]
+    partial class FK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,6 +270,9 @@ namespace ServiceField.Server.Migrations
                     b.Property<int>("CheckListFK")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ContactPerson")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -315,6 +321,8 @@ namespace ServiceField.Server.Migrations
                     b.HasIndex("CategoryFK");
 
                     b.HasIndex("CheckListFK");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasIndex("ElementFK");
 
@@ -409,6 +417,10 @@ namespace ServiceField.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ServiceField.Server.Models.Company", null)
+                        .WithMany("ServiceCases")
+                        .HasForeignKey("CompanyId");
+
                     b.HasOne("ServiceField.Server.Models.MDElement", "MDElement")
                         .WithMany("ServiceCases")
                         .HasForeignKey("ElementFK")
@@ -436,6 +448,11 @@ namespace ServiceField.Server.Migrations
                     b.Navigation("MDElement");
 
                     b.Navigation("MDSkills");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.Company", b =>
+                {
+                    b.Navigation("ServiceCases");
                 });
 
             modelBuilder.Entity("ServiceField.Server.Models.LuServiceCaseCategory", b =>

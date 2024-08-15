@@ -12,7 +12,7 @@ namespace ServiceField.Server.Models
 [Key]
     public int Id { get; set; }
     public int ProductSerialNumber { get; set; }
-    public string AffectedCompany { get; set; } = "";
+    public string AffectedCompany { get; set; }
     public string ContactPerson { get; set; } = "";
     public string AffectedInstallation { get; set; } = "";
     public string OriginatingSOrder { get; set; } = "";
@@ -39,5 +39,10 @@ namespace ServiceField.Server.Models
     public virtual MDCheckList MDCheckList { get; set; }
     [ForeignKey("CategoryFK")]
     public virtual LuServiceCaseCategory LuServiceCaseCategory { get; set; }
-}
+
+   
+
+
+
+    }
 }

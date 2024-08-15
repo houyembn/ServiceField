@@ -19,7 +19,10 @@ namespace ServiceField.Server.Data
         public DbSet<MDSkills> MDSkills { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Login> Logins { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<MasterDataCompany> MasterDataCompanies { get; set; }
+    
 
 
-    }
+}
 }

@@ -39,6 +39,7 @@ namespace ServiceField.Server.Dtos.ServiceCase
         public int CheckListFK { get; set; }
         public int ElementFK { get; set; }
         public int CategoryFK { get; set; }
+        
     }
 
      

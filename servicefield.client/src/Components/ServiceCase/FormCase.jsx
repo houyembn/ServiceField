@@ -22,11 +22,11 @@ function FormCase() {
         message: '',
         creator: '',
         creationDate: new Date().toISOString(), 
-        objectFK:0,
-        skillsFK: 0,
-        checkListFK: 0,
-        elementFK: 0,
-        categoryFK: 0
+        objectFK: '',
+        skillsFK: '',
+        checkListFK: '',
+        elementFK: '',
+        categoryFK: ''
 
     });
 
@@ -37,6 +37,7 @@ function FormCase() {
     const [skills, setSkills] = useState([]);
     const [category, setCategories] = useState([]);
     const [error, setError] = useState('');
+    const [company, setCompanies] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -79,6 +80,8 @@ function FormCase() {
                     setSkills(skillsResponse.data);
                     const categoryResponse = await axios.get('https://localhost:7141/ServiceField/Category');
                     setCategories(categoryResponse.data);
+                    const companyResponse = await axios.get('https://localhost:7141/api/MasterDataCompanies');
+                    setCompanies(companyResponse.data);
                 } catch (error) {
                     console.error('There was an error fetching the data!', error);
                     setError('Failed to fetch data.');
@@ -123,7 +126,7 @@ function FormCase() {
                                     <Form.Select className="custom-input" id="objectFK" aria-label="Default select example" name="objectFK" value={formData.objectFK}
 
                                         onChange={handleChange}>
-                                        
+                                        <option value="" disabled>Select an option</option>
                                         {object.map(obj => (
                                             <option key={obj.id} value={obj.id}>{obj.type}</option>
                                         ))}
@@ -134,15 +137,23 @@ function FormCase() {
                                 </div>
                                 <div className="form-column">
                                     <Form.Label className="custom-label">Affected Company</Form.Label>
-
-                                    <Form.Select className="custom-input" id="affectedCompany" aria-label="Default select example" name="affectedCompany"  value={formData.affectedCompany}
-                                        onChange={handleChange}>
+                                    <Form.Select
+                                        className="custom-input"
+                                        id="affectedCompany"
+                                        aria-label="Select affected company"
+                                        name="affectedCompany"
+                                        value={formData.affectedCompany}
+                                        onChange={handleChange}
+                                    >
                                         <option value="" disabled>Select an option</option>
-
-                                        <option value="One">One</option>
-                                        <option value="Two">Two</option>
-                                        <option value="Three">Three</option>
+                                        {company.map(company => (
+                                            <option key={company.id} value={company.name}>
+                                                {company.name} 
+                                            </option>
+                                        ))}
                                     </Form.Select>
+
+                                    
 
                                 </div>
                             </div>
@@ -187,6 +198,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Skills</Form.Label>
                                     <Form.Select className="custom-input" id="skillsFK" aria-label="Select skills" name="skillsFK" value={formData.skillsFK}
                                         onChange={handleChange}>
+                                        <option value="" disabled>Select an option</option>
                                        
                                         {skills.map(skill => (
                                             <option key={skill.id} value={skill.id}>{skill.type}</option>
@@ -200,6 +212,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Checklist</Form.Label>
                                     <Form.Select aria-label="Select affected installation" id="checkListFK" className="custom-input" name="checkListFK" value={formData.checkListFK}
                                         onChange={handleChange}>
+                                        <option value="" disabled>Select an option</option>
                                         
                                         {checklist.map(ch => (
                                             <option key={ch.id} value={ch.id}>{ch.type}</option>
@@ -211,6 +224,7 @@ function FormCase() {
                                     <Form.Label className="custom-label">Element</Form.Label>
                                     <Form.Select aria-label="Select skills" id="elementFK" className="custom-input" name="elementFK" value={formData.elementFK}
                                         onChange={handleChange}>
+                                        <option value="" disabled>Select an option</option>
                                        
                                         {element.map(element => (
                                             <option key={element.id} value={element.id}>{element.type}</option>
@@ -237,6 +251,7 @@ function FormCase() {
                                     <Form.Label className="custom-label" >Service case category</Form.Label>
                                     <Form.Select aria-label="Select skills" className="custom-input" id="categoryFK" name="categoryFK" value={formData.categoryFK}
                                         onChange={handleChange}>
+                                        <option value="" disabled>Select an option</option>
                                         
                                         {category.map(ch => (
                                             <option key={ch.id} value={ch.id}>{ch.type}</option>

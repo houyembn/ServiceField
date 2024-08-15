@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceField.Server.Data;
 
@@ -11,9 +12,11 @@ using ServiceField.Server.Data;
 namespace ServiceField.Server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240815095654_Fkkk")]
+    partial class Fkkk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,9 +256,8 @@ namespace ServiceField.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AffectedCompany")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AffectedCompany")
+                        .HasColumnType("int");
 
                     b.Property<string>("AffectedInstallation")
                         .IsRequired()
@@ -311,6 +313,8 @@ namespace ServiceField.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AffectedCompany");
 
                     b.HasIndex("CategoryFK");
 
@@ -397,6 +401,12 @@ namespace ServiceField.Server.Migrations
 
             modelBuilder.Entity("ServiceField.Server.Models.ServiceCase", b =>
                 {
+                    b.HasOne("ServiceField.Server.Models.Company", "Company")
+                        .WithMany("ServiceCases")
+                        .HasForeignKey("AffectedCompany")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ServiceField.Server.Models.LuServiceCaseCategory", "LuServiceCaseCategory")
                         .WithMany("ServiceCases")
                         .HasForeignKey("CategoryFK")
@@ -427,6 +437,8 @@ namespace ServiceField.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Company");
+
                     b.Navigation("LuServiceCaseCategory");
 
                     b.Navigation("LuServiceObject");
@@ -436,6 +448,11 @@ namespace ServiceField.Server.Migrations
                     b.Navigation("MDElement");
 
                     b.Navigation("MDSkills");
+                });
+
+            modelBuilder.Entity("ServiceField.Server.Models.Company", b =>
+                {
+                    b.Navigation("ServiceCases");
                 });
 
             modelBuilder.Entity("ServiceField.Server.Models.LuServiceCaseCategory", b =>
