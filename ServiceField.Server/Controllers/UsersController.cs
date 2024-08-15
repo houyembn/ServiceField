@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ServiceField.Server.Data;
-using ServiceField.Server.Models.ServiceField.Server.Models;
+using ServiceField.Server.Models;
 
 namespace ServiceField.Server.Controllers
 {
@@ -63,8 +63,8 @@ namespace ServiceField.Server.Controllers
             user.Field = updatedUser.Field;
             user.Skills = updatedUser.Skills;
             user.Grade = updatedUser.Grade;
-            user.ServiceManager = updatedUser.ServiceManager;
-            user.Technician = updatedUser.Technician;
+            user.Role = updatedUser.Role;
+           
 
             await _context.SaveChangesAsync();
             return Ok(user);
