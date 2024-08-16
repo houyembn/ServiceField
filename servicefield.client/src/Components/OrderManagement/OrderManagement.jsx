@@ -379,20 +379,13 @@ const OrderManagement = () => {
                         <Button className="sub" type="submit">Submit</Button>
                     </form>
 
-                    {/* Success Modal */}
-                    <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Success</Modal.Title>
-                        </Modal.Header>
+                    <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} className="modal-success">
+
                         <Modal.Body>Order has been successfully submitted!</Modal.Body>
                     </Modal>
 
-                    {/* Failure Modal */}
-                    <Modal show={showFailModal} onHide={() => setShowFailModal(false)}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Error</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>There was an error submitting the order. Please try again.</Modal.Body>
+                    <Modal show={showFailModal} onHide={() => setShowFailModal(false)} className="modal-fail">
+                        <Modal.Body>Adding failed!</Modal.Body>
                     </Modal>
                 </div>
             </div>
