@@ -188,3 +188,15 @@ h5 {
     border-color: #cebdbd;
 }body {
 }
+.modal-success {
+    color: green;
+}
+
+.modal-fail {
+    color: red;
+}
+
+.checkbox-label {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
