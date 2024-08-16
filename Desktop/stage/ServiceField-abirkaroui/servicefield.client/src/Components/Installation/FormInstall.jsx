@@ -57,8 +57,8 @@ function FormInstall() {
                         {message && <p>{message}</p>}
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <label htmlFor="installationNumber">Installation Number</label>
-                                <input type="text" id="installationNumber" name="installationNumber" value={formData.installationNumber} onChange={handleChange} />
+                                <label htmlFor="installationName">Installation Name</label>
+                                <input type="text" id="installationName" name="installationName" value={formData.installationName} onChange={handleChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="description">Description</label>

@@ -9,6 +9,7 @@ namespace ServiceField.Server.Models
         [Key]
 
         public int InstallationNumber { get; set; }
+        public string InstallationName { get; set; } = "";
         public string Description { get; set; } = "";
         public string InstallationType { get; set; } = "";
         public string Owner { get; set; } = "";
@@ -19,6 +20,7 @@ namespace ServiceField.Server.Models
 
         public void UpdateFromDto(UpdateInstallationRequestDto dto)
         {
+            InstallationName = dto.InstallationName; 
             Description = dto.Description;
             InstallationType = dto.InstallationType;
             Owner = dto.Owner;

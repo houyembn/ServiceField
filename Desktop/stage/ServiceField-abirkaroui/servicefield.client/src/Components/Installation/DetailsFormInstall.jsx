@@ -45,7 +45,7 @@ function DetailsFormInstall() {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Installation Number</th>
+                                    <th>Installation Name</th>
                                     <th>Description</th>
                                     <th>Installation Type</th>
                                     <th>Owner</th>
@@ -57,6 +57,7 @@ function DetailsFormInstall() {
                             <tbody>
                                 {installations.map((installation) => (
                                     <tr key={installation.InstallationNumber}>
+                                        <td>{installation.InstallationName}</td>
                                         <td>{installation.Description}</td>
                                         <td>{installation.InstallationType}</td>
                                         <td>{installation.Owner}</td>

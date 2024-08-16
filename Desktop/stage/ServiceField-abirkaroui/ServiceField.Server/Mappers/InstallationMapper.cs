@@ -10,6 +10,7 @@ namespace ServiceField.Server.Mappers
             return new InstallationDto
             {
                 InstallationNumber = installation.InstallationNumber,
+                InstallationName=installation.InstallationName,
                 Description = installation.Description,
                 InstallationType = installation.InstallationType,
                 Owner = installation.Owner,
@@ -25,6 +26,7 @@ namespace ServiceField.Server.Mappers
         {
             return new Installation
             {
+                InstallationName = installationDto.InstallationName,
                 Description = installationDto.Description,
                 InstallationType = installationDto.InstallationType,
                 Owner = installationDto.Owner,

@@ -4,6 +4,7 @@ namespace ServiceField.Server.Dtos.Installation
 {
     public class UpdateInstallationRequestDto
     {
+        public string InstallationName { get; set; } = "";
         public string Description { get; set; } = "";
         public string InstallationType { get; set; } = "";
         public string Owner { get; set; } = "";
