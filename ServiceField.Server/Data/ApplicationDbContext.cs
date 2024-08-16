@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ServiceField.Server.Models;
 using ServiceField.Server.Models.ServiceField;
 using ServiceField.Server.Models.ServiceField.Server.Models;
 
@@ -17,6 +18,11 @@ namespace ServiceField.Server.Data
         public DbSet<MDCheckList> MDCheckLists { get; set; }
         public DbSet<MDElement> MDElements { get; set; }
         public DbSet<MDSkills> MDSkills { get; set; }
+
+        public DbSet<Installation> Installation { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<MasterDataCompany> MasterDataCompany { get; set; }
+
 
 
 

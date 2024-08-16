@@ -12,8 +12,6 @@ namespace ServiceField.Server.Models.ServiceField
         [Required]
         public int OrderNumber { get; set; }
 
-        //[Required]
-        //public string ServiceObject { get; set; }
 
         [Required]
         public int ServiceObjectId { get; set; } // Foreign Key
@@ -25,12 +23,18 @@ namespace ServiceField.Server.Models.ServiceField
         [Required]
         public int IdCompany { get; set; }
 
+        [ForeignKey(nameof(IdCompany))]
+        public Company? Company { get; set; } // Navigation Property
+
         [Required]
         public string CompanyName { get; set; }
 
 
         [Required]
         public int IdInstallation { get; set; }
+
+        [ForeignKey(nameof(IdInstallation))]
+        public Installation? Installation { get; set; } // Navigation Property
 
         [Required]
         public string InstallationName { get; set; }
@@ -49,8 +53,6 @@ namespace ServiceField.Server.Models.ServiceField
         public string InitiatorContact { get; set; }
 
 
-        //[Required]
-        //public string ServiceType { get; set; }
 
         [Required]
         public int ServiceTypeId { get; set; } // Foreign Key

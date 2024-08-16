@@ -6,17 +6,21 @@ import SideBar from '../SideBar/SideBar';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
 import axios from 'axios';
+
 function UserDisplay() {
     const navigate = useNavigate();
-    const handleCreateButtonClick = () => {
-        navigate('/User');
-    };
-
     const [searchTerm, setSearchTerm] = useState('');
     const [filterRole, setFilterRole] = useState('');
     const [users, setUsers] = useState([]);
+    const [userRole, setUserRole] = useState('');
 
     useEffect(() => {
+        
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+            setUserRole(storedUser.role);
+        }
+
         const fetchItems = async () => {
             try {
                 const response = await axios.get('https://localhost:7141/ServiceField.Server/User');
@@ -29,16 +33,6 @@ function UserDisplay() {
         fetchItems();
     }, []);
 
-    //const filteredUsers = users.filter(user => {
-    //    const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
-    //    const term = searchTerm.toLowerCase();
-    //    return (
-    //        (fullName.includes(term) || user.role.toLowerCase().includes(term))
-
-    //    );
-    //});
-
-    // Fonction de filtrage des utilisateurs
     const filteredUsers = users.filter(user => {
         const matchesRole = filterRole ? user.role === filterRole : true;
         const matchesName = user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -46,9 +40,12 @@ function UserDisplay() {
         return matchesRole && matchesName;
     });
 
-
     const handleRowClick = (userId) => {
         navigate(`/UserDetails/${userId}`);
+    };
+
+    const handleCreateButtonClick = () => {
+        navigate('/User');
     };
 
     return (
@@ -96,12 +93,16 @@ function UserDisplay() {
                             ))}
                         </tbody>
                     </Table>
-                    <button onClick={handleCreateButtonClick} className="addBtn">
-                        <i className="material-icons">add</i>
-                    </button>
+                  
+                    {userRole === 'Admin' && (
+                        <button onClick={handleCreateButtonClick} className="addBtn">
+                            <i className="material-icons">add</i>
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
     );
 }
+
 export default UserDisplay;

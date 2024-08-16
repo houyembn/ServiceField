@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
 import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
-import '../OrderDetails/OrderDetails.css';
-
-
-
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 
 function Technician() {
     const [userDetails, setUserDetails] = useState(null);
-
-  
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -29,32 +23,68 @@ function Technician() {
         fetchUserDetails();
     }, []);
 
-  
-
     return (
-        <div className="flex">
+        <div className="d-flex">
             <SideBar />
-            <div className="flex-1">
+            <div className="flex-grow-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <h1 className="display">User Details</h1>
+                    <h1 className="display">User Details:</h1>
                     {userDetails && (
-                        <Card className="user-details-card">
-                            <Card.Body>
-                                <Card.Title>{userDetails.firstName}  {userDetails.lastName} Details</Card.Title>
+                        <Card className="user-details-card shadow-sm my-4" style={{ borderRadius: '10px', overflow: 'hidden' }}>
+                            <Card.Header style={{ backgroundColor: '#0492C2', color: '#ffffff' }}>
+                                {userDetails.firstName} {userDetails.lastName} Details
+                            </Card.Header>
+                            <Card.Body className="p-4">
                                 <Card.Text>
-                                    <strong>Email:</strong> {userDetails.email}<br />
-                                    <strong>First Name:</strong> {userDetails.firstName}<br />
-                                    <strong>Last Name:</strong> {userDetails.lastName}<br />
-                                    <strong>CIN:</strong> {userDetails.cin}<br />
-                                    <strong>Age:</strong> {userDetails.age}<br />
-                                    <strong>Address:</strong> {userDetails.address}<br />
-                                    <strong>Phone Number:</strong> {userDetails.phoneNumber}<br />
-                                    <strong>Diploma:</strong> {userDetails.diploma}<br />
-                                    <strong>Field:</strong> {userDetails.field}<br />
-                                    <strong>Skills:</strong> {userDetails.skills}<br />
-                                    <strong>Grade:</strong> {userDetails.grade}<br />
-                                    <strong>Role:</strong> {userDetails.role}<br />
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Email:</div>
+                                        <div className="col-sm-8">{userDetails.email}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>First Name:</div>
+                                        <div className="col-sm-8">{userDetails.firstName}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Last Name:</div>
+                                        <div className="col-sm-8">{userDetails.lastName}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>CIN:</div>
+                                        <div className="col-sm-8">{userDetails.cin}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Age:</div>
+                                        <div className="col-sm-8">{userDetails.age}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Address:</div>
+                                        <div className="col-sm-8">{userDetails.address}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Phone Number:</div>
+                                        <div className="col-sm-8">{userDetails.phoneNumber}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Diploma:</div>
+                                        <div className="col-sm-8">{userDetails.diploma}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Field:</div>
+                                        <div className="col-sm-8">{userDetails.field}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Skills:</div>
+                                        <div className="col-sm-8">{userDetails.skills}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Grade:</div>
+                                        <div className="col-sm-8">{userDetails.grade}</div>
+                                    </div>
+                                    <div className="row mb-2">
+                                        <div className="col-sm-4 font-weight-bold" style={{ fontWeight: '600' }}>Role:</div>
+                                        <div className="col-sm-8">{userDetails.role}</div>
+                                    </div>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

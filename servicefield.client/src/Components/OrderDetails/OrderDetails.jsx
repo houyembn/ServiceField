@@ -24,20 +24,26 @@ function OrderDetails() {
     const [invoicings, setInvoicings] = useState([]);
     const [serviceObjects, setServiceObjects] = useState([]);
     const [initiators, setInitiators] = useState([]);
+    const [companies, setCompanies] = useState([]);
+    const [installation, setinstallation] = useState([]);
 
     const fetchData = async () => {
         try {
-            const [invoicingResponse, serviceObjectsResponse, serviceTypesResponse, initiatorsResponse] = await Promise.all([
+            const [invoicingResponse, serviceObjectsResponse, serviceTypesResponse, initiatorsResponse, companiesResponse, installationResponse] = await Promise.all([
                 axios.get('https://localhost:7141/api/Invoicing'),
                 axios.get('https://localhost:7141/api/ServiceObject'),
                 axios.get('https://localhost:7141/api/ServiceType'),
-                axios.get('https://localhost:7141/ServiceField.Server/User')
+                axios.get('https://localhost:7141/ServiceField.Server/User'),
+                axios.get('https://localhost:7141/api/MasterDataCompanies'),
+                axios.get('https://localhost:7141/ServiceField/Installation'),
             ]);
 
             setInvoicings(invoicingResponse.data);
             setServiceObjects(serviceObjectsResponse.data);
             setServiceTypes(serviceTypesResponse.data);
             setInitiators(initiatorsResponse.data);
+            setCompanies(companiesResponse.data);
+            setinstallation(installationResponse.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -84,12 +90,27 @@ function OrderDetails() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+
         if (name === 'initiatorName') {
             const selectedInitiator = initiators.find(initiator => `${initiator.firstName} ${initiator.lastName}` === value);
-            const initiatorContact = selectedInitiator ? `   ${selectedInitiator.email},${selectedInitiator.phoneNumber}  ` : '';
-            setUpdatedOrder({ ...updatedOrder, [name]: value, initiatorContact });
+            const initiatorContact = selectedInitiator ? `${selectedInitiator.email}, ${selectedInitiator.phoneNumber}` : '';
+            setUpdatedOrder(prevOrder => ({ ...prevOrder, [name]: value, initiatorContact }));
+
+        } else if (name === 'companyName') {
+            const selectedCompany = companies.find(company => company.name === value);
+            if (selectedCompany) {
+                setUpdatedOrder(prevOrder => ({
+                    ...prevOrder,
+                    [name]: value,
+                    idCompany: selectedCompany.id,
+                    location: selectedCompany.position || '',
+                    address: selectedCompany.parentCopmany || '',
+                    contactPerson: selectedCompany.responsableUser || ''
+                }));
+                console.log('Selected Company Data:', selectedCompany);
+            }
         } else {
-            setUpdatedOrder({ ...updatedOrder, [name]: value });
+            setUpdatedOrder(prevOrder => ({ ...prevOrder, [name]: value }));
         }
     };
 
@@ -158,81 +179,29 @@ function OrderDetails() {
                                                 )}
                                             </Card.Text>
 
-                                            <Card.Text as={Col}>
-                                                <span className="custom-label">Service Type:</span> {editMode ? (
-                                                    <Form.Select aria-label="Select service type" className="custom-input" id="serviceType" name="serviceType" value={updatedOrder.serviceType} onChange={handleInputChange}>
-                                                        <option value="">Select Service Type</option>
-                                                        {serviceTypes.map(type => (
-                                                            <option key={type.serviceTypeId} value={type.serviceTypeName}>
-                                                                {type.serviceTypeName}
-                                                            </option>
-                                                        ))}
-                                                    </Form.Select>
-                                                ) : (
-                                                    <span>{order.serviceType}</span>
-                                                )}
-                                            </Card.Text>
-                                        </Row>
-
-                                        <Row className="mb-3">
-                                            <Card.Text as={Col}>
-                                                <span className="custom-label">idCustomer:</span> {editMode ? (
-                                                    <Form.Control
-
-                                                        name="idCompany"
-                                                        value={updatedOrder.idCompany}
-                                                        onChange={handleInputChange}
-                                                        className="custom-input"
-                                                    >
-                                                    </Form.Control>
-                                                ) : (
-                                                    <span>{order.idCompany}</span>
-                                                )}
-                                            </Card.Text>
-
-                                            <Card.Text as={Col}>
-                                                <span className="custom-label">Customer:</span> {editMode ? (
-                                                    <Form.Select className="custom-input" aria-label="Default select example" id="companyName" name="companyName" value={updatedOrder.companyName} onChange={handleInputChange}>
-
-                                                        <option value="1">Customer 1</option>
-                                                        <option value="2">Customer 2</option>
-                                                        <option value="3">Customer 3</option>
-                                                    </Form.Select>
-                                                ) : (
-                                                    <span>{order.companyName}</span>
-                                                )}
-                                            </Card.Text>
-                                        </Row>
-
-                                        <Row className="mb-3">
-                                            <Card.Text as={Col}>
-                                                <span className="custom-label">idInstallation:</span> {editMode ? (
-                                                    <Form.Control
-
-                                                        name="idInstallation"
-                                                        value={updatedOrder.idInstallation}
-                                                        onChange={handleInputChange}
-                                                        className="custom-input"
-                                                    >
-
-                                                    </Form.Control>
-                                                ) : (
-                                                    <span>{order.idInstallation}</span>
-                                                )}
-                                            </Card.Text>
-
-                                            <Card.Text as={Col}>
-                                                <span className="custom-label">Installation:</span> {editMode ? (
-                                                    <Form.Select className="custom-input" aria-label="Select affected installation" id="installationName" name="installationName" value={updatedOrder.installationName} onChange={handleInputChange}>
-                                                        <option value="1">Installation 1</option>
-                                                        <option value="2">Installation 2</option>
-                                                        <option value="3">Installation 3</option>
-                                                    </Form.Select>
-                                                ) : (
+                                            
+                                                <Card.Text as={Col}>
+                                                    <span className="custom-label">Installation:</span> {editMode ? (
+                                                        <Form.Select className="custom-input" aria-label="Select affected installation" id="installationName" name="installationName" value={updatedOrder.installationName} onChange={handleInputChange}>
+                                                            <option value="">Select Installation Name</option>
+                                                            {installation.map(install => (
+                                                                <option key={install.installationNumber} value={install.name}>
+                                                                    {install.name} {install.installationType}
+                                                                </option>
+                                                            ))}
+                                                        </Form.Select>
+                                                    ) : (
                                                         <span>{order.installationName}</span>
-                                                )}
-                                            </Card.Text>
-                                        </Row>
+                                                    )}
+                                                </Card.Text>
+                                            </Row>
+
+                                            
+                                       
+
+                                     
+
+                                       
 
                                         <Row className="mb-3">
                                             
@@ -252,9 +221,7 @@ function OrderDetails() {
                                                     <span>{order.initiatorName}</span>
                                                 )}
                                             </Card.Text>
-                                        </Row>
 
-                                        <Row className="mb-3">
                                             <Card.Text as={Col}>
                                                 <span className="custom-label">Contact person of Initiator:</span> {editMode ? (
                                                     <input
@@ -263,12 +230,31 @@ function OrderDetails() {
                                                         value={updatedOrder.initiatorContact}
                                                         onChange={handleInputChange}
                                                         className="form-control"
-                                                         readOnly 
+                                                        readOnly
                                                     />
                                                 ) : (
                                                     <span>{order.initiatorContact}</span>
                                                 )}
                                             </Card.Text>
+                                        </Row>
+
+                                        <Row className="mb-3">
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Service Type:</span> {editMode ? (
+                                                    <Form.Select aria-label="Select service type" className="custom-input" id="serviceType" name="serviceType" value={updatedOrder.serviceType} onChange={handleInputChange}>
+                                                        <option value="">Select Service Type</option>
+                                                        {serviceTypes.map(type => (
+                                                            <option key={type.serviceTypeId} value={type.serviceTypeName}>
+                                                                {type.serviceTypeName}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Select>
+                                                ) : (
+                                                    <span>{order.serviceType}</span>
+                                                )}
+                                            </Card.Text>
+
+                                         
 
                                             <Card.Text as={Col}>
                                                 <span className="custom-label">Invoicing Type:</span> {editMode ? (
@@ -287,31 +273,53 @@ function OrderDetails() {
                                             </Card.Text>
                                         </Row>
 
+                                        <Row className="mb-3">
+
+                                            <Card.Text as={Col}>
+                                                <span className="custom-label">Customer:</span> {editMode ? (
+                                                    <Form.Select className="custom-input" aria-label="Default select example" id="companyName" name="companyName" value={updatedOrder.companyName} onChange={handleInputChange}>
+
+                                                        <option value="">Select Company Name</option>
+                                                        {companies.map(company => (
+                                                            <option key={company.id} value={company.name}>
+                                                                {company.name}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Select>
+                                                ) : (
+                                                    <span>{order.companyName}</span>
+                                                )}
+                                            </Card.Text>
+                                        </Row>
+
                                         <Card.Title className="title">Dispatch Location:</Card.Title>
 
                                         <Row className="mb-3">
 
                                             <Card.Text as={Col}>
                                                 <span className="custom-label">Custom Address:</span> {editMode ? (
-                                                    <Form.Select aria-label="Select Custom Address" className="custom-input" id="address" name="address" value={updatedOrder.address} onChange={handleInputChange}>
-
-
-                                                        <option value="1">Address 1</option>
-                                                        <option value="2">Address 2</option>
-                                                        <option value="3">Address 3</option>
-                                                    </Form.Select>
+                                                    <input
+                                                        type="text"
+                                                        name="address"
+                                                        value={updatedOrder.address}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                        readOnly
+                                                    />
                                                 ) : (
-                                                    <span>{order.address}</span>
+                                                        <span>{order.address}</span>
                                                 )}
                                             </Card.Text>
                                             <Card.Text as={Col}>
                                                 <span className="custom-label">Contact at service location:</span> {editMode ? (
-                                                    <Form.Select aria-label="Select Contact" className="custom-input" id="contactPerson" name="contactPerson" value={updatedOrder.contactPerson} onChange={handleInputChange}>
-
-                                                        <option value="1">Contact 1</option>
-                                                        <option value="2">Contact 2</option>
-                                                        <option value="3">Contact 3</option>
-                                                    </Form.Select>
+                                                    <input
+                                                        type="text"
+                                                        name="contactPerson"
+                                                        value={updatedOrder.contactPerson}
+                                                        onChange={handleInputChange}
+                                                        className="form-control"
+                                                        readOnly
+                                                    />
                                                 ) : (
                                                     <span>{order.contactPerson}</span>
                                                 )}
@@ -319,12 +327,17 @@ function OrderDetails() {
 
                                             <Card.Text as={Col}>
                                                 <span className="custom-label">Location:</span> {editMode ? (
-                                                    <Form.Select aria-label="Select location" className="custom-input" id="location" name="location" value={updatedOrder.location} onChange={handleInputChange}>
+                                                    
 
-                                                        <option value="1">Location 1</option>
-                                                        <option value="2">Location 2</option>
-                                                        <option value="3">Location 3</option>
-                                                    </Form.Select>
+                                                        <input
+                                                            type="text"
+                                                            name="location"
+                                                            value={updatedOrder.location}
+                                                            onChange={handleInputChange}
+                                                            className="form-control"
+                                                            readOnly
+                                                        />
+                                                  
                                                 ) : (
                                                     <span>{order.location}</span>
                                                 )}

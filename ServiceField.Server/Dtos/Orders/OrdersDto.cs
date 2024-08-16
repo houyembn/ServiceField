@@ -11,11 +11,10 @@ namespace ServiceField.Server.Dtos.Orders
 
         public string ServiceObject { get; set; }
 
-        public int IdCompany { get; set; }
 
         public string CompanyName { get; set; }
 
-        public int IdInstallation { get; set; }
+ 
 
         public string InstallationName { get; set; }
 

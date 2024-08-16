@@ -97,8 +97,8 @@ function FormCase() {
                 <div className="p-4">
                     {message && <p>{message}</p>}
                     <form onSubmit={handleSubmit}>
-                        <h2>Service case</h2>
-                        <h3>Basic information</h3>
+                        <h2 className="h2">Service case</h2>
+                        <h3 className="h3">Basic information</h3>
                         <div className="all">
 
                             <Form.Label className="custom-label">Product Serial Number</Form.Label>

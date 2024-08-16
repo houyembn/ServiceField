@@ -1,17 +1,11 @@
-
 import './OrderManagement.css';
 import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
-//import Container from 'react-bootstrap/Container';
-//import Row from 'react-bootstrap/Row';
-//import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
-
-
 
 const OrderManagement = () => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -20,17 +14,14 @@ const OrderManagement = () => {
     const [invoicings, setInvoicings] = useState([]);
     const [serviceObjects, setServiceObjects] = useState([]);
     const [initiators, setInitiators] = useState([]);
-   
-
+    const [companies, setCompanies] = useState([]);
+    const [installation, setinstallation] = useState([]);
 
 
     const [Order, setOrder] = useState({
         orderNumber: '',
         serviceObject: '',
-        idCompany: '',
         companyName: '',
-        idInstallation: '',
-        installationName: '',
         initiatorName: '',
         initiatorContact: '',
         serviceType: '',
@@ -43,17 +34,21 @@ const OrderManagement = () => {
 
     const fetchData = async () => {
         try {
-            const [invoicingResponse, serviceObjectsResponse, serviceTypesResponse, initiatorsResponse] = await Promise.all([
+            const [invoicingResponse, serviceObjectsResponse, serviceTypesResponse, initiatorsResponse, companiesResponse, installationResponse] = await Promise.all([
                 axios.get('https://localhost:7141/api/Invoicing'),
                 axios.get('https://localhost:7141/api/ServiceObject'),
                 axios.get('https://localhost:7141/api/ServiceType'),
-                axios.get('https://localhost:7141/ServiceField.Server/User')
+                axios.get('https://localhost:7141/ServiceField.Server/User'),
+                axios.get('https://localhost:7141/api/MasterDataCompanies'),
+                axios.get('https://localhost:7141/ServiceField/Installation'),
             ]);
 
             setInvoicings(invoicingResponse.data);
             setServiceObjects(serviceObjectsResponse.data);
             setServiceTypes(serviceTypesResponse.data);
             setInitiators(initiatorsResponse.data);
+            setCompanies(companiesResponse.data);
+            setinstallation(installationResponse.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -70,42 +65,80 @@ const OrderManagement = () => {
             [name]: value
         }));
 
+        if (name === 'companyName') {
+            const selectedCompany = companies.find(company => company.name === value);
+            if (selectedCompany) {
+                setOrder(prevOrder => ({
+                    ...prevOrder,
+                    idCompany: selectedCompany.id,
+                    location: selectedCompany.position || '', 
+                    address: selectedCompany.parentCopmany || '', 
+                    contactPerson: selectedCompany.responsableUser || ''
+                }));
+                console.log('Selected Company Data:', selectedCompany);
+            }
+        }
+
         if (name === 'initiatorName') {
             const selected = initiators.find(initiator => `${initiator.firstName} ${initiator.lastName}` === value);
             setOrder(prevOrder => ({
                 ...prevOrder,
+
                 idInitiator: selected ? selected.id : '',
-                initiatorContact: selected ? `${selected.email}, ${selected.phoneNumber}` : '' 
+                initiatorContact: selected ? `${selected.email}, ${selected.phoneNumber}` : ''
             }));
         }
-    };
+    
+
+
+
+        if (name === 'installationName') {
+            // Find the installation using the correct backend property
+            const selectedInstallation = installation.find(install => install.installationType === value);
+
+            if (selectedInstallation) {
+                setOrder(prevOrder => ({
+                    ...prevOrder,
+                    idInstallation: Number(selectedInstallation.installationNumber) // Use installationNumber here
+                }));
+                console.log('Selected Installation Data:', selectedInstallation);
+            } else {
+                // Handle case where no installation was found
+                setOrder(prevOrder => ({
+                    ...prevOrder,
+                    idInstallation: '' // Reset or clear the ID if no match found
+                }));
+            }
+        }
 
 
 
 
+};
 
 
     const handleSubmit = async (e) => {
-       
         e.preventDefault();
 
-        // Ensure correct data types
+
+
         const orderData = {
             ...Order,
- 
             orderNumber: parseInt(Order.orderNumber),
             idCompany: parseInt(Order.idCompany),
-            idInstallation: parseInt(Order.idInstallation),
+           idInstallation: parseInt(Order.idInstallation), 
             idInitiator: parseInt(Order.idInitiator),
             initiatorName: Order.initiatorName,
-            initiatorContact: Order.initiatorContact 
-           
+            initiatorContact: Order.initiatorContact,
+            
+            location: Order.location,
+            address: Order.address,
+            contactPerson: Order.contactPerson,
+            companyName: Order.companyName
         };
 
         console.log('Order Data:', orderData);
 
-
-       
         try {
             const response = await axios.post('https://localhost:7141/api/ServiceOrders', orderData);
             console.log(response.data);
@@ -167,49 +200,11 @@ const OrderManagement = () => {
                                     </Form.Select>
                                 </div>
 
-                                <div className="form-column">
-                                    <Form.Label className="custom-label">ID Company</Form.Label>
-                                    <Form.Control
-                                        id="idCompany"
-                                        placeholder="Enter ID Company"
-                                        className="custom-input"
-                                        name="idCompany"
-                                        value={Order.idCompany}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                            </div>
+                               
+                            
 
-                            <div className="form-row">
-                                <div className="form-column">
-                                    <Form.Label className="custom-label">Company Name</Form.Label>
-                                    <Form.Select
-                                        className="custom-input"
-                                        aria-label="Select Company Name"
-                                        name="companyName"
-                                        value={Order.companyName}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">Select Company Name</option>
-                                        <option value="1">Company 1</option>
-                                        <option value="2">Company 2</option>
-                                        <option value="3">Company 3</option>
-                                    </Form.Select>
-                                </div>
+                  
 
-                                <div className="form-column">
-                                    <Form.Label className="custom-label">ID Installation</Form.Label>
-                                    <Form.Control
-                                        placeholder="Enter ID Installation"
-                                        className="custom-input"
-                                        name="idInstallation"
-                                        value={Order.idInstallation}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="form-row">
                                 <div className="form-column">
                                     <Form.Label className="custom-label">Installation Name</Form.Label>
                                     <Form.Select
@@ -220,12 +215,16 @@ const OrderManagement = () => {
                                         onChange={handleChange}
                                     >
                                         <option value="">Select Installation Name</option>
-                                        <option value="1">Installation 1</option>
-                                        <option value="2">Installation 2</option>
-                                        <option value="3">Installation 3</option>
+                                        {installation.map(install => (
+                                            <option key={install.installationNumber} value={install.name}>
+                                                {install.name} {install.installationType}
+                                            </option>
+                                        ))}
                                     </Form.Select>
                                 </div>
                             </div>
+
+
 
                             <div className="form-row">
                                 <div className="form-column">
@@ -250,14 +249,14 @@ const OrderManagement = () => {
                                     <Form.Group controlId="initiatorContact">
                                         <Form.Label className="custom-label">Initiator Contact</Form.Label>
                                         <Form.Control
+                                            placeholder="Initiator Contact"
                                             className="custom-input"
-                                            type="text"
                                             name="initiatorContact"
                                             value={Order.initiatorContact}
-                                            readOnly 
+                                            onChange={handleChange}
+                                            readOnly
                                         />
                                     </Form.Group>
-
                                 </div>
                             </div>
 
@@ -281,7 +280,7 @@ const OrderManagement = () => {
                                 </div>
 
                                 <div className="form-column">
-                                    <Form.Label className="custom-label">Invoicing Type</Form.Label>
+                                      <Form.Label className="custom-label">Invoicing Type</Form.Label>
                                     <Form.Select
                                         className="custom-input"
                                         aria-label="Select Invoicing Type"
@@ -300,82 +299,100 @@ const OrderManagement = () => {
                                 </div>
                             </div>
 
-                            <h3 className="h3">Dispatch Location</h3>
                             <div className="form-row">
                                 <div className="form-column">
-                                    <Form.Label className="custom-label">Address</Form.Label>
+                                    <Form.Label className="custom-label">Company Name</Form.Label>
                                     <Form.Select
                                         className="custom-input"
-                                        aria-label="Select Address"
-                                        name="address"
-                                        value={Order.address}
+                                        aria-label="Select Company Name"
+                                        name="companyName"
+                                        value={Order.companyName}
                                         onChange={handleChange}
                                     >
-                                        <option value="">Select Address</option>
-                                        <option value="1">Address 1</option>
-                                        <option value="2">Address 2</option>
-                                        <option value="3">Address 3</option>
+                                        <option value="">Select Company Name</option>
+                                        {companies.map(company => (
+                                            <option key={company.id} value={company.name}>
+                                                {company.name}
+                                            </option>
+                                        ))}
                                     </Form.Select>
                                 </div>
 
+
+                            </div>
+                            <h3 className="h3">Dispatch Location</h3>
+
+                            <div className="form-row">
+                                <div className="form-column">
+                                    <Form.Label className="custom-label">Address</Form.Label>
+                                    <Form.Control
+                                        placeholder="Address"
+                                        className="custom-input"
+                                        name="address"
+                                        value={Order.address}
+                                        onChange={handleChange}
+                                        readOnly
+                                    />
+                                </div>
                                 <div className="form-column">
                                     <Form.Label className="custom-label">Contact Person</Form.Label>
-                                    <Form.Select
+                                    <Form.Control
+                                        placeholder="Contact Person"
                                         className="custom-input"
-                                        aria-label="Select Contact Person"
                                         name="contactPerson"
                                         value={Order.contactPerson}
                                         onChange={handleChange}
-                                    >
-                                        <option value="">Select Contact Person</option>
-                                        <option value="1">Contact 1</option>
-                                        <option value="2">Contact 2</option>
-                                        <option value="3">Contact 3</option>
-                                    </Form.Select>
+                                        readOnly
+                                    />
                                 </div>
 
                                 <div className="form-column">
                                     <Form.Label className="custom-label">Location</Form.Label>
-                                    <Form.Select
+                                    <Form.Control
+                                        placeholder="Location"
                                         className="custom-input"
-                                        aria-label="Select Location"
                                         name="location"
                                         value={Order.location}
                                         onChange={handleChange}
-                                    >
-                                        <option value="">Select Location</option>
-                                        <option value="1">Location 1</option>
-                                        <option value="2">Location 2</option>
-                                        <option value="3">Location 3</option>
-                                    </Form.Select>
+                                        readOnly
+                                    />
                                 </div>
                             </div>
+                                <Form.Group controlId="message">
 
-                            <Form.Group controlId="message">
-                                <Form.Label className="custom-label">Message</Form.Label>
-                                <Form.Control
-                                    className="custom-input"
-                                    as="textarea"
-                                    rows={3}
-                                    style={{ resize: 'both' }}
-                                    name="message"
-                                    value={Order.message}
-                                    onChange={handleChange}
-                                />
-                            </Form.Group>
-
-                            <Button className="sub" type="submit">Submit</Button>
+                                    <div className="form-column">
+                                        <Form.Label className="custom-label">Message</Form.Label>
+                                        <Form.Control
+                                            placeholder="Enter Message"
+                                            className="custom-input"
+                                            name="message"
+                                            as="textarea"
+                                            rows={3}
+                                            style={{ resize: 'both' }}
+                                            value={Order.message}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </Form.Group>
+                          
                         </div>
+                        <Button className="sub" type="submit">Submit</Button>
                     </form>
 
                     {/* Success Modal */}
-                    <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} className="modal-success">
-                        <Modal.Body>Service Order added successfully!</Modal.Body>
+                    <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Success</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>Order has been successfully submitted!</Modal.Body>
                     </Modal>
 
-                    {/* Fail Modal */}
-                    <Modal show={showFailModal} onHide={() => setShowFailModal(false)} className="modal-fail">
-                        <Modal.Body>Adding failed!</Modal.Body>
+                    {/* Failure Modal */}
+                    <Modal show={showFailModal} onHide={() => setShowFailModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Error</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>There was an error submitting the order. Please try again.</Modal.Body>
                     </Modal>
                 </div>
             </div>

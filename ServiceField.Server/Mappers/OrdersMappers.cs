@@ -18,18 +18,16 @@ namespace ServiceField.Server.Mappers
                 IdOrder = OrderModel.IdOrder,
                 OrderNumber = OrderModel.OrderNumber,
                 ServiceObject = OrderModel.ServiceObject?.ServiceObjectName,
-                IdCompany = OrderModel.IdCompany,
-                CompanyName = OrderModel.CompanyName,
-                IdInstallation = OrderModel.IdInstallation,
-                InstallationName = OrderModel.InstallationName,
+                CompanyName = OrderModel.Company?.name,
+                InstallationName = OrderModel.Installation?.InstallationType,
                 InitiatorName = OrderModel.InitiatorName,
                 InitiatorContact = OrderModel.InitiatorContact,
                 ServiceType = OrderModel.ServiceType?.ServiceTypeName,
                 Invoicing = OrderModel.Invoicing?.InvoicingType,
                 Message = OrderModel.Message,
-                Address = OrderModel.Address,
-                ContactPerson = OrderModel.ContactPerson,
-                Location = OrderModel.Location,
+                Address = OrderModel.Company?.ParentCopmany,
+                ContactPerson = OrderModel.Company?.ResponsableUser, 
+                Location = OrderModel.Company?.position,
             };
         }
 
@@ -45,7 +43,7 @@ namespace ServiceField.Server.Mappers
                 CompanyName = OrderDto.CompanyName,
                 IdInstallation = OrderDto.IdInstallation,
                 InstallationName = OrderDto.InstallationName,
-                IdInitiator = initiator?.Id ?? 0, // Automatically assigned from the Users object
+                IdInitiator = initiator?.Id ?? 0, 
                 InitiatorName = initiator != null ? $"{initiator.FirstName} {initiator.LastName}" : null,
                 InitiatorContact = initiator != null ? $"{initiator.Email}, {initiator.PhoneNumber}" : null,
                 ServiceType = serviceOrderHelper.GetServiceTypeByName(OrderDto.ServiceType),

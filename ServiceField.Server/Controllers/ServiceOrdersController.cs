@@ -40,6 +40,8 @@ namespace ServiceField.Server.Controllers
                 .Include(o => o.ServiceType)
                 .Include(o => o.Invoicing)
                 .Include(o => o.Initiator)
+                .Include(o => o.Company)
+                .Include(o => o.Installation)
                 .Select(s => s.ToOrderDto())
                 .ToListAsync();
 
@@ -71,6 +73,8 @@ namespace ServiceField.Server.Controllers
                 .Include(o => o.ServiceType)
                 .Include(o => o.Invoicing)
                 .Include(o => o.Initiator)
+                .Include(o => o.Company)
+                .Include(o => o.Installation)
                 .FirstOrDefaultAsync(o => o.IdOrder == idOrder);
 
             if (order == null)
@@ -140,9 +144,7 @@ namespace ServiceField.Server.Controllers
 
             orderModel.OrderNumber = updateDto.OrderNumber;
             orderModel.ServiceObject = _serviceOrderHelper.GetServiceObjectByName(updateDto.ServiceObject);
-            orderModel.IdCompany = updateDto.IdCompany;
             orderModel.CompanyName = updateDto.CompanyName;
-            orderModel.IdInstallation = updateDto.IdInstallation;
             orderModel.InstallationName = updateDto.InstallationName;
             orderModel.InitiatorName = updateDto.InitiatorName;
             orderModel.InitiatorContact = updateDto.InitiatorContact;

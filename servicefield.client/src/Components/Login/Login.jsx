@@ -37,11 +37,11 @@ function LogIn() {
                 password: pwd
             });
 
-            console.log('Full response:', response); // Log the entire response to check its structure
+            console.log('Full response:', response); 
 
             if (response.data.success) {
                 const userRole = response.data.role;
-                console.log('Received user role:', userRole); // Debugging log
+                console.log('Received user role:', userRole); 
 
                 if (!userRole) {
                     console.error('User role is undefined or null');
@@ -52,7 +52,7 @@ function LogIn() {
                     role: userRole
                 }));
 
-                // Navigate based on user role
+                
                 if (userRole === 'Technician') {
                     navigate('/Technician');
                 } else {
@@ -91,6 +91,7 @@ function LogIn() {
                             placeholder="name@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -101,6 +102,7 @@ function LogIn() {
                                 placeholder="*********"
                                 value={pwd}
                                 onChange={(e) => setPwd(e.target.value)}
+                                required
                             />
                             <span
                                 className="password-toggle"

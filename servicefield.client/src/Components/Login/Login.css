@@ -15,7 +15,7 @@
 }
 
 .right-section {
-    flex: 1;
+    flex: 2;
     flex-direction: column;
 }
 

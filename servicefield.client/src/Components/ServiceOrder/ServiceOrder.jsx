@@ -98,7 +98,7 @@ function ServiceOrder() {
                             outline: 'none',
                         }}
                     >
-                        <Typography id="modal-title" variant="h6" component="h2">
+                        <Typography id="modal-title" variant="h6" component="h6">
                             Has this ever been a service case?
                         </Typography>
                         <div className="input-container">
