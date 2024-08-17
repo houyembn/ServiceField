@@ -12,8 +12,8 @@ using ServiceField.Server.Data;
 namespace ServiceField.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240816231527_integ")]
-    partial class integ
+    [Migration("20240817135410_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,6 +99,10 @@ namespace ServiceField.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstallationLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InstallationName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

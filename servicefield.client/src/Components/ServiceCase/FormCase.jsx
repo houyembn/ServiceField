@@ -37,6 +37,7 @@ function FormCase() {
     const [category, setCategories] = useState([]);
     const [error, setError] = useState('');
     const [company, setCompanies] = useState([]);
+    const [installation, setInstallations] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -81,6 +82,8 @@ function FormCase() {
                     setCategories(categoryResponse.data);
                     const companyResponse = await axios.get('https://localhost:7141/api/MasterDataCompanies');
                     setCompanies(companyResponse.data);
+                    const installationResponse = await axios.get('https://localhost:7141/ServiceField/Installation');
+                    setInstallations(installationResponse.data);
                 } catch (error) {
                     console.error('There was an error fetching the data!', error);
                     setError('Failed to fetch data.');
@@ -139,7 +142,7 @@ function FormCase() {
                                     <Form.Select
                                         className="custom-input"
                                         id="affectedCompany"
-                                        aria-label="Select affected company"
+                                        aria-label="Select company name"
                                         name="affectedCompany"
                                         value={formData.affectedCompany}
                                         onChange={handleChange}
@@ -172,13 +175,33 @@ function FormCase() {
 
                                 <div className="form-column">
                                     <Form.Label className="custom-label">Affected Installation</Form.Label>
-                                    <Form.Select className="custom-input" id="affectedInstallation" aria-label="Select affected installation" name="affectedInstallation" value={formData.affectedInstallation}
-                                        onChange={handleChange} >
+                                    <Form.Select
+                                        className="custom-input"
+                                        id="affectedInstallation"
+                                        aria-label="Select installation name"
+                                        name="affectedInstallation"
+                                        value={formData.affectedInstallation}
+                                        onChange={handleChange}
+                                    >
                                         <option value="" disabled>Select an option</option>
-                                        <option value="One">One</option>
-                                        <option value="Two">Two</option>
-                                        <option value="Three">Three</option>
+                                        {installation.map(installation => (
+                                            <option key={installation.id} value={installation.installationName}>
+                                                {installation.installationName}
+                                            </option>
+                                        ))}
                                     </Form.Select>
+
+
+                                    {/*<Form.Label className="custom-label">Affected Installation</Form.Label>*/}
+                                    {/*<Form.Select className="custom-input" id="affectedInstallation" aria-label="Select affected installation" name="affectedInstallation" value={formData.affectedInstallation}>*/}
+                                    {/*    <option value="" disabled>Select an option</option>*/}
+                                    {/*    {installation.map(installation => (*/}
+                                    {/*        <option key={installation.installationNumber} value={installation.installationName}>*/}
+                                    {/*            {installation.installationName}*/}
+                                    {/*        </option>*/}
+                                    {/*    ))}*/}
+                                    {/*</Form.Select>*/}
+                                   
 
                                 </div>
                             </div>
@@ -290,7 +313,8 @@ function FormCase() {
                                 value={formData.creationDate}
                                 readOnly
                                 className="custom-input"/>
-                            <Button className="sub" as="input" type="submit" value="Submit" onSubmit={handleSubmit} />
+
+                            <button type="submit" className="sub" onSubmit={handleSubmit}>Submit</button>
                         </div>
 
                     </form>

@@ -6,6 +6,7 @@ namespace ServiceField.Server.Dtos.Installation
     {
 
         public int InstallationNumber { get; set; }
+        public string InstallationName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string InstallationType { get; set; } = string.Empty;
         public string Owner { get; set; } = string.Empty;

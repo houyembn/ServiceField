@@ -85,6 +85,11 @@
         transform: scale(1.12);
         font-weight: bold;
     }
+    .sub:active {
+        background-color: #0976ea;
+        border-color: #ccc;
+        transform: scale(1);
+    }
 
 
 
