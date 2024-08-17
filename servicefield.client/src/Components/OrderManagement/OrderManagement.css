@@ -172,3 +172,15 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.modal-success {
+    color: green;
+}
+
+.modal-fail {
+    color: red;
+}
+
+.checkbox-label {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

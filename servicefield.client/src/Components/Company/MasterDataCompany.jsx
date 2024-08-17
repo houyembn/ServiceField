@@ -1,8 +1,8 @@
-/* eslint-disable no-undef */
-//import React, { useEffect, useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const MasterDataCompanyList = () => {
+const MasterDataCompany = () => {
     const [companies, setCompanies] = useState([]);
 
     useEffect(() => {
@@ -10,7 +10,7 @@ const MasterDataCompanyList = () => {
     }, []);
 
     const loadCompanies = async () => {
-        const result = await axios.get('http://localhost:5000/api/masterdatacompanies');
+        const result = await axios.get('https://localhost:7141/api/MasterDataCompanies');
         setCompanies(result.data);
     };
 
@@ -36,4 +36,4 @@ const MasterDataCompanyList = () => {
     );
 };
 
-export default MasterDataCompanyList;
+export default MasterDataCompany;

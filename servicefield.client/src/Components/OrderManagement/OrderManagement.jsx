@@ -380,8 +380,9 @@ const OrderManagement = () => {
                         <button type="submit" className="sub" onSubmit={handleSubmit}>Submit</button>
                     </form>
 
+               
                     <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} className="modal-success">
-
+                   
                         <Modal.Body>Order has been successfully submitted!</Modal.Body>
                     </Modal>
 
