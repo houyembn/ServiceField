@@ -12,8 +12,8 @@ using ServiceField.Server.Data;
 namespace ServiceField.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240817135410_update")]
-    partial class update
+    [Migration("20240817162110_integ")]
+    partial class integ
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

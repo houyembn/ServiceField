@@ -567,7 +567,8 @@ function CompanyForm() {
                                 <Form.Control className="custom-input" as="textarea" rows={3} style={{ resize: 'both' }} id="description" name="description" value={formData.description} onChange={handleChange} />
                             </Form.Group>
 
-                            <Button className="sub" as="input" type="submit" value="Submit" onSubmit={handleSubmit} />
+
+                            <button type="submit" className="sub" onSubmit={handleSubmit}>Submit</button>
                         </div>
 
 

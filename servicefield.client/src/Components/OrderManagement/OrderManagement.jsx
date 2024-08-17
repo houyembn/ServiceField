@@ -376,7 +376,8 @@ const OrderManagement = () => {
                                 </Form.Group>
                           
                         </div>
-                        <Button className="sub" type="submit">Submit</Button>
+
+                        <button type="submit" className="sub" onSubmit={handleSubmit}>Submit</button>
                     </form>
 
                     <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} className="modal-success">
