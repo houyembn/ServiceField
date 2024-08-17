@@ -84,7 +84,7 @@ function UserDetails() {
                     <Container fluid>
                         <Row className="justify-content">
                             <Col md={8}>
-                                <h1 className="display" style={{ marginBottom: 40 }}>Service Users Details:</h1>
+                                <h1 className="display" style={{ marginBottom: 40 }}>Service Users Details</h1>
 
                                 <Card style={{ width: '151%', boxShadow: '0 4px 8px rgba(0.1, 0.1, 0.1, 0.1)', padding: '20px 30px 40px 50px' }}>
                                     <Card.Body>
@@ -282,12 +282,15 @@ function UserDetails() {
 
                                         {!editMode && userRole !== 'Service Manager' && (
                                             <Row>
+                                              
                                                 <Col>
-                                                    <Button variant="primary" onClick={handleEditClick}>Edit</Button>
+                                                    <button onClick={() => handleEditClick(true)} className="updateBtn" ><i className="material-icons">edit</i></button>
+                                                    <button onClick={() => setShowDeleteModal(true)} className="deleteBtn">
+                                                        <i className="material-icons">delete</i>
+                                                    </button>
+                                                    
                                                 </Col>
-                                                <Col>
-                                                    <Button variant="danger" onClick={() => setShowDeleteModal(true)}>Delete</Button>
-                                                </Col>
+                                           
                                             </Row>
                                         )}
 

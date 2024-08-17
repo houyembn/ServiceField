@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import '../OrderDisplay/OrderDisplay.css';
+import './FormCase.css';
 import axios from 'axios';
-import ShowNavBar from '../NavBar/NavBar';
-import SideBar from '../SideBar/SideBar';
+import ShowNavBar from '../NavBar/NavBar'; import SideBar from '../SideBar/SideBar';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 
@@ -98,39 +97,41 @@ function DetailsFormCase() {
             <div className="flex-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <h4>List of Service Cases</h4>
+                    <div className="h2">List of Service Cases</div>
 
                     <div style={{ marginTop: '15px' }}>
-                        {serviceCases.map((serviceCase) => (
-                            <Card key={serviceCase.id} className="mb-3 clickable-card" onClick={() => handleCardClick(serviceCase.id)}>
-                                <Card.Body >
-                                    <Card.Title>{serviceCase.productSerialNumber}</Card.Title>
-                                    <Card.Text>
-                                        <strong>Affected Company:</strong> {serviceCase.affectedCompany}<br />
-                                        <strong>Object:</strong> {getTypeById(objectMap, serviceCase.objectFK)}<br />
-                                        <div className="form-row">
-                                            <div className="form-column1">
-                                                <strong>Responsible User:</strong> {serviceCase.responsableUser}<br />
-                                            </div>
-                                            <div className="form-column1">
-                                                <span className={`circle ${getStatusClass(serviceCase.serviceCaseStatus)}`}></span>
-                                                <strong>Status:</strong> {serviceCase.serviceCaseStatus}<br />
-                                            </div>
-                                            <div className="form-column1">
-                                                <span className={`circle ${getPriorityClass(serviceCase.priority)}`}></span>
-                                                <strong>Priority:</strong> {serviceCase.priority}
-                                            </div>
-                                            <div className="form-column1">
-                                                <strong>Created on :</strong> {new Date(serviceCase.creationDate).toLocaleString()}<br />
-                                            </div>
+                    {serviceCases.map((serviceCase) => (
+                        <Card key={serviceCase.id} className="mb-4" onClick={() => handleCardClick(serviceCase.id)}>
+                            <Card.Header as="h5">
+                                Service Case Number: {serviceCase.productSerialNumber}
+                            </Card.Header>
+                            <Card.Body > 
+                                <Card.Text>
+                                    <strong>Affected Company:</strong> {serviceCase.affectedCompany}<br />
+                                    <strong>Object:</strong> {getTypeById(objectMap, serviceCase.objectFK)}<br />
+                                    <div className="form-row">
+                                        <div className="form-column1">
+                                            <strong>Responsible User:</strong> {serviceCase.responsableUser}<br />
                                         </div>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        ))}
-                        <button onClick={handleCreateButtonClick} className="addBtn">
-                            <i className="material-icons">add</i>
-                        </button>
+                                        <div className="form-column1">
+                                            <span className={`circle ${getStatusClass(serviceCase.serviceCaseStatus)}`}></span>
+                                            <strong>Status:</strong> {serviceCase.serviceCaseStatus}<br />
+                                        </div>
+                                        <div className="form-column1">
+                                            <span className={`circle ${getPriorityClass(serviceCase.priority)}`}></span>
+                                            <strong>Priority:</strong> {serviceCase.priority}
+                                        </div>
+                                        <div className="form-column1">
+                                            <strong>Created on :</strong> {new Date(serviceCase.creationDate).toLocaleString()}<br />
+                                        </div>
+                                    </div>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ))}
+                    <button onClick={handleCreateButtonClick} className="addBtn">
+                        <i className="material-icons">add</i>
+                    </button>
                     </div>
                 </div>
             </div>

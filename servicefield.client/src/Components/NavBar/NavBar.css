@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-.bell-icon {
+/*.bell-icon {
     transition: transform 0.2s ease-in-out;
 }
 
@@ -15,3 +15,12 @@
     height: 300px;
     margin: 0 auto;
 }
+*/
+
+.bell-icon {
+    transition: transform 0.2s ease-in-out;
+}
+
+    .bell-icon:hover {
+        transform: scale(1.2);
+    }

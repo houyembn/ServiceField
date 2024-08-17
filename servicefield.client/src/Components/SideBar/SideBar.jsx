@@ -157,7 +157,27 @@ const Sidebar = () => {
                                     </Link>
                                     <Link to="/ObjectDisplay" className="nested-link">
                                         <i className="material-icons">view_list</i>
-                                        <span className="text">Service Object</span>
+                                        <span className="text">Order Object </span>
+                                    </Link>
+                                    <Link to="/LuObject" className="nested-link">
+                                        <i className="material-icons">view_list</i>
+                                        <span className="text">Case Object </span>
+                                    </Link>
+                                    <Link to="/LuCategory" className="nested-link">
+                                        <i className="material-icons">view_list</i>
+                                        <span className="text">Category</span>
+                                    </Link>
+                                    <Link to="/LuElement" className="nested-link">
+                                        <i className="material-icons">view_list</i>
+                                        <span className="text">Element</span>
+                                    </Link>
+                                    <Link to="/LuSkills" className="nested-link">
+                                        <i className="material-icons">view_list</i>
+                                        <span className="text">Skills</span>
+                                    </Link>
+                                    <Link to="/LuCheckList" className="nested-link">
+                                        <i className="material-icons">view_list</i>
+                                        <span className="text">CheckList</span>
                                     </Link>
                                 </div>
                             )}

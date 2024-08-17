@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 import Card from 'react-bootstrap/Card';
+import { Button, Modal } from 'react-bootstrap';
+
+import { useNavigate } from 'react-router-dom';
 
 function ServiceCaseDetails() {
     const { id } = useParams();
@@ -14,11 +17,20 @@ function ServiceCaseDetails() {
     const [skillsMap, setSkillsMap] = useState({});
     const [categoryMap, setCategoryMap] = useState({});
     const [error, setError] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [checklistResponse, objectResponse, elementResponse, skillsResponse, categoryResponse, serviceCaseResponse] = await Promise.all([
+                const [
+                    checklistResponse,
+                    objectResponse,
+                    elementResponse,
+                    skillsResponse,
+                    categoryResponse,
+                    serviceCaseResponse
+                ] = await Promise.all([
                     axios.get('https://localhost:7141/ServiceField/CheckList'),
                     axios.get('https://localhost:7141/ServiceField/Object'),
                     axios.get('https://localhost:7141/ServiceField/Element'),
@@ -26,6 +38,7 @@ function ServiceCaseDetails() {
                     axios.get('https://localhost:7141/ServiceField/Category'),
                     axios.get(`https://localhost:7141/ServiceField/Case/${id}`)
                 ]);
+
                 const mapData = (data) => {
                     const map = {};
                     data.forEach(item => {
@@ -50,10 +63,19 @@ function ServiceCaseDetails() {
     }, [id]);
 
     if (error) return <p>{error}</p>;
-
     if (!serviceCase) return <p>Loading...</p>;
 
     const getTypeById = (map, id) => map[id] || 'Unknown';
+
+    const handleDeleteClick = async () => {
+        try {
+            await axios.delete(`https://localhost:7141/ServiceField/Case/${id}`);
+            navigate('/DetailsFormCase');
+        } catch (error) {
+            console.error('There was an error deleting the data!', error);
+            setError('Failed to delete data.');
+        }
+    };
 
     return (
         <div className="flex">
@@ -61,11 +83,13 @@ function ServiceCaseDetails() {
             <div className="flex-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <h5>Service Case Details</h5>
+                    <div className="h5">Service Case Details</div>
                     <div style={{ marginTop: '15px' }}>
                         <Card>
+                            <Card.Header as="h5">
+                                Service Case Number: {serviceCase.productSerialNumber}
+                            </Card.Header>
                             <Card.Body>
-                                <Card.Title>Product Serial Number: {serviceCase.productSerialNumber}</Card.Title>
                                 <Card.Text>
                                     <strong>Affected Company:</strong> {serviceCase.affectedCompany}<br />
                                     <strong>Object:</strong> {getTypeById(objectMap, serviceCase.objectFK)}<br />
@@ -84,9 +108,30 @@ function ServiceCaseDetails() {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
+                        <div className="mt-4">
+                            <button  className="updateBtn"><i className="material-icons">edit</i></button>
+                            <button onClick={() => setShowDeleteModal(true)} className="deleteBtn">
+                                <i className="material-icons">delete</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+                <Modal.Header closeButton>
+                    Confirm Delete
+                </Modal.Header>
+                <Modal.Body>Are you sure you want to delete this service case?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteClick}>
+                        Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }

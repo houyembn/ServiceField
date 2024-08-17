@@ -27,7 +27,7 @@ function LogIn() {
                 email: 'admin@gmail.com',
                 role: 'Admin'
             }));
-            navigate('/');
+            navigate('/HomePage');
             return;
         }
 

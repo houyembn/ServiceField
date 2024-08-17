@@ -1,41 +1,37 @@
-/*h2 {
+.h2 {
     border-bottom: 2px solid #ccc;
-    position: absolute;
-    left: 10%;
+    display: inline-block;
+    margin-left: 5%;
     font-size: 27px;
     font-weight: bold;
 }
-
-h3 {
+.h3{
     border-bottom: 2px solid #ccc;
-    padding-top: 4%;
-    font-size: 17px;
+    padding-top: 1.5%;
+    font-size: 10px;
     font-weight: bold;
 }
-
-h4 {
+.h4 {
     border-bottom: 2px solid #ccc;
     font-size: 25px;
     left: 10%;
     font-weight: bold;
 }
-
-h5 {
+.h5 {
     border-bottom: 2px solid #ccc;
-    font-size: 22px;
-    left: 10%;
+    display: inline-block;
+    margin-left: 2%;
     font-style: italic;
     font-weight: revert;
 }
-
 .all {
     display: flex;
     flex-direction: column;
-    padding-top: 1.5%;
+    padding-top:1.5%;
 }
 
 .custom-label {
-    color: #696666;
+   color: #696666;
     font-style: italic;
     margin-top: 0.5%;
 }
@@ -43,11 +39,11 @@ h5 {
 .custom-input {
     border-radius: 5px;
     border-radius: 5px;
+    
 }
-
     .custom-input::placeholder {
         color: #000000;
-        font-size: 15px;
+        font-size: 15px; 
     }
 
 .form-row {
@@ -57,8 +53,8 @@ h5 {
 
 .form-column {
     flex: 1;
+   
 }
-
 .form-column1 {
     padding: 0.7%;
     border: 1px solid #ccc;
@@ -79,7 +75,7 @@ h5 {
     border-color: #ccc;
     background-color: #808080;
     font-weight: bold;
-    color: #000000;
+    color : #000000;
 }
 
 
@@ -96,7 +92,6 @@ h5 {
     padding: 20%;
     font-size: 30px;
 }
-
 .addBtn {
     position: fixed;
     bottom: 3%;
@@ -119,12 +114,11 @@ h5 {
         border-color: #cebdbd;
         transform: scale(1.3);
     }
-
 .circle {
     display: inline-block;
     width: 10px;
     height: 10px;
-    border-radius: 50%;
+    border-radius: 50%;  
 }
 
 .high-priority {
@@ -136,21 +130,19 @@ h5 {
 }
 
 .low-priority {
-    background-color: green;
+    background-color: green; 
 }
-
 .status-new {
-    background-color: #28a745;
+    background-color: #28a745; 
 }
 
 .status-inprog {
-    background-color: #ffc107;
+    background-color: #ffc107; 
 }
 
 .status-old {
-    background-color: #6c757d;
+    background-color: #6c757d; 
 }
-
 .addBtn .material-icons {
     padding: 20%;
     font-size: 30px;
@@ -169,6 +161,7 @@ h5 {
     background-color: #204fea;
     text-decoration-color: #ffffff;
     border-color: #cebdbd;
+   
 }
 
 
@@ -177,14 +170,21 @@ h5 {
         border-color: #cebdbd;
         transform: scale(1.2);
     }
-
 .btm {
-    margin-left: 50px;
+    margin-left:50px;
     justify-content: center;
     align-items: center;
     border: 3px solid;
     background-color: #204fea;
     text-decoration-color: #ffffff;
     border-color: #cebdbd;
-}body {
-}*/
+}
+.display {
+    margin-bottom: 3%;
+    margin-left: 3%;
+    font-size: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid #ccc;
+    display: inline-block;
+}

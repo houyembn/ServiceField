@@ -25,6 +25,10 @@ import UserDetails from './Components/User/UserDetails';
 import DetailsFormCase from './Components/ServiceCase/DetailsFormCase';
 import FormCase from './Components/ServiceCase/FormCase';
 import LuSkills from './Components/ServiceCase/LuSkills';
+import LuCategory from './Components/ServiceCase/LuCategory';
+import LuObject from './Components/ServiceCase/LuObject';
+import LuElement from './Components/ServiceCase/LuElement';
+import LuCheckList from './Components/ServiceCase/LuCheckList';
 import ServiceCaseDetails from './Components/ServiceCase/ShowSCDetail';
 import Technician from './Components/Technician/Technician';
 import CompanyForm from './Components/Company/CompanyForm';
@@ -34,7 +38,7 @@ import FormInstall from './Components/Installation/FormInstall';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './index.css';
-
+import './Components/SideBar/SideBar.css';
 
 
 
@@ -44,7 +48,9 @@ function App() {
 
     return (
         <Router>
-                <Routes>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/HomePage" element={<HomePage />} />
                 <Route path="/ServiceOrder" element={<ServiceOrder />} />
                <Route path="/OrderManagement" element={<OrderManagement />} />
                <Route path="/CheckCase" element={<CheckCase />} />
@@ -67,12 +73,15 @@ function App() {
                 <Route path="/User" element={<User />} />
                 <Route path="/UserDisplay" element={<UserDisplay />} />
                 <Route path="/UserDetails/:UserId" element={<UserDetails />} />
-                <Route path="/" element={<HomePage />} />
-                <Route path="/Login" element={<Login />} />
+               
                 <Route path="/DetailsFormCase" element={<DetailsFormCase />} />
                 <Route path="/FormCase" element={<FormCase />} />
                 <Route path="/ServiceCaseDetails/:id" element={<ServiceCaseDetails />} />
                 <Route path="/LuSkills" element={<LuSkills />} />
+                <Route path="/LuObject" element={<LuObject />} />
+                <Route path="/LuCategory" element={<LuCategory />} />
+                <Route path="/LuElement" element={<LuElement />} />
+                <Route path="/LuCheckList" element={<LuCheckList />} />
                 <Route path="/Technician" element={<Technician />} />
                 <Route path="/CompanyForm" element={<CompanyForm />} />
                 <Route path="/MasterDataCompany" element={<MasterDataCompany />} />

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ShowNavBar from '../NavBar/NavBar';
-import SideBar from '../SideBar/SideBar';
+import ShowNavBar from '../NavBar/NavBar'; import SideBar from '../SideBar/SideBar';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -30,7 +29,7 @@ function LuSkills() {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const response = await axios.get('https://localhost:7141/ServiceField/Skills');
+                const response = await axios.get('https://localhost:7141/ServiceField/Element');
                 setSkills(response.data);
             } catch (error) {
                 console.error('Il y a eu une erreur!', error);
@@ -53,7 +52,7 @@ function LuSkills() {
     const handleModalSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://localhost:7141/ServiceField/Skills', { type: newSkill });
+            const response = await axios.post('https://localhost:7141/ServiceField/Element', { type: newSkill });
             setSkills([...skills, response.data]);
             setNewSkill('');
             setMessage('Skills submitted successfully!');
@@ -66,7 +65,7 @@ function LuSkills() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://localhost:7141/ServiceField/Skills/${id}`);
+            await axios.delete(`https://localhost:7141/ServiceField/Element/${id}`);
             setSkills(skills.filter(skill => skill.id !== id));
         } catch (error) {
             console.error('There was an error deleting the data!', error);
@@ -80,28 +79,28 @@ function LuSkills() {
             <div className="flex-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <div className="h4">List of skills</div>
+                    <div className="h4">List of Elements</div>
                     <div className="all">
-                        <Button className="ajoutBtn" onClick={handleAddClick}>
+                        <Button  className="ajoutBtn" onClick={handleAddClick}>
                             Add
                         </Button>
                         <div style={{ marginTop: '15px' }}>
 
-                        {skills.map(skill => (
-                            <Card key={skill.id} className="mb-3" >
-                                <Card.Body >
-                                    <div className="d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <label className="custom-label">Skill type :</label>
-                                            <p style={{ marginLeft: '15px', fontSize: '17.5px' }} >{skill.type}</p>
+                            {skills.map(skill => (
+                                <Card key={skill.id} className="mb-3" >
+                                    <Card.Body >
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <label className="custom-label">Element type :</label>
+                                                <p style={{ marginLeft: '15px', fontSize: '17.5px' }} >{skill.type}</p>
+                                            </div>
+                                            <button onClick={() => handleDelete(skill.id)} >
+                                                <i className="material-icons">delete</i>
+                                            </button>
                                         </div>
-                                        <button onClick={() => handleDelete(skill.id)} >
-                                                                                     <i className="material-icons">delete</i>
-                                                                                 </button>
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        ))}
+                                    </Card.Body>
+                                </Card>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -109,22 +108,22 @@ function LuSkills() {
 
             <Modal show={showModal} onHide={handleModalClose}>
                 <Modal.Header closeButton style={{ fontSize: '20px', fontWeight: 'bold' }}>
-                 Add a new skill
+                   Add a new Element
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleModalSubmit}>
                         <Form.Group controlId="formNewSkill">
                             <Form.Control
-                               
+
                                 type="text"
-                                placeholder="Put a new skill"
+                                placeholder="Put a new Element"
                                 value={newSkill}
                                 onChange={(e) => setNewSkill(e.target.value)}
                             />
                         </Form.Group>
                         <div className="d-flex justify-content-center mt-3">
-                        <Button variant="primary" type="submit">
-                            Submit
+                            <Button variant="primary" type="submit">
+                                Submit
                             </Button>
                         </div>
                     </Form>
