@@ -1,4 +1,3 @@
-
 import { useLocation } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -7,8 +6,6 @@ import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 import Grid from '@mui/material/Grid';
 import './CheckCase.css';
-
-
 
 function CheckCase() {
     const location = useLocation();
@@ -22,38 +19,56 @@ function CheckCase() {
                     <ShowNavBar />
 
                     {/* Centered Grid Container */}
-                    <Grid container justifyContent="center">
+                    <Grid container
+                        alignItems="center"
+                        justifyContent="center"
+                        style={{ height: 'calc(100vh - 64px)' }} 
+                    >
                         <Grid item xs={12} md={8}>
                             <Card sx={{ mb: 2 }}>
                                 <CardContent>
                                     <Typography variant="h6" gutterBottom>
-                                        Service Case Information
+                                        Service Case :
+                                        Basic Information
                                     </Typography>
                                     <Typography variant="body1" color="textSecondary">
-                                        <strong>Description:</strong> {caseData.descriptionOfCase || ''}
+                                        <strong>Product Serial Number:</strong> {caseData.productSerialNumber || ''}
                                     </Typography>
                                     <Typography variant="body1" color="textSecondary">
-                                        <strong>Date Time:</strong> {caseData.dateTimeOfCase || ''}
+                                        <strong>Affected Company:</strong> {caseData.affectedCompany || ''}
                                     </Typography>
                                     <Typography variant="body1" color="textSecondary">
-                                        <strong>How Its Solved:</strong> {caseData.howItIsSolved || ''}
+                                        <strong>Contact Person:</strong> {caseData.contactPerson || ''}
                                     </Typography>
+                                    <Typography variant="body1" color="textSecondary">
+                                        <strong>Affected Installation:</strong> {caseData.affectedInstallation || ''}
+                                    </Typography>
+                                    <Typography variant="body1" color="textSecondary">
+                                        <strong>Originating Service Order:</strong> {caseData.originatingSOrder || ''}
+                                    </Typography>
+  
                                 </CardContent>
                             </Card>
 
-                            <Card sx={{ mb: 2 }}>
+                                <Card sx={{ mb: 2 }}>
                                 <CardContent>
                                     <Typography variant="h6" gutterBottom>
-                                        Company Information
+                                        Extended information
                                     </Typography>
                                     <Typography variant="body1" color="textSecondary">
-                                        <strong>Name:</strong> {caseData.clientName || ''}
+                                        <strong>Service Case Status:</strong> {caseData.serviceCaseStatus || ''}
                                     </Typography>
                                     <Typography variant="body1" color="textSecondary">
-                                        <strong>Phone:</strong> {caseData.phoneNumber || ''}
+                                        <strong>Responsable User:</strong> {caseData.responsableUser || ''}
                                     </Typography>
                                     <Typography variant="body1" color="textSecondary">
-                                        <strong>Address:</strong> {caseData.address || ''}
+                                        <strong>Priority:</strong> {caseData.priority || ''}
+                                    </Typography>
+                                    <Typography variant="body1" color="textSecondary">
+                                        <strong>Message:</strong> {caseData.message || ''}
+                                    </Typography>
+                                    <Typography variant="body1" color="textSecondary">
+                                        <strong>Creation Date:</strong> {caseData.creationDate || ''}
                                     </Typography>
                                 </CardContent>
                             </Card>

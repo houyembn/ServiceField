@@ -1,7 +1,6 @@
 import { useState } from "react";
-import './Login.css';
 import Card from 'react-bootstrap/Card';
-import login from '../../assets/login.png';
+import login from '../../assets/login.png'; // Ensure this path is correct
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -37,11 +36,11 @@ function LogIn() {
                 password: pwd
             });
 
-            console.log('Full response:', response); 
+            console.log('Full response:', response);
 
             if (response.data.success) {
                 const userRole = response.data.role;
-                console.log('Received user role:', userRole); 
+                console.log('Received user role:', userRole);
 
                 if (!userRole) {
                     console.error('User role is undefined or null');
@@ -52,7 +51,6 @@ function LogIn() {
                     role: userRole
                 }));
 
-                
                 if (userRole === 'Technician') {
                     navigate('/Technician');
                 } else {
@@ -71,19 +69,73 @@ function LogIn() {
         }
     };
 
+    const cardStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '10% 20%',
+        flexDirection: 'row',
+        height: '60vh'
 
+    };
 
+    const leftSectionStyle = {
+        flex: 1.5,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '0 5%'
+    };
 
+    const rightSectionStyle = {
+        flex: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    };
 
+    const imageStyle = {
+        maxWidth: '100%',
+        maxHeight: '100%'
+    };
+
+    const textSIStyle = {
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        display: 'flex',
+        justifyContent: 'center',
+        fontSize: '50px'
+    };
+
+    const passwordContainerStyle = {
+        position: 'relative',
+        width: '100%'
+    };
+
+    const passwordToggleStyle = {
+        position: 'absolute',
+        right: '10px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        cursor: 'pointer',
+        color: '#6c757d'
+    };
+
+    const errorMessageStyle = {
+        color: 'red',
+        fontSize: '14px',
+        marginTop: '10px'
+    };
 
     return (
-        <Card className="card1">
-            <div className="left-section">
-                <img src={login} className="image" alt="Login" />
+        <Card style={cardStyle}>
+            <div style={rightSectionStyle}>
+                <img src={login} alt="Login" style={imageStyle} />
             </div>
-            <div className="right-section">
-                <label className="textSI ">Sign In</label>
-                <Form className="label" onSubmit={handleLogin}>
+            <div style={leftSectionStyle}>
+                <label style={textSIStyle}>Sign In</label>
+                <Form onSubmit={handleLogin}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
@@ -96,7 +148,7 @@ function LogIn() {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <div className="password-container">
+                        <div style={passwordContainerStyle}>
                             <Form.Control
                                 type={showPassword ? "text" : "password"}
                                 placeholder="*********"
@@ -105,15 +157,15 @@ function LogIn() {
                                 required
                             />
                             <span
-                                className="password-toggle"
+                                style={passwordToggleStyle}
                                 onClick={handlePasswordToggle}
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                             </span>
                         </div>
                     </Form.Group>
-                    {error && <p className="error-message">{error}</p>}
-                    <div className="btn">
+                    {error && <p style={errorMessageStyle}>{error}</p>}
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Button variant="primary" type="submit">Sign In</Button>
                     </div>
                 </Form>

@@ -48,6 +48,7 @@ const Sidebar = () => {
     const toggleServiceManagement = () => {
         setIsServiceManagementOpen(!isServiceManagementOpen);
     };
+
     const toggleInventory = () => {
         setIsInventoryOpen(!isInventoryOpen);
     };
@@ -166,12 +167,14 @@ const Sidebar = () => {
                     </>
                 )}
 
-                <Link to="/Technician" className="sidebar-link">
-                    <i className="material-icons">person</i>
-                    <span className="icon-text">My Account</span>
-                </Link>
+                {userRole !== 'Admin' && (
+                    <Link to="/Technician" className="sidebar-link">
+                        <i className="material-icons">person</i>
+                        <span className="icon-text">My Account</span>
+                    </Link>
+                )}
                 <br />
-                <Link to="/Login" className="sidebar-link">
+                <Link to="/Login" className="sidebar-link" style={{ marginBottom: 0 }}>
                     <i className="material-icons">keyboard_return</i>
                     <span className="icon-text">Logout</span>
                 </Link>
