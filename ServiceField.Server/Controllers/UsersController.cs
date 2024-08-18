@@ -64,7 +64,7 @@ namespace ServiceField.Server.Controllers
             user.Skills = updatedUser.Skills;
             user.Grade = updatedUser.Grade;
             user.role  = updatedUser.role;
-            
+
 
             await _context.SaveChangesAsync();
             return Ok(user);
@@ -108,11 +108,11 @@ namespace ServiceField.Server.Controllers
             if (user == null)
             {
                 return Unauthorized(new { success = false, message = "Invalid email or password" });
-            }
+        }
 
            
             return Ok(new { success = true, role = user.role });
-        }
+    }
 
 
         // GET: api/Users/{email}

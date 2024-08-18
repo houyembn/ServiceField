@@ -87,6 +87,24 @@ function App() {
                 <Route path="/MasterDataCompany" element={<MasterDataCompany />} />
                 <Route path="/DetailsFormInstall" element={<DetailsFormInstall />} />
                 <Route path="/FormInstall" element={<FormInstall />} />
+                <Route path="/Articles" element={<Articles />} />
+                <Route path="/ShowArticles" element={<ShowArticles />} />
+
+
+                <Route path="/ShowArticles/:id" element={<ArticleDetails />} />
+
+                <Route path="/ShowSideBar" element={<ShowSideBar />} />
+
+
+
+                <Route path="/ShowNavBar" element={<ShowNavBar />} />
+
+
+
+
+                <Route path="/add-lookup" element={<AddLookup />} />
+
+                <Route path="/edit-article/:id" element={<EditArticle />} />
                 </Routes>
         </Router>
     );
