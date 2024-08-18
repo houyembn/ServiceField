@@ -35,6 +35,12 @@ import CompanyForm from './Components/Company/CompanyForm';
 import MasterDataCompany from './Components/Company/MasterDataCompany';
 import DetailsFormInstall from './Components/Installation/DetailsFormInstall';
 import FormInstall from './Components/Installation/FormInstall';
+
+import Articles from './Components/Articles/Articles';
+import ShowArticles from './Components/Articles/ShowArticles';
+import ArticleDetails from './Components/Articles/ArticleDetails';
+import EditArticle from './Components/Articles/EditArticle';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './index.css';
@@ -93,16 +99,14 @@ function App() {
 
                 <Route path="/ShowArticles/:id" element={<ArticleDetails />} />
 
-                <Route path="/ShowSideBar" element={<ShowSideBar />} />
-
-
-
-                <Route path="/ShowNavBar" element={<ShowNavBar />} />
+             
 
 
 
 
-                <Route path="/add-lookup" element={<AddLookup />} />
+
+
+
 
                 <Route path="/edit-article/:id" element={<EditArticle />} />
                 </Routes>

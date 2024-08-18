@@ -12,9 +12,9 @@ namespace ServiceField.Server.Controllers
     [Route("ServiceField.Server/ItemTypes")]
     public class ItemTypesController : ControllerBase
     {
-        private readonly ApplicationDBContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ItemTypesController(ApplicationDBContext context)
+        public ItemTypesController(ApplicationDbContext context)
         {
             _context = context;
         }

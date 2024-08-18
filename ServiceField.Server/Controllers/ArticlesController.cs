@@ -13,8 +13,8 @@ namespace ServiceField.Server.Controllers
     public class ArticlesController : ControllerBase
     {
 
-        private readonly ApplicationDBContext _context;
-        public ArticlesController(ApplicationDBContext context)
+        private readonly ApplicationDbContext _context;
+        public ArticlesController(ApplicationDbContext context)
         {
             _context=context;
         }
