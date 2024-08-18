@@ -128,7 +128,18 @@ function LogIn() {
         marginTop: '10px'
     };
 
+    // Background style for the entire page
+    const pageStyle = {
+        backgroundColor: '#ededed',
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      
+    };
+
     return (
+        <div style={pageStyle}>
         <Card style={cardStyle}>
             <div style={rightSectionStyle}>
                 <img src={login} alt="Login" style={imageStyle} />
@@ -170,7 +181,8 @@ function LogIn() {
                     </div>
                 </Form>
             </div>
-        </Card>
+            </Card>
+        </div>
     );
 }
 

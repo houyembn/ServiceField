@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ServiceField.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class integ : Migration
+    public partial class AddNewModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

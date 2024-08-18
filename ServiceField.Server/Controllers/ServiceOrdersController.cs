@@ -99,9 +99,24 @@ namespace ServiceField.Server.Controllers
 
             return Ok(serviceTypesCount);
         }
-    
 
-    [HttpPost]
+        [HttpGet("service-invoicing-count")]
+        public async Task<IActionResult> GetInvoicingCount()
+        {
+            var invoicingCount = await _context.ServiceOrder
+                .GroupBy(o => o.Invoicing.InvoicingType)
+                .Select(g => new
+                {
+                    Invoicing = g.Key,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+
+            return Ok(invoicingCount);
+        }
+
+
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateOrderRequestDto orderDto)
         {
             var orderModel = orderDto.ToOrderFromCreateDTO(_serviceOrderHelper);

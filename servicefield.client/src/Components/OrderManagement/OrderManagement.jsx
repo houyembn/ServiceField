@@ -377,7 +377,7 @@ const OrderManagement = () => {
                           
                         </div>
 
-                        <button type="submit" className="sub" onSubmit={handleSubmit}>Submit</button>
+                        <Button className="sub" type="submit">Submit</Button>
                     </form>
 
                

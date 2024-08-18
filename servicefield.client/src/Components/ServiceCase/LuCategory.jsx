@@ -79,11 +79,8 @@ function LuCategory() {
             <div className="flex-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <div className="h4">List of Categories</div>
+                    <div className="h5">List of Categories</div>
                     <div className="all">
-                        <Button  className="ajoutBtn" onClick={handleAddClick}>
-                            Add
-                        </Button>
                         <div style={{ marginTop: '15px' }}>
 
                             {skills.map(skill => (
@@ -104,6 +101,10 @@ function LuCategory() {
                         </div>
                     </div>
                 </div>
+
+                <button onClick={handleAddClick} className="addBtn">
+                    <i className="material-icons">add</i>
+                </button>
             </div>
 
             <Modal show={showModal} onHide={handleModalClose}>

@@ -80,11 +80,9 @@ function LuSkills() {
             <div className="flex-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <div className="h4">List of skills</div>
+                    <div className="h5">List of skills</div>
                     <div className="all">
-                        <Button className="ajoutBtn" onClick={handleAddClick}>
-                            Add
-                        </Button>
+                     
                         <div style={{ marginTop: '15px' }}>
 
                         {skills.map(skill => (
@@ -105,6 +103,10 @@ function LuSkills() {
                         </div>
                     </div>
                 </div>
+
+                <button onClick={handleAddClick} className="addBtn">
+                    <i className="material-icons">add</i>
+                </button>
             </div>
 
             <Modal show={showModal} onHide={handleModalClose}>

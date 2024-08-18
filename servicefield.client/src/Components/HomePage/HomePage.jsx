@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Chart, registerables } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import axios from 'axios';
 import ShowNavBar from '../NavBar/NavBar';
 import SideBar from '../SideBar/SideBar';
 import '../NavBar/NavBar.css';
 
-// Register necessary components and scales with Chart.js
 Chart.register(...registerables);
 
 const HomePage = () => {
@@ -23,10 +22,23 @@ const HomePage = () => {
         ]
     });
 
+    const [invoicingTypesData, setInvoicingTypesData] = useState({
+        labels: [],
+        datasets: [
+            {
+                label: 'Invoicing Types Proportion',
+                data: [],
+                backgroundColor: ['rgb(255,99,132)', 'rgb(54,162,235)', 'rgb(255,206,86)'], // Example colors
+                borderColor: 'rgb(255,255,255)',
+                borderWidth: 1
+            }
+        ]
+    });
+
     const barChartRef = useRef(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchServiceTypesData = async () => {
             try {
                 const response = await axios.get('https://localhost:7141/api/ServiceOrders/service-types-count');
                 const serviceTypes = response.data;
@@ -51,7 +63,34 @@ const HomePage = () => {
             }
         };
 
-        fetchData();
+        const fetchInvoicingTypesData = async () => {
+            try {
+                const response = await axios.get('https://localhost:7141/api/ServiceOrders/service-invoicing-count');
+              
+                const invoicingTypes = response.data;
+              
+                const labels = invoicingTypes.map(item => item.invoicing || 'Unknown');
+                const data = invoicingTypes.map(item => item.count);
+
+                setInvoicingTypesData({
+                    labels,
+                    datasets: [
+                        {
+                            label: 'Invoicing Types Proportion',
+                            data,
+                            backgroundColor: ['#7fb6e7', '#2c88d8', '#195589'], // Example colors
+                            borderColor: ['#7fb6e7', '#2c88d8', '#195589'],
+                            borderWidth: 1
+                        }
+                    ]
+                });
+            } catch (error) {
+                console.error('Error fetching invoicing types data', error);
+            }
+        };
+
+        fetchServiceTypesData();
+        fetchInvoicingTypesData();
 
         return () => {
             if (barChartRef.current) {
@@ -71,6 +110,23 @@ const HomePage = () => {
         }
     };
 
+   
+    const chartContainerStyle = {
+        display: 'flex',
+        gap: '10%',
+        marginTop: '90px',
+    };
+
+    const barChartStyle = {
+        width: '85%',
+        height: '400px',
+    };
+
+    const pieChartStyle = {
+        width: '50%',
+        height: '400px',
+    };
+
     return (
         <div className="flex">
             <SideBar />
@@ -78,9 +134,15 @@ const HomePage = () => {
                 <ShowNavBar />
 
                 <div className="p-4">
-                    <h2>Service Types:</h2>
-                    <div className="chart-container">
-                        <Bar data={serviceTypesData} options={options} ref={barChartRef} />
+                    <div className="chart-container" style={chartContainerStyle}>
+                        <div style={barChartStyle}>
+                            <h2>Service Types Proportion:</h2>
+                            <Bar data={serviceTypesData} options={options} ref={barChartRef} />
+                        </div>
+                        <div style={pieChartStyle}>
+                            <h2>Invoicing Types Proportion:</h2>
+                            <Pie data={invoicingTypesData} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -143,7 +143,7 @@ function OrderDetails() {
                                     <Card.Body>
                                         <Card.Title className="title">Order Information:</Card.Title><br />
 
-                                        {/* <Card.Subtitle className="mb-2 text-muted">Detai:</Card.Subtitle>*/}
+                                    
                                         <Row className="mb-3">
                                             <Card.Text as={Col}>
                                                 <span className="custom-label">Order Number:</span> {editMode ? (
@@ -378,7 +378,7 @@ function OrderDetails() {
 
             <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm Delete</Modal.Title>
+                    <Modal.Title >Confirm Delete</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Are you sure you want to delete this order?</Modal.Body>
                 <Modal.Footer>

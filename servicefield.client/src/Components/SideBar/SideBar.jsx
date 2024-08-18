@@ -6,6 +6,7 @@ import img from "../../assets/mobile.png";
 const Sidebar = () => {
     const [mini, setMini] = useState(true);
     const [isServiceManagementOpen, setIsServiceManagementOpen] = useState(false);
+    const [isLookUpOpen, setLookUpOpen] = useState(false);
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
     const [userRole, setUserRole] = useState('');
 
@@ -53,6 +54,9 @@ const Sidebar = () => {
         setIsInventoryOpen(!isInventoryOpen);
     };
 
+    const toggleLookUp = () => {
+        setLookUpOpen(!isLookUpOpen);
+    };
     return (
         <>
             <div
@@ -97,14 +101,16 @@ const Sidebar = () => {
                             )}
                         </div>
                         <br />
-                        <Link to="#">
+
+                        <Link to="/DetailsFormInstall" className="nested-link">
                             <i className="material-icons">factory</i>
-                            <span className="icon-text">Installation</span>
+                            <span className="text">Installation</span>
                         </Link>
                         <br />
-                        <Link to="#">
+
+                        <Link to="/CompanyForm" className="nested-link">
                             <i className="material-icons">apartment</i>
-                            <span className="icon-text">Companies</span>
+                            <span className="text">Companies</span>
                         </Link>
                         <br />
                         <Link to="/UserDisplay">
@@ -139,14 +145,14 @@ const Sidebar = () => {
                         </div>
                         <br />
                         <div>
-                            <button onClick={toggleServiceManagement} className="sidebar-link no-outline">
+                            <button onClick={toggleLookUp} className="sidebar-link no-outline">
                                 <i className="material-icons">collections_bookmark</i>
                                 <span className="icon-text">LookUps</span>
                                 <i className="material-icons">
-                                    {isServiceManagementOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+                                    {isLookUpOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
                                 </i>
                             </button>
-                            {isServiceManagementOpen && (
+                            {isLookUpOpen && (
                                 <div className="nested-links">
                                     <Link to="/InvoicingDisplay" className="nested-link">
                                         <i className="material-icons">view_list</i>
@@ -183,7 +189,7 @@ const Sidebar = () => {
                                 </div>
                             )}
                         </div>
-                        <br />
+                      
                     </>
                 )}
 
@@ -194,7 +200,7 @@ const Sidebar = () => {
                     </Link>
                 )}
                 <br />
-                <Link to="/Login" className="sidebar-link" style={{ marginBottom: 0 }}>
+                <Link to="/" className="sidebar-link" style={{ marginBottom: 0 }}>
                     <i className="material-icons">keyboard_return</i>
                     <span className="icon-text">Logout</span>
                 </Link>

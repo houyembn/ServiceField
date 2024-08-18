@@ -1,10 +1,13 @@
 
 .title {
+    display: block;
+    width: 100%;
     border-bottom: 2px solid #ccc;
     font-size: 17px;
     font-weight: bold;
     padding: 5px 0;
 }
+
 
 
 .custom-label {

@@ -119,8 +119,8 @@ function OrderDisplay() {
                         backdrop="static"
                         keyboard={false}
                     >
-                        <Modal.Header closeButton>
-                            <Modal.Title id="modal-title">Has this ever been a service case?</Modal.Title>
+                        <Modal.Header closeButton >
+                            Has this ever been a service case?
                         </Modal.Header>
                         <Modal.Body>
                             <div className="input-container" style={{ display: 'flex', alignItems: 'center' }}>
