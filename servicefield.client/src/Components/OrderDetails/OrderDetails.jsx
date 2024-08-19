@@ -186,7 +186,7 @@ function OrderDetails() {
                                                             <option value="">Select Installation Name</option>
                                                             {installation.map(install => (
                                                                 <option key={install.installationNumber} value={install.name}>
-                                                                    {install.name} {install.installationType}
+                                                                    {install.name} {install.installationName}
                                                                 </option>
                                                             ))}
                                                         </Form.Select>

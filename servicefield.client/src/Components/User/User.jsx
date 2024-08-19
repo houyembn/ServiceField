@@ -6,7 +6,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 function User() {
+    const navigate = useNavigate();
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [showFailModal, setShowFailModal] = useState(false);
 
@@ -44,6 +46,8 @@ function User() {
             console.log(response.data);
             setShowSuccessModal(true);
             setTimeout(() => setShowSuccessModal(false), 3000);
+            navigate('/UserDisplay');
+
         } catch (error) {
             console.error('There was an error adding the User!', error);
             setShowFailModal(true);

@@ -6,8 +6,10 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const OrderManagement = () => {
+    const navigate = useNavigate();
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [showFailModal, setShowFailModal] = useState(false);
     const [serviceTypes, setServiceTypes] = useState([]);
@@ -93,28 +95,21 @@ const OrderManagement = () => {
 
 
         if (name === 'installationName') {
-            // Find the installation using the correct backend property
-            const selectedInstallation = installation.find(install => install.installationType === value);
-
+            const selectedInstallation = installation.find(install => install.installationName === value);
             if (selectedInstallation) {
                 setOrder(prevOrder => ({
                     ...prevOrder,
-                    idInstallation: Number(selectedInstallation.installationNumber) // Use installationNumber here
+                    idInstallation: Number(selectedInstallation.installationNumber)
                 }));
                 console.log('Selected Installation Data:', selectedInstallation);
             } else {
-                // Handle case where no installation was found
                 setOrder(prevOrder => ({
                     ...prevOrder,
-                    idInstallation: '' // Reset or clear the ID if no match found
+                    idInstallation: ''
                 }));
             }
         }
-
-
-
-
-};
+    };
 
 
     const handleSubmit = async (e) => {
@@ -143,7 +138,8 @@ const OrderManagement = () => {
             const response = await axios.post('https://localhost:7141/api/ServiceOrders', orderData);
             console.log(response.data);
             setShowSuccessModal(true);
-            setTimeout(() => setShowSuccessModal(false), 3000);
+            navigate('/OrderDisplay');
+
         } catch (error) {
             console.error('There was an error adding the Order!', error);
 
@@ -216,11 +212,12 @@ const OrderManagement = () => {
                                     >
                                         <option value="">Select Installation Name</option>
                                         {installation.map(install => (
-                                            <option key={install.installationNumber} value={install.name}>
-                                                {install.name} {install.installationType}
+                                            <option key={install.installationNumber} value={install.installationName}>
+                                                {install.installationName}
                                             </option>
                                         ))}
                                     </Form.Select>
+
                                 </div>
                             </div>
 

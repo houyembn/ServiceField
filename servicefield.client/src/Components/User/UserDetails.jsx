@@ -300,26 +300,33 @@ function UserDetails() {
                                             )}
                                         </Card.Text>
 
-
+                                       
 
 
                                         <div className="mt-4">
-                                            {!editMode && User.role !== 'Service Manager' && (
+                                            {editMode ? (
                                                 <>
-
-                                                <Button className="sub" as="input" type="submit" value="Save Changes" onClick={handleSaveClick} />
-
-                                         
-                                                <button onClick={handleEditClick} className="updateBtn"><i className="material-icons">edit</i></button>
-                                            
-                                          
-
-                                            <button onClick={() => setShowDeleteModal(true)} className="deleteBtn"><i className="material-icons">delete</i></button>
-                                            </>
-                                              )}
+                                                   
+                                                    <Button className="sub" as="input" type="button" value="Save Changes" onClick={handleSaveClick} />
+                                                </>
+                                            ) : (
+                                                User.role != 'Service Manager' && (
+                                                    <>
+                                                        <button onClick={handleEditClick} className="updateBtn">
+                                                            <i className="material-icons">edit</i>
+                                                        </button>
+                                                        <button onClick={() => setShowDeleteModal(true)} className="deleteBtn">
+                                                            <i className="material-icons">delete</i>
+                                                        </button>
+                                                    </>
+                                                )
+                                            )}
                                         </div>
                                     </Card.Body>
                                 </Card>
+
+                               
+
 
                             </Col>
                         </Row>
