@@ -33,14 +33,18 @@ namespace ServiceField.Server.Data
         public DbSet<ServiceOrder> ServiceOrder { get; set; }
         public DbSet<Users> Users { get; set; }
 
+
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<ItemType> ItemTypes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
 
-            
+
         }
     }
 }
-
 

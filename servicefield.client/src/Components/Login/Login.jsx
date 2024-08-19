@@ -54,7 +54,7 @@ function LogIn() {
                 if (userRole === 'Technician') {
                     navigate('/Technician');
                 } else {
-                    navigate('/');
+                    navigate('/HomePage');
                 }
             } else {
                 console.error('Login was not successful, no role returned.');

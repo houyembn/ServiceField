@@ -7,7 +7,7 @@ const Sidebar = () => {
     const [mini, setMini] = useState(true);
     const [isServiceManagementOpen, setIsServiceManagementOpen] = useState(false);
     const [isLookUpOpen, setLookUpOpen] = useState(false);
-    const [isInventoryOpen, setIsInventoryOpen] = useState(false);
+/*    const [isInventoryOpen, setIsInventoryOpen] = useState(false);*/
     const [userRole, setUserRole] = useState('');
 
     useEffect(() => {
@@ -50,9 +50,9 @@ const Sidebar = () => {
         setIsServiceManagementOpen(!isServiceManagementOpen);
     };
 
-    const toggleInventory = () => {
-        setIsInventoryOpen(!isInventoryOpen);
-    };
+    //const toggleInventory = () => {
+    //    setIsInventoryOpen(!isInventoryOpen);
+    //};
 
     const toggleLookUp = () => {
         setLookUpOpen(!isLookUpOpen);
@@ -118,31 +118,11 @@ const Sidebar = () => {
                             <span className="icon-text">Users</span>
                         </Link>
                         <br />
-                        <div>
-                            <button onClick={toggleInventory} className="sidebar-link no-outline">
-                                <i className="material-icons">inventory_2</i>
-                                <span className="icon-text">Inventories</span>
-                                <i className="material-icons">
-                                    {isInventoryOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-                                </i>
-                            </button>
-                            {isInventoryOpen && (
-                                <div className="nested-links">
-                                    <Link to="/DetailsFormCase" className="nested-link">
-                                        <i className="material-icons">view_list</i>
-                                        <span className="text">Articles</span>
-                                    </Link>
-                                    <Link to="/service-cases" className="nested-link">
-                                        <i className="material-icons">view_list</i>
-                                        <span className="text">Stocks</span>
-                                    </Link>
-                                    <Link to="/service-cases" className="nested-link">
-                                        <i className="material-icons">view_list</i>
-                                        <span className="text">Stores</span>
-                                    </Link>
-                                </div>
-                            )}
-                        </div>
+                        <Link to="/ShowArticles">
+                            <i className="material-icons">inventory_2</i>
+                            <span className="icon-text">Articles</span>
+                        </Link>
+                        
                         <br />
                         <div>
                             <button onClick={toggleLookUp} className="sidebar-link no-outline">
@@ -193,6 +173,7 @@ const Sidebar = () => {
                     </>
                 )}
 
+                <br />
                 {userRole !== 'Admin' && (
                     <Link to="/Technician" className="sidebar-link">
                         <i className="material-icons">person</i>
