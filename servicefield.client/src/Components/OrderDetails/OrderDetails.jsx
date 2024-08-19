@@ -137,11 +137,11 @@ function OrderDetails() {
                     <Container fluid>
                         <Row className="justify-content">
                             <Col md={8}>
-                                <h1 className="display" style={{ marginBottom: 40 }} >Service Orders Details:</h1>
+                                <h1 className="display" style={{ marginBottom: 40 }} >Service Orders Details</h1>
 
                                 <Card style={{ width: '151%', boxShadow: '0 4px 8px rgba(0.1, 0.1, 0.1, 0.1)', padding: '20px 30px 40px 50px' }}>
                                     <Card.Body>
-                                        <Card.Title className="title">Order Information:</Card.Title><br />
+                                        <Card.Title className="title">Order Information</Card.Title><br />
 
                                     
                                         <Row className="mb-3">
@@ -286,7 +286,7 @@ function OrderDetails() {
                                             </Card.Text>
                                         </Row>
 
-                                        <Card.Title className="title">Dispatch Location:</Card.Title>
+                                        <Card.Title className="title">Dispatch Location</Card.Title>
 
                                         <Row className="mb-3">
 

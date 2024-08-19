@@ -86,7 +86,7 @@ function OrderDisplay() {
             <div className="flex-1">
                 <ShowNavBar />
                 <div className="p-4">
-                    <h1 className="display">Service Orders:</h1>
+                    <h1 className="display">Service Orders</h1>
                     {orders.map((order) => (
                         <Card key={order.idOrder} className="mb-4" onClick={() => handleCardClick(order.idOrder)}>
                             <Card.Header as="h5">

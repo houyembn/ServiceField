@@ -43,7 +43,7 @@ function InstallationDetails() {
 
                                 {installations.length > 0 ? (
                                     installations.map((installation) => (
-                                        <Card key={installation.installationNumber} style={{ width: '151%', boxShadow: '0 4px 8px rgba(0.1, 0.1, 0.1, 0.1)', padding: '20px 30px 40px 50px' }}>
+                                        <Card key={installation.installationNumber} style={{ width: '151%', boxShadow: '0 4px 8px rgba(0.1, 0.1, 0.1, 0.1)', padding: '20px 30px 40px 50px', marginBottom: '20px' }}>
                                             <Card.Body>
                                                 <Card.Title className="title">Installation Information:</Card.Title><br />
 
